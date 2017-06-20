@@ -85,6 +85,6 @@ const styles = EStyleSheet.create({
     height: '2.5rem'
   },
   text: {
-    fontSize: '1rem'
+    fontSize: '0.8rem'
   }
 })

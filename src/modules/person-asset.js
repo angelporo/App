@@ -21,34 +21,34 @@ const OrderIcon = (<Icon name="ios-book" size={ 22 } color="#f60" />);
 //个人中心 资产数据
 const data= [{
         id: 1,
-        icon: (<Icon name="ios-book" size={ 22 } color="red" />),
+        icon: (<Icon name="ios-book" size={ 20 } color="red" />),
         onPress: () => {alert(this.id)},
         type: '账户余额',
-        num: 2229,
+        num: 2029,
       }, {
         id: 1,
-        icon: (<Icon name="ios-book" size={ 22 } color="red" />),
+        icon: (<Icon name="ios-book" size={ 20 } color="red" />),
         onPress: () => {alert(this.id)},
         type: '账户余额',
-        num: 2229,
+        num: 2029,
       }, {
         id: 1,
-        icon: (<Icon name="ios-book" size={ 22 } color="red" />),
+        icon: (<Icon name="ios-book" size={ 20 } color="red" />),
         onPress: () => {alert(this.id)},
         type: '账户余额',
-        num: 2229,
+        num: 2029,
       }, {
         id: 1,
-        icon: (<Icon name="ios-book" size={ 22 } color="red" />),
+        icon: (<Icon name="ios-book" size={ 20 } color="red" />),
         onPress: () => {alert(this.id)},
         type: '账户余额',
-        num: 2229,
+        num: 2029,
       }, {
         id: 1,
-        icon: (<Icon name="ios-book" size={ 22 } color="red" />),
+        icon: (<Icon name="ios-book" size={ 20 } color="red" />),
         onPress: () => {alert(this.id)},
         type: '账户余额',
-        num: 2229,
+        num: 2029,
       }]
 /**
  * NOTE: 个人中心 全部订单list
@@ -101,7 +101,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   item: {
-    width: '5.8rem',
+    width: 78,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -110,10 +110,11 @@ const styles = EStyleSheet.create({
     paddingBottom: '0.5rem',
   },
   text: {
-
+    fontSize: '0.8rem'
   },
   number: {
     color: '#f60',
+    fontSize: '0.8rem'
   }
 
 })

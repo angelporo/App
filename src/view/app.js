@@ -87,14 +87,14 @@ export default class App extends Component {
         <Login />
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
-          title="购物车"
+          title="我的"
           iconName="ios-person"
           selectedIconName="ios-person"
           iconSize={homeIconSize}
           selected={this.state.selectedTab === 'person'}
           onPress={() => {
             this.setState({
-              selectedTab: 'person',
+              selectedTab: 'person'
             });
           }}>
           <Person />

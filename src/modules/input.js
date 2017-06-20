@@ -8,44 +8,142 @@ import React, { Component } from 'react';
 import {
   View,
   TextInput,
-  Picker
+  Picker,
+  Text,
+  TouchableOpacity
 } from 'react-native';
 import styleConfig, { globalStyle } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
 
+const loginHintColor = "#8B7778";
+const LoginIcon = (<Icon name="mobile" size={ 16 } color={loginHintColor} />);
+const PasswordIcon = (<Icon name="lock" size={ 16 } color={loginHintColor} />);
+const EyeIcon = (<Icon name="eye" size={ 16 } color={loginHintColor} />);
+const EmailIcon = (<Icon name="email-outline" size={ 20 } color={loginHintColor} />);
+const DownTriangleIcon =  (<Icon name="triangle-down" size={ 20 } color={loginHintColor} />);
 export class LoginInput extends Component {
   constructor(props) {
     super(props);
     this.state = { placeholder: '请输入手机号' ,
                    value: 'hah'};
   }
+
   render() {
     return (
-      <View>
-      <TextInput
-        style={styles.loginInput}
-        keyboardType="numeric"
-        onChangeText={(text) => this.setState({text})}
-        placeholder={this.state.placeholder}
-        { ...this.props }
-        />
-        <Picker
-          selectedValue={'hah'}
-          onValueChange={(lang) => alert(lang)}>
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-        </Picker>
+      <View style={[styles.container]}>
+          <View style={ styles.inputIcon}>
+            { LoginIcon }
+          </View>
+          <TouchableOpacity
+            onPress={ () => { alert('click select address icons')}}
+            style={[styles.selectAddressNumber, globalStyle.flexCenter]}>
+            <Text style={styles.selectText}>+86</Text>
+            <Text style={{marginLeft: 3, marginTop: 2}}>{ DownTriangleIcon }</Text>
+          </TouchableOpacity>
+          <View style={[styles.inputBox]}>
+            <TextInput
+              style={styles.loginInput}
+              keyboardType="numeric"
+              onChangeText={(text) => this.setState({text})}
+              placeholder={this.state.placeholder}
+              { ...this.props }
+              />
+          </View>
       </View>
     );
   }
 }
 
-// TODO: 登录注册input框样式
+export class PassWordInput extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      placeholder: '请输入密码',
+    }
+  }
+  render () {
+    return(
+      <View style={[styles.container]}>
+          <View style={ styles.inputIcon}>
+            { PasswordIcon }
+          </View>
+          <View
+            style={[styles.selectAddressNumber, globalStyle.flexCenter]}>
+          </View>
+          <View style={[styles.inputBox, styles.passwordInput]}>
+            <TextInput
+              style={styles.password}
+              keyboardType="email-address"
+              onChangeText={(text) => this.setState({text})}
+              placeholder={this.state.placeholder}
+              { ...this.props }
+              />
+              <TouchableOpacity
+                onPress={ () => alert('display password details')}
+                >
+                <Text style={styles.passwordEyeIcon}>{ EyeIcon }</Text>
+              </TouchableOpacity>
+        </View>
+      </View>
+    )
+
+  }
+}
 
 let styles = EStyleSheet.create({
   loginInput: {
-    height: '3rem',
+    height: '2rem',
     fontSize: '0.8rem',
+    paddingLeft: '4rem',
+    color: loginHintColor
+  },
+  password: {
+    flex: 1,
+    height: '3rem',
+    width: '12rem',
+    fontSize: '0.8rem',
+    paddingLeft: '0.5rem',
+    color: loginHintColor
+  },
+  container: {
+    paddingBottom: '1rem',
+    paddingLeft: '3rem',
+    paddingRight: '3rem',
+    width: '100%',
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    left: '-2rem'
+  },
+  inputIcon: {
+    position: 'relative',
+    left: '3.5rem'
+  },
+  selectText: {
+    color: loginHintColor
+  },
+  inputBox: {
+    borderBottomColor: '$globalBorder',
+    borderBottomWidth: 1,
+    borderStyle: 'solid',
+    width: '100%'
+  },
+  selectAddressNumber: {
+    width: '4rem',
+    position: 'relative',
+    left: '4rem',
+    fontSize: '0.8rem',
+    zIndex: 1,
+  },
+  passwordEyeIcon: {
+  },
+  passwordInput: {
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   }
 })

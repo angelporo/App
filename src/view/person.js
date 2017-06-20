@@ -16,8 +16,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TouchBar } from '../modules/TouchBar';
 import { PersonHeader } from '../modules/personHead';
-import PersonOrder from '../view/person-order';
-import PersonAssetComponent from '../view/person-asset';
+import PersonOrder from '../modules/person-order';
+import PersonAssetComponent from '../modules/person-asset';
 import Alert from '../modules/Alert'
 
 const TouchIcon = (<Icon name="ios-book" size={ 22 } color="red" />);
