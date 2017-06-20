@@ -20,7 +20,6 @@ export class LoginInput extends Component {
     this.state = { placeholder: '请输入手机号' ,
                    value: 'hah'};
   }
-
   render() {
     return (
       <View>
