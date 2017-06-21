@@ -10,46 +10,48 @@ import {
   TextInput,
   Picker,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import styleConfig, { globalStyle } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import Button from 'apsl-react-native-button';
 import Icon from 'react-native-vector-icons/Entypo';
 
 const loginHintColor = "#8B7778";
 const LoginIcon = (<Icon name="mobile" size={ 16 } color={loginHintColor} />);
 const PasswordIcon = (<Icon name="lock" size={ 16 } color={loginHintColor} />);
-const EyeIcon = (<Icon name="eye" size={ 16 } color={loginHintColor} />);
-const EmailIcon = (<Icon name="email-outline" size={ 20 } color={loginHintColor} />);
-const DownTriangleIcon =  (<Icon name="triangle-down" size={ 20 } color={loginHintColor} />);
+const EyeIcon = (<Icon name="eye" size={ 16 } color={ loginHintColor } />);
+const EmailIcon = (<Icon name="mail" size={ 16 } color={loginHintColor} />);
+const DownTriangleIcon =  (<Icon name="triangle-down" size={ 16 } color={loginHintColor} />);
 export class LoginInput extends Component {
   constructor(props) {
     super(props);
     this.state = { placeholder: '请输入手机号' ,
-                   value: 'hah'};
+                   value: 'ha'
+                 };
   }
 
   render() {
     return (
       <View style={[styles.container]}>
-          <View style={ styles.inputIcon}>
-            { LoginIcon }
-          </View>
-          <TouchableOpacity
-            onPress={ () => { alert('click select address icons')}}
-            style={[styles.selectAddressNumber, globalStyle.flexCenter]}>
-            <Text style={styles.selectText}>+86</Text>
-            <Text style={{marginLeft: 3, marginTop: 2}}>{ DownTriangleIcon }</Text>
-          </TouchableOpacity>
-          <View style={[styles.inputBox]}>
-            <TextInput
-              style={styles.loginInput}
-              keyboardType="numeric"
-              onChangeText={(text) => this.setState({text})}
-              placeholder={this.state.placeholder}
-              { ...this.props }
-              />
-          </View>
+        <View style={ styles.inputIcon}>
+          { LoginIcon }
+        </View>
+        <TouchableOpacity
+          onPress={ () => { alert('click select address icons')}}
+          style={[styles.selectAddressNumber, globalStyle.flexCenter]}>
+          <Text style={styles.selectText}>+86</Text>
+          <Text style={{marginLeft: 3, marginTop: 2}}>{ DownTriangleIcon }</Text>
+        </TouchableOpacity>
+        <View style={[styles.inputBox]}>
+          <TextInput
+            style={styles.loginInput}
+            keyboardType="numeric"
+            onChangeText={(text) => this.setState({text})}
+            placeholder={this.state.placeholder}
+            { ...this.props }
+            />
+        </View>
       </View>
     );
   }
@@ -65,31 +67,81 @@ export class PassWordInput extends Component {
   render () {
     return(
       <View style={[styles.container]}>
-          <View style={ styles.inputIcon}>
-            { PasswordIcon }
-          </View>
-          <View
-            style={[styles.selectAddressNumber, globalStyle.flexCenter]}>
-          </View>
-          <View style={[styles.inputBox, styles.passwordInput]}>
-            <TextInput
-              style={styles.password}
-              keyboardType="email-address"
-              onChangeText={(text) => this.setState({text})}
-              placeholder={this.state.placeholder}
-              { ...this.props }
-              />
-              <TouchableOpacity
-                onPress={ () => alert('display password details')}
-                >
-                <Text style={styles.passwordEyeIcon}>{ EyeIcon }</Text>
-              </TouchableOpacity>
+        <View style={ styles.inputIcon}>
+          { PasswordIcon }
+        </View>
+        <View
+          style={[styles.selectAddressNumber, globalStyle.flexCenter]}>
+        </View>
+        <View style={[styles.inputBox, styles.passwordInput]}>
+          <TextInput
+            style={styles.password}
+            keyboardType="email-address"
+            onChangeText={(text) => this.setState({text})}
+            placeholder={this.state.placeholder}
+            { ...this.props }
+            />
+            <TouchableOpacity
+              onPress={ () => alert('display password details')}
+              >
+              <Text style={styles.passwordEyeIcon}>{ EyeIcon }</Text>
+            </TouchableOpacity>
         </View>
       </View>
     )
-
   }
 }
+
+/**
+ * NOTE: 登录注册验证码input
+ * Param:  param
+ * Return: {undefined}
+ **/
+
+export class VerifyCode extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      placeholder: '输入验证码',
+      disable: true,
+      time: 90
+    }
+  }
+
+  render () {
+    let { text } = this.props;
+    return(
+      <View style={[styles.container]}>
+        <View style={ styles.inputIcon}>
+          { EmailIcon }
+        </View>
+        <View
+          style={[styles.selectAddressNumber, globalStyle.flexCenter]}>
+        </View>
+        <View style={[styles.inputBox, styles.passwordInput]}>
+          <TextInput
+            style={styles.password}
+            keyboardType="numeric"
+            onChangeText={(text) => this.setState({text})}
+            placeholder={this.state.placeholder}
+            { ...this.props }
+            />
+            <Button
+              title={ text }
+              style={styles.verifyButtonBox }
+              textStyle={ styles.verifyButton }
+              disabledStyle={styles.disabledStyle}
+              isDisabled={ this.state.disable }
+              onPress={ () => alert('获取验证码')}
+              >
+              { this.state.disable ? this.state.time : text }
+            </Button>
+        </View>
+      </View>
+    )
+  }
+}
+
 
 let styles = EStyleSheet.create({
   loginInput: {
@@ -138,12 +190,30 @@ let styles = EStyleSheet.create({
     fontSize: '0.8rem',
     zIndex: 1,
   },
-  passwordEyeIcon: {
+  verifyButton: {
+    textAlign: 'center',
+    color: '$globalWhite',
+    fontSize: '0.8rem',
+  },
+  verifyButtonBox: {
+    backgroundColor: '$globalColorPro',
+    width: '5rem',
+    marginTop: '0.4rem',
+    height: '2rem',
+    borderRadius: '0.2rem',
+    marginBottom: 0 ,
+    overflow: 'hidden',
+    borderColor: '$globalColorPro',
+    flex: 0,
   },
   passwordInput: {
     flex: 0,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center'
+  },
+  disabledStyle: {
+    backgroundColor: '#DCD2D1',
+    borderColor: '#DCD2D1'
   }
 })

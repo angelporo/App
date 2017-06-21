@@ -1,5 +1,4 @@
 'use strict';
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -68,7 +67,7 @@ export default class App extends Component {
           selected={this.state.selectedTab === 'class'}
           onPress={() => {
             this.setState({
-              selectedTab: 'class',
+              selectedTab: 'class'
             });
           }}>
           {this._renderContent('#090', 'Profile')}

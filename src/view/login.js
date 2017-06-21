@@ -1,29 +1,34 @@
-'use strict'
+'use strict';
+
 import React, { Component } from 'react';
 import {
   Text,
   View,
   TextInput,
   TouchableOpacity,
+  ImagePickerIOS
 } from 'react-native';
 import styleConfig, { globalStyle } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import RoundImage from '../modules/RoundImage';
-import { LoginInput, PassWordInput } from '../modules/input';
-import { LoginButton } from '../modules/Button'
-
+import { LoginInput, PassWordInput, VerifyCode } from '../modules/input';
+import { LoginButton } from '../modules/Button';
+import { HintMsg } from '../modules/hint';
 
 export default class Login extends Component {
   constructor (props) {
     super(props);
     this.state = {
       abbleColor: styleConfig.$globalColorPro,
-    }
+      isLoading: true
+    };
   }
 
   render () {
     return (
+      <View style={ [globalStyle.html] }>
+        <HintMsg msg={ 'haha' }  closeMsgBefor={() => alert('haha') } />
       <View style={[ globalStyle.bgdW, styles.loginPage]}>
         <View style={[styles.loginContainer]}>
           <RoundImage style={[ globalStyle.bb]} source={require('../modules/img/avatar@2x.png')} />
@@ -37,9 +42,13 @@ export default class Login extends Component {
         <View style={[ globalStyle.bgdW]}>
           <PassWordInput />
         </View>
+        <VerifyCode text="获取验证码" />
         <View style={[globalStyle.tc, globalStyle.mt1, styles.loginBottom]}>
           <LoginButton bgc={ this.state.abbleColor }
-                       onPress={ () => alert('login...')} />
+                       disabled={ false }
+                       onPress={ () => {
+                         alert(ImagePickerIOS.openSelectDialog);
+            }} />
             <View style={[globalStyle.flexEnd]}>
               <TouchableOpacity
                 style={[styles.LoginHint, globalStyle.mt1]}
@@ -50,17 +59,18 @@ export default class Login extends Component {
             </View>
         </View>
       </View>
-    )
+      </View>
+    );
   }
 }
 
 let styles = EStyleSheet.create({
   loginContainer: {
     flex: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '13rem',
     width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   loginPage: {
     height: '$height'

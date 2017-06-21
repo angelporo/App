@@ -21,6 +21,9 @@ export default {
 }
 
 export let globalStyle = EStyleSheet.create({
+  html: {
+    position: 'relative'
+  },
   tc: {
     textAlign: 'center'
   },
@@ -43,7 +46,7 @@ export let globalStyle = EStyleSheet.create({
     alignItems: 'center'
   },
   bgdW: {
-    backgroundColor: '$globalWhite',
+    backgroundColor: '$globalWhite'
   },
   solidBorder: {
     borderColor: '$globalBorder',
@@ -64,4 +67,4 @@ export let globalStyle = EStyleSheet.create({
     paddingLeft: 1 * FontSize,
     paddingRight: 1 * FontSize
   }
-})
+});

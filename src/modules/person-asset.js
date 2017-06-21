@@ -3,6 +3,7 @@
  * Param:  param
  * Return: { jsx }
  **/
+'use strict';
 import React, { Component } from 'react';
 import {
   View,
@@ -22,7 +23,7 @@ const OrderIcon = (<Icon name="ios-book" size={ 22 } color="#f60" />);
 const data= [{
         id: 1,
         icon: (<Icon name="ios-book" size={ 20 } color="red" />),
-        onPress: () => {alert(this.id)},
+        onPress: (id) => {alert(id)},
         type: '账户余额',
         num: 2029,
       }, {
@@ -70,7 +71,7 @@ export default class PersonAssetComponent extends Component {
           <FlatList
             horizontal={true}
             data={data}
-            renderItem={ ({item}) => <PersonAssetItem data={item} />}
+            renderItem={ ({ item }) => <PersonAssetItem data={item} />}
             />
       </View>
     )
@@ -84,12 +85,12 @@ export default class PersonAssetComponent extends Component {
  **/
 export function PersonAssetItem ({data}) {
   return (
-    <TouchableOpacity style={ styles.item} onPress={ () => {data.onPress()} }>
-      <View style={ styles.itemIcon}>
-        { data.icon}
+    <TouchableOpacity style={ styles.item} onPress={ () => {data.onPress(data.id)} }>
+      <View style={ styles.itemIcon }>
+        { data.icon }
       </View>
-      <Text style={styles.number}>{ data.num }</Text>
-      <Text style={styles.text}>{ data.type }</Text>
+      <Text style={ styles.number }>{ data.num }</Text>
+      <Text style={ styles.text }>{ data.type }</Text>
     </TouchableOpacity>
   )
 }

@@ -22,7 +22,8 @@ import Button from 'apsl-react-native-button';
 export function LoginButton ({
   bgc,
   onPress,
-  style
+  style,
+  disabled
 }) {
   return (
           <Button
@@ -32,12 +33,20 @@ export function LoginButton ({
                     width: '100%',
                     borderRadius: 5
             }, style]}
+            textStyle={ styles.verifyButton }
+            disabledStyle={styles.disabledStyle}
             onPress={onPress}
-                  textStyle={{fontSize: 1*styleConfig.rem, color: styleConfig.$globalWhite}}>
+            isDisabled={ disabled }
+            textStyle={{fontSize: 1*styleConfig.rem, color: styleConfig.$globalWhite}}
+            >
             确定
             </Button>
   )
 }
 
 const styles = EStyleSheet.create({
+  disabledStyle: {
+    backgroundColor: '#DCD2D1',
+    borderColor: '#DCD2D1'
+  }
 })
