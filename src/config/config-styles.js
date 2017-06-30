@@ -33,20 +33,65 @@ export let globalStyle = EStyleSheet.create({
   mb1: {
     marginBottom: '1rem'
   },
+  ml1: {
+    marginLeft: '1rem'
+  },
+  mr1: {
+    marginRight: '1rem'
+  },
+  px1: {
+    paddingLeft: '1rem',
+    paddingRight: '1rem'
+  },
+  mld5: {
+    marginLeft: '0.5rem'
+  },
   flexCenter: {
     flex: 0,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
-  flexEnd: {
-    flex: 0,
+  flexauto: {
+    flex: 1,
+  },
+  flexFix: {
+    flex:0
+  },
+  flexStart: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  flexEnd: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  sbarbgd: {
+    backgroundColor: '$globalWhite'
+  },
+  flexStart: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  flexbox: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  center: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   bgdW: {
     backgroundColor: '$globalWhite'
+  },
+  gbdc: {
+    backgroundColor: '$globalBgc'
+  },
+  bgcp: {
+    backgroundColor: '$globalColorPro'
   },
   solidBorder: {
     borderColor: '$globalBorder',
@@ -56,15 +101,45 @@ export let globalStyle = EStyleSheet.create({
   textColorPro: {
     color: proColor
   },
+  tl: {
+    textAlign: 'left'
+  },
   tr: {
     textAlign: 'right'
   },
   py1: {
-    paddingTop: 1 * FontSize,
-    paddingBottom: 1 * FontSize
+    paddingTop: '1rem',
+    paddingBottom: '1rem'
+  },
+  mrd5: {
+    marginRight: '0.5rem'
+  },
+  bb: {
+    borderBottomColor: '$globalBorder',
+    borderStyle: 'solid',
+    borderBottomWidth: 1
+  },
+  pyd5: {
+    paddingTop: '0.5rem',
+    paddingBottom: '0.5rem'
+  },
+  mtd5: {
+    marginTop: '0.5rem'
+  },
+  cw: {
+    color: '$globalWhite'
+  },
+  cca: {
+    color: '$globalColorAssist'
+  },
+  cp: {
+    color: '$globalColorPro'
+  },
+  fzd8: {
+    fontSize: '0.8rem'
   },
   px1: {
-    paddingLeft: 1 * FontSize,
-    paddingRight: 1 * FontSize
-  }
+    paddingLeft: '0.8rem',
+    paddingRight: '0.8rem'
+  },
 });

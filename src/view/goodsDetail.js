@@ -1,14 +1,13 @@
 /**
- * 个人中心
+ * 商品详情
  * Param:  param
  * Return: {undefined}
  **/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import store from '../redux/store/store';
-import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
-import Person from '../modules/Person';
+import GoodsDetailComponent from '../modules/GoodsDetail'
 
 function mapStateToProps (state) {
   return {
@@ -21,20 +20,18 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-let App = connect()( Person );
+let App = connect(mapStateToProps, mapDispatchToProps )(GoodsDetailComponent);
 
-export default class AppPerson extends Component {
+export default class GoodsDetail extends Component {
   static navigatorStyle = {
-    navBarRightButtonColor: '#ccc',
-    navBarLeftButtonColor: '#ccc',
     navBarHidden: true,
-  };
+    tabBarHidden: true
+  }
 
   constructor(props){
     super(props);
   }
   render () {
-    console.log(store.getState());
     return (
       <Provider store={ store } >
         <App navigator={this.props} />

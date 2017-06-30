@@ -7,13 +7,6 @@ import {
 } from 'react-native';
 import App from './app';
 import EStyleSheet from 'react-native-extended-stylesheet';
-function ButtonText () {
-  return (
-    <Button style={styles.button} textStyle={{fontSize: 18, color: '#fff'}} onPress={this.clickButton}>
-      Hello!
-    </Button>
-  )
-}
 
 export default class ModulesView extends Component {
   clickButton () {

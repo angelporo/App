@@ -1,22 +1,62 @@
-import {
-  View,
-  Text
-} from 'react-native';
+/**
+ * 首页
+ * Param:  param
+ * Return: {undefined}
+ **/
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { TouchBar } from '../modules/TouchBar';
+import { Provider, connect } from 'react-redux';
+import Home from '../modules/Home';
 
-const TouchIcon = (<Icon name="ios-book" size={ 22 } color="#4F8EF7" />);
-export default class Home extends Component {
+function mapStateToProps (state) {
+  return {
+    name: 'liyuan'
+  }
+}
+function mapDispatchToProps (dispatch) {
+  return {
+    nameDispatch: function () {alert('ok')}
+  }
+}
+
+let AppHome = connect()( Home );
+
+export default class GoodsDetail extends Component {
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        buttonColor: '#ccc',
+      },
+      {
+        icon: require('./img/home.png') ,
+        id: 'scan',
+        buttonColor: styleConfig.$globalColorPro,
+      }
+    ],
+    leftButtons: [
+      {
+        icon: require('./img/left.png') ,
+        id: 'search',
+        buttonColor: styleConfig.$globalColorPro,
+      }
+    ]
+  }
+
+static navigatorStyle = {
+    navBarRightButtonColor: '#ccc',
+    navBarLeftButtonColor: '#ccc'
+};
+
+  constructor(props){
+    super(props);
+  }
   render () {
     return (
-      <TouchBar
-        title=" touchbar "
-        IconChild={ TouchIcon }
-        onClick={ () => { alert('ok') }}
-        />
+      <Provider store={ store } >
+        <AppHome navigator={this.props} />
+      </Provider>
     )
   }
 }

@@ -8,7 +8,8 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  Animated
+  Animated,
+  ActivityIndicator
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import styleConfig from '../config/config-styles';
@@ -91,6 +92,28 @@ export class HintMsg extends Component {
   }
 }
 
+export class Loading extends Component{
+  constructor (props){
+    super(props);
+  }
+  render () {
+    let { isShow } = this.props;
+    if (isShow) {
+    return(
+      <View style={styles.hintBox}>
+      <ActivityIndicator
+        style={styles.centering}
+        size="small"
+        hidesWhenStopped={false}
+        />
+      </View>
+    )
+    }else {
+      return null
+    }
+  }
+}
+
 const styles = EStyleSheet.create({
   hintBox: {
     width: '$width',
@@ -103,6 +126,12 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     left: 0, right: 0, top: 0, bottom: 0
   },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+    zIndex: 1000
+  }, 
   hintBgc: {
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
     paddingBottom: '0.4rem',

@@ -18,10 +18,12 @@ export default function RoundImage ({
   source,
 }) {
   return (
+      <View style={[styles.avatarPic, style]}>
       <Image
-    style={ [styles.avatarPic, style]}
+    style={ [styles.avatarPic]}
     source={ source }
       />
+      </View>
   );
 }
 

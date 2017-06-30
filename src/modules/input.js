@@ -21,13 +21,14 @@ const loginHintColor = "#8B7778";
 const LoginIcon = (<Icon name="mobile" size={ 16 } color={loginHintColor} />);
 const PasswordIcon = (<Icon name="lock" size={ 16 } color={loginHintColor} />);
 const EyeIcon = (<Icon name="eye" size={ 16 } color={ loginHintColor } />);
+const UnableEye = ( <Icon name="eye-with-line" size={ 16 } color={ loginHintColor} />)
 const EmailIcon = (<Icon name="mail" size={ 16 } color={loginHintColor} />);
 const DownTriangleIcon =  (<Icon name="triangle-down" size={ 16 } color={loginHintColor} />);
 export class LoginInput extends Component {
   constructor(props) {
     super(props);
     this.state = { placeholder: '请输入手机号' ,
-                   value: 'ha'
+                   value: ''
                  };
   }
 
@@ -62,6 +63,7 @@ export class PassWordInput extends Component {
     super(props);
     this.state = {
       placeholder: '请输入密码',
+      textEntry: true
     }
   }
   render () {
@@ -77,14 +79,15 @@ export class PassWordInput extends Component {
           <TextInput
             style={styles.password}
             keyboardType="email-address"
+            secureTextEntry={ this.state.textEntry }
             onChangeText={(text) => this.setState({text})}
             placeholder={this.state.placeholder}
             { ...this.props }
             />
             <TouchableOpacity
-              onPress={ () => alert('display password details')}
+              onPress={ () => this.setState({ textEntry: !this.state.textEntry })}
               >
-              <Text style={styles.passwordEyeIcon}>{ EyeIcon }</Text>
+              <Text style={styles.passwordEyeIcon}>{ this.state.textEntry ? EyeIcon : UnableEye  }</Text>
             </TouchableOpacity>
         </View>
       </View>
@@ -187,11 +190,9 @@ let styles = EStyleSheet.create({
     width: '4rem',
     position: 'relative',
     left: '4rem',
-    fontSize: '0.8rem',
     zIndex: 1,
   },
   verifyButton: {
-    textAlign: 'center',
     color: '$globalWhite',
     fontSize: '0.8rem',
   },

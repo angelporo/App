@@ -15,17 +15,16 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './home';
 import Person from './person';
 import Login from './login';
+import GoodsDetail from '../view/goodsDetail';
 
 const homeIconSize = 26;
-const styles = EStyleSheet.create({
-});
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedTab: 'starred'
+      selectedTab: 'home'
     };
   }
 
@@ -43,8 +42,9 @@ export default class App extends Component {
   render() {
     return (
       <TabBarIOS
-        tintColor={ 'red' }
-        barTintColor={ styleConfig.globalWhite}
+      tintColor={ styleConfig.$globalColorPro }
+      style={styles.tabBar}
+      barTintColor={ styleConfig.$globalWhite}
         >
         <Icon.TabBarItemIOS
           title="首页"
@@ -70,12 +70,12 @@ export default class App extends Component {
               selectedTab: 'class'
             });
           }}>
-          {this._renderContent('#090', 'Profile')}
+        <GoodsDetail />
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
           title="购物车"
-          iconName="ios-shopping-cart"
-          selectedIconName="ios-shopping-cart"
+          iconName="ios-cart-outline"
+          selectedIconName="ios-cart-outline"
           iconSize={homeIconSize}
           selected={this.state.selectedTab === 'starred'}
           onPress={() => {
@@ -87,8 +87,8 @@ export default class App extends Component {
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
           title="我的"
-          iconName="ios-person"
-          selectedIconName="ios-person"
+          iconName="md-person"
+          selectedIconName="md-person"
           iconSize={homeIconSize}
           selected={this.state.selectedTab === 'person'}
           onPress={() => {
@@ -102,3 +102,7 @@ export default class App extends Component {
     );
   }
 }
+let styles = EStyleSheet.create({
+  tabBar: {
+  }
+})

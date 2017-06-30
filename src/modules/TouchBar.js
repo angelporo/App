@@ -1,24 +1,34 @@
 import {
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import React, { Component } from 'react';
-import styleConfig from '../config/config-styles';
+import PropTypes from 'prop-types';
+import styleConfig, { globalStyle } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const defaultTouchBarRightChild = (<Icon name="ios-arrow-forward" color='#6b6b6b' size={26} />);
 
+TouchBar.PropTypes = {
+  isTouch: PropTypes.bool,
+  IconChild: PropTypes.node,
+  title: PropTypes.string,
+  onClick: PropTypes.func,
+  RightChild: PropTypes.node
+}
+
 export function TouchBar ({
   isTouch=true,
   IconChild,
   title,
+  style,
   onClick,
   RightChild = defaultTouchBarRightChild
 }) {
   let ItemContent = () => (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={ styles.icon} >
         { IconChild }
       </View>
@@ -36,18 +46,19 @@ export function TouchBar ({
   let IsTouchableBar = ({ ChiledElement}) => {
     if( isTouch ){
       return (
-        <TouchableOpacity onPress={ onClick } style={styles.container}>
+        <TouchableOpacity onPress={ onClick } style={[styles.container, style]}>
           <ChiledElement />
         </TouchableOpacity>
       )
     }else {
       return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
           <ChiledElement />
         </View>
       )
     }
   }
+
   return (
     <View style={styles.box}>
       <IsTouchableBar ChiledElement={ ItemContent } />
@@ -55,9 +66,70 @@ export function TouchBar ({
   )
 }
 
+export class ViewTouchTitleBar extends Component {
+  constructor(props) {
+    super(props);
+  }
+  handleReturn () {
+    let { onPressLeft } = this.props;
+    onPressLeft();
+  }
+  render () {
+    let { Right, LeftIcon, title, style } = this.props;
+    let DefaultReturnIcon = (<Icon size={22} onPress={() => this.handleReturn.bind(this)()} style={styles.returnIcon} name="ios-arrow-back-outline" color={styleConfig.$globalColorAssist}/> );
+    return (
+      <View style={[styles.titleBox, style]}>
+        <View style={styles.titleLeft}  >
+          { LeftIcon || DefaultReturnIcon }
+        </View>
+        <View style={styles.titleCenter}>
+          <Text style={styles.titleCenterText}>{ title }</Text>
+        </View>
+        <View style={styles.titleRight}>
+          { Right }
+        </View>
+      </View>
+    )
+  }
+}
+
 const styles = EStyleSheet.create({
-  box: {
+  titleBox: {
     height: '2.5rem',
+    position: 'relative',
+    paddingTop: '0.3rem',
+    backgroundColor: '$globalWhite',
+    paddingBottom: '0.3rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem'
+  },
+  titleLeft: {
+    width: '3rem',
+    height: '2.5rem',
+    position: 'absolute',
+    justifyContent:'center',
+    left: 0, top: 0,zIndex: 100
+  },
+  titleCenter : {
+    marginTop: '0.4rem',
+    justifyContent: 'center'
+  },
+  titleCenterText: {
+    width: '100%',
+    textAlign: 'center',
+    color: '$globalColorPro'
+  },
+  titleRight: {
+    width: '4rem',
+    height: '2.5rem',
+    position: 'absolute',
+    justifyContent: 'center',
+    right: 0, top: 0,
+    paddingRight: '$globalWhiteSpace',
+  },
+  box: {
+    paddingTop: '0.3rem',
+    paddingBottom: '0.3rem',
     paddingRight: '1rem',
     paddingLeft: '1rem',
     backgroundColor: '$globalWhite',
@@ -78,6 +150,9 @@ const styles = EStyleSheet.create({
     flexGrow: 1,
     paddingLeft: '0.5rem',
     justifyContent: 'center',
+  },
+  returnIcon: {
+    paddingLeft: '$globalWhiteSpace'
   },
   text: {
     fontSize: '1rem',

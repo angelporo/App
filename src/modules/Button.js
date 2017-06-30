@@ -10,7 +10,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import styleConfig from '../config/config-styles';
+import styleConfig, { globalStyle } from '../config/config-styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from 'apsl-react-native-button';
 
@@ -44,9 +44,38 @@ export function LoginButton ({
   )
 }
 
+export function ProColorMessageButton ({
+  text
+}) {
+  return (
+    <View style={styles.hintBox}>
+      <Text style={[globalStyle.bgcp, styles.goodsHintPer]}>{ text }</Text>
+    </View>
+  )
+}
+
+
+
+
 const styles = EStyleSheet.create({
   disabledStyle: {
     backgroundColor: '#DCD2D1',
     borderColor: '#DCD2D1'
+  },
+  hintBox: {
+    paddingLeft: '0.2rem',
+    paddingRight: '0.2rem',
+    backgroundColor: '$globalColorPro',
+    paddingBottom: '0.25rem',
+    paddingTop: '0.25rem',
+    marginLeft: '0.3rem',
+    marginTop: '0.3rem',
+
+  },
+  goodsHintPer: {
+    textAlign: 'center',
+    lineHeight: '1rem',
+    fontSize: '0.8rem',
+    color: '$globalWhite'
   }
 })

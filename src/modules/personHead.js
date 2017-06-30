@@ -92,7 +92,7 @@ const styles = EStyleSheet.create({
     backgroundColor: 'transparent'
   },
   avatarPic: {
-    borderWidth: 1, borderColor: '$globalWhite', borderStyle: 'solid',
+    borderWidth: 1, borderColor: '$globalWhite',
     marginTop: '3rem'
   },
   avatarIon: {
