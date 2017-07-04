@@ -16,7 +16,6 @@ import { LoginInput, PassWordInput, VerifyCode } from '../modules/input';
 import { LoginButton } from '../modules/Button';
 import { HintMsg, Loading } from '../modules/hint';
 
-
 export default class Login extends Component {
   constructor (props) {
     super(props);
@@ -30,7 +29,7 @@ export default class Login extends Component {
     return (
       <View>
         <HintMsg msg={ '发布成功' }  closeMsgBefor={() => {} } />
-          <Loading isShow={ true }  />
+          <Loading isShow={ false }  />
           <View style={[ globalStyle.bgdW, styles.loginPage]}>
             <View style={[styles.loginContainer]}>
               <RoundImage style={[ globalStyle.bb]} source={require('../modules/img/avatar@2x.png')} />

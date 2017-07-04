@@ -11,7 +11,10 @@ import Home from './src/view/home';
 import AppPerson from './src/view/person';
 import LoginView from './src/view/login';
 import GoodsDetail from './src/view/goodsDetail';
+import AppSearch from './src/view/search'
 import { Navigation } from 'react-native-navigation';
+import Nav from './src/view/nav';
+import ShoppingCar from './src/view/shoppingCar';
 // 初始化入口文件注入全局style对象;
 EStyleSheet.build( styleConfig );
 
@@ -20,10 +23,14 @@ EStyleSheet.build( styleConfig );
 // register all screens of the app (including internal ones)
 function RegisterScreens() {
   Navigation.registerComponent('example.Home', () => Home);
+  Navigation.registerComponent('example.Login', () => LoginView);
   Navigation.registerComponent('example.Class', () => LoginView);
   Navigation.registerComponent('example.Nav', () => Icon);
   Navigation.registerComponent('example.Person', () => AppPerson);
-  Navigation.registerComponent('example.goodsDetail', () => GoodsDetail);
+  Navigation.registerComponent('example.GoodsDetail', () => GoodsDetail);
+  Navigation.registerComponent('example.Search', () => AppSearch);
+  Navigation.registerComponent('example.Nav', () => Nav);
+  Navigation.registerComponent('example.ShoppingCar', () => ShoppingCar);
 }
 
 RegisterScreens(); // this is where you register all of your app's screens
@@ -41,28 +48,28 @@ RegisterScreens(); // this is where you register all of your app's screens
 Navigation.startTabBasedApp({
   tabs: [
     {
-      label: 'One',
+      label: '首页',
       title: 'U兔购',
       screen: 'example.Home', // this is a registered name for a screen
       icon: require('./src/view/img/home.png'),
       selectedIcon: require('./src/view/img/home.png'), // iOS only
     },
     {
-      label: 'Two',
-      screen: 'example.Class',
+      label: '分类',
+      screen: 'example.Nav',
       icon: require('./src/view/img/home.png'),
       selectedIcon: require('./src/view/img/home.png'), // iOS only
-      title: ''
+      title: 'U兔购'
     },
     {
-      label: 'Two',
-      screen: 'example.Class',
+      label: '购物车',
+      screen: 'example.ShoppingCar',
       icon: require('./src/view/img/home.png'),
       selectedIcon: require('./src/view/img/home.png'), // iOS only
-      title: 'nav'
+      title: '购物车'
     },
     {
-      label: 'Two',
+      label: '我的',
       screen: 'example.Person',
       icon: require('./src/view/img/home.png'),
       selectedIcon: require('./src/view/img/home.png'), // iOS only

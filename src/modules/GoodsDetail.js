@@ -8,18 +8,16 @@ import {
   Text,
   Image,
   ScrollView,
-  Dimensions,
-  AlertIOS,
   Modal,
   RefreshControl,
   ListView,
   PixelRatio,
   TouchableOpacity,
-  TouchableWithoutFeedback,
+  InteractionManager
 } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styleConfig, { globalStyle } from '../config/config-styles';
+import styleConfig, { globalStyle, refreshColor } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { GoodsDetailSwiper } from '../modules/HomeSwiper';
@@ -33,19 +31,8 @@ let TouchBarHeight = 26;
 let prefetchImg = "https://img1.360buyimg.com/da/jfs/t5800/228/4567349819/124708/8ada1b46/59506dfdNefd95f11.jpg";
 
 let textSiperData = [{uri: 'https://m.360buyimg.com/n12/jfs/t5575/315/2774069126/166468/bfd65dbb/5933ffb3N3481d9da.jpg!q70.jpg'}, {uri: 'https://m.360buyimg.com/n12/jfs/t2437/182/2620062135/221142/6ae1eeb7/5711cee3Nc958a38f.jpg!q70.jpg'}, {uri: 'https://m.360buyimg.com/n12/jfs/t2671/168/409622090/266992/875f55c/5711cee9N70e69e29.jpg!q70.jpg'}];
-let modeData = [{title: '微客', description: '160'}, {title: '微客', description: '160'}, {title: '微客', description: '160'}, {title: '微客', description: '160'}, {title: '微客', description: '160'}, {title: '微客', description: '160'}]
 
 export default class GoodsDetailComponent extends Component {
-  constructor(props) {
-    super(props);
-    console.log('component', this.props);
-    this.state = {
-      goodsInfoImage: [],
-      goodsInfoShow: false,
-      isFetch: false,
-      isShowModal: false,
-    }
-  }
   handleReturnPageIcon () {
     this.props.navigator.navigator.pop({
       animated: true,
@@ -72,11 +59,63 @@ export default class GoodsDetailComponent extends Component {
       })
     }
   }
+  constructor(props) {
+    super(props);
+    console.log('component', this.props);
+    this.state = {
+      goodsName: '彪马PUMA男鞋跑步鞋2017春新款运',
+      storeTag: ['赠送积分158', '积分商品', '商家包邮', '满198送'],
+      goodsInfoImage: [],
+      discount: '9.5', //折扣
+      sale: '23',//销量
+      protoPrice: '334', // 商品原价
+      goodsInfoShow: false,
+      isFetch: false,
+      isShowModal: false, //等价价格modal开关
+      isShowGoodsArguments: false,
+      vipPriceData: [{title: '微客', description: '160'}, {title: '微客', description: '160'}, {title: '微客', description: '160'}, {title: '微客', description: '160'}, {title: '微客', description: '160'}, {title: '微客', description: '160'}],
+      goodsArguments: [{title: '商品名称', description: '炫亮魅力丝绒口红'},
+                       {title: '商品编号', description: 'ECS000123'},
+                       {title: '商品品牌', description: '花颜'},
+                       {title: '上架时间', description: '2016-05-12'},
+                       {title: '商品重量', description: '25g'},
+                       {title: '商品库存', description: '1145'}],
+      storeInfo: {
+        storeLogo: "https://img1.360buyimg.com/da/jfs/t5800/228/4567349819/124708/8ada1b46/59506dfdNefd95f11.jpg",
+        storeName: '跨进电商',
+        allGoods: '100453',
+        fansNum: '12323',
+        goodsInfo: '5.0',
+        logistics: '5.0',
+        storeService: '5.0'
+      }
+    }
+  }
+  handleCloseModal() {
+    this.setState({
+      isShowModal: !this.state.isShowModal
+    })
+  }
+
+  handleCloseGoodsArgumentsModal() {
+    this.setState({
+      isShowGoodsArguments: !this.state.isShowGoodsArguments
+    })
+  }
+  componentDidMount () {
+    InteractionManager.runAfterInteractions(() => {
+      // ...耗时较长的同步的任务...
+      // alert('ok')
+    });
+  }
+
+
   render () {
     return (
       <View style={[globalStyle.html]}>
         <Loading isShow={this.state.isFetch} />
-        <PriceMoal isShow={ this.state.isShowModal } title="会员专享价" dataSource={ modeData } />
+        <PriceMoal closeModal={this.handleCloseModal.bind(this)} isShow={ this.state.isShowModal } title="会员专享价" dataSource={ this.state.vipPriceData } />
+        <PriceMoal closeModal={this.handleCloseGoodsArgumentsModal.bind(this)} isShow={ this.state.isShowGoodsArguments } title="商品参数" dataSource={ this.state.goodsArguments } />
       <ScrollView
         style={[globalStyle.html]}
         scrollEventThrottle={10}
@@ -89,7 +128,7 @@ export default class GoodsDetailComponent extends Component {
                 tintColor="#ff0000"
                 title="下拉刷新"
                 titleColor={ styleConfig.$globalColorPro }
-                colors={['#ff0000', '#00ff00', '#0000ff']}
+                colors={ refreshColor }
                 progressBackgroundColor="#ffff00"
                 />
       }
@@ -109,7 +148,7 @@ export default class GoodsDetailComponent extends Component {
        </View>
         <View style={[ globalStyle.px1, globalStyle.pyd5, globalStyle.center]}>
           <View style={[globalStyle.flexStart, globalStyle.flexauto]}>
-            <Text>彪马PUMA男鞋跑步鞋2017春新款运</Text>
+            <Text>{ this.state.goodsName }</Text>
           </View>
           <View style={styles.shareIcon}>
             <TouchableOpacity style={[globalStyle.flexEnd]}>
@@ -121,45 +160,49 @@ export default class GoodsDetailComponent extends Component {
           </View>
         </View>
         <View style={[globalStyle.px1 ]}>
-          <View style={[{flex: 1, alignItems: 'flex-start', justifyContent: 'center', flexDirection:'row'}, globalStyle.px1]}>
+          <View style={[{flex: 0,
+                         alignItems: 'flex-start',
+                         justifyContent: 'flex-start',
+                         flexDirection:'row',
+                         width: '100%',
+                }]}>
             <View style={{}}>
               <Text>
                 ￥158
               </Text>
             </View>
-            <View style={{flexWrap: 'wrap', flex: 0, justifyContent: 'flex-start',alignItems: 'center', flexDirection: 'row' }}>
-              <ProColorMessageButton text="赠送积分158" />
-              <ProColorMessageButton text="积分商品" />
-              <ProColorMessageButton text="满398送" />
-              <ProColorMessageButton text="积分商品" />
-              <ProColorMessageButton text="商家包邮" />
-              <ProColorMessageButton text="积分商品" />
+            <View style={{flexWrap: 'wrap', flex: 1, justifyContent: 'flex-start',alignItems: 'center', flexDirection: 'row' }}>
+              {
+                  this.state.storeTag.map( (n, i) => {
+                    return <ProColorMessageButton text={n} />
+                  })
+              }
             </View>
           </View>
           <Text style={[{textDecorationLine: 'line-through', color: '#a0a0a0', lineHeight: 24},
                         globalStyle.fzd8
-                ]}>原价:￥300 </Text>
+                ]}>原价:￥{this.state.protoPrice} </Text>
           <View style={[globalStyle.bb]}>
             <View style={globalStyle.flexStart}>
               <View>
-                <Text style={[{color: '#747474', lineHeight: 24}, globalStyle.fzd8]}>折扣: 9.4折</Text>
+                <Text style={[{color: '#747474', lineHeight: 24}, globalStyle.fzd8]}>折扣: { this.state.discount}折</Text>
               </View>
               <View>
-                <Text style={[{marginLeft: 40, color: '#747474'}, globalStyle.fzd8]}>月销0笔</Text>
+                <Text style={[{marginLeft: 40, color: '#747474'}, globalStyle.fzd8]}>月销{ this.state.sale }笔</Text>
               </View>
             </View>
           </View>
           <GoodsDetailTouchBar title="会员等级价格" onPress={() => this.setState({isShowModal: true})} />
-          <GoodsDetailTouchBar title="产品参数" onPress={() => alert('ok')} />
+            <GoodsDetailTouchBar title="产品参数" onPress={() => this.setState({isShowGoodsArguments: true})} />
           <GoodsDetailTouchBar title="查看自提点" onPress={() => alert('ok')} bb={false} />
         </View>
-        <GoodsStore />
+        <GoodsStore storeInfo={this.state.storeInfo} />
         {
           this.state.goodsInfoImage.length != 0 ? <GoodsImgIntro data={this.state.goodsInfoImage} /> : null
         }
 
 </ScrollView>
-        <GoodsFooter />
+<GoodsFooter />
       </View>
     )
   }
@@ -212,7 +255,7 @@ export class GoodsImgIntro extends Component {
     let _this = this;
     return (
       <View style={[styles.goodsIntro]}>
-        <View style={[globalStyle.mtd5, globalStyle.px1, globalStyle.bgdW]}>
+        <View style={[globalStyle.mtd5, globalStyle.bgdW]}>
           {
             data.map( (n, i) => {
                 return (
@@ -244,7 +287,7 @@ export class FixImage extends Component {
     return (
       <View style={ styles.goodsIntroItem }>
         <Image
-          style={{width: 'auto', height: this.state.height/PixelRatio.get()}}
+          style={{height: this.state.height/PixelRatio.get()}}
           source={{uri: uri}}
           resizeMode={Image.resizeMode.contain}
           />
@@ -269,32 +312,37 @@ export class GoodsMode extends Component {
   }
 }
 
-function GoodsStore () {
+function GoodsStore ({storeInfo}) {
   return (
     <View style={styles.storeInfoBox}>
       <View style={[globalStyle.mtd5, globalStyle.bgdW]}>
         <View style={[globalStyle.flexStart, globalStyle.px1, globalStyle.pyd5]}>
           <View style={styles.goodsStoreLogo}>
-            <Image style={{width: '100%', height: '100%'}} source={{uri: prefetchImg}} resizeMode={Image.resizeMode.contain} />
+            <Image
+              style={{width: '100%',
+              height: '100%'}}
+              source={{uri: storeInfo.storeLogo}}
+              resizeMode={Image.resizeMode.contain}
+              />
           </View>
           <View style={[globalStyle.mld5]}>
-            <Text style={[globalStyle.fzd8]}>易换商家</Text>
+            <Text style={[globalStyle.fzd8]}>{ storeInfo.storeName}</Text>
             <Text style={{fontSize: 14}}>⭐⭐⭐⭐⭐⭐</Text>
           </View>
         </View>
         <View style={[globalStyle.flexCenter]}>
           <View style={{alignItems: 'center', width: '33%'}}>
-            <Text style={globalStyle.fzd8}>12321</Text>
+            <Text style={globalStyle.fzd8}>{ storeInfo.allGoods}</Text>
             <Text style={globalStyle.fzd8}>全部商品</Text>
           </View>
           <View style={[{alignItems: 'center', width: '33%'}, styles.bx1]}>
-            <Text style={globalStyle.fzd8}>12321</Text>
-            <Text style={globalStyle.fzd8}>全部商品</Text>
+            <Text style={globalStyle.fzd8}>{ storeInfo.fansNum}</Text>
+            <Text style={globalStyle.fzd8}>关注人数</Text>
           </View>
           <View style={{alignItems: 'center', width: '33%'}}>
-            <Text style={[globalStyle.fzd8, {lineHeight: 16}]}>商品描述  <Text style={[globalStyle.cp]}>5.0</Text></Text>
-            <Text style={[globalStyle.fzd8, {lineHeight: 16}]}>卖家服务  <Text style={[globalStyle.cp]}>5.0</Text></Text>
-            <Text style={[globalStyle.fzd8, {lineHeight: 16}]}>物流服务  <Text style={[globalStyle.cp]}>5.0</Text></Text>
+            <Text style={[globalStyle.fzd8, {lineHeight: 16}]}>商品描述  <Text style={[globalStyle.cp]}>{ storeInfo.goodsInfo }</Text></Text>
+            <Text style={[globalStyle.fzd8, {lineHeight: 16}]}>卖家服务  <Text style={[globalStyle.cp]}>{ storeInfo.storeService }</Text></Text>
+            <Text style={[globalStyle.fzd8, {lineHeight: 16}]}>物流服务  <Text style={[globalStyle.cp]}>{ storeInfo.logistics }</Text></Text>
           </View>
         </View>
         <View style={[globalStyle.flexCenter, globalStyle.mtd5]}>
@@ -342,10 +390,14 @@ export class GoodsFooter extends Component {
           </TouchableOpacity>
         </View>
         <View style={[{width: '50%',height: '100%', backgroundColor: "red"}, globalStyle.flexStart]}>
-          <TouchableOpacity style={{width: '50%'}}>
-            <Text style={[{fontSize: 14}, globalStyle.tc, globalStyle.cw]}>加入购物车</Text>
+          <TouchableOpacity
+            onPress={() => alert('ok')}
+            style={{width: '50%', height: '100%', justifyContent: 'center'}}>
+            <Text style={[{fontSize: 14, }, globalStyle.tc, globalStyle.cw]}>加入购物车</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{width: '50%'}}>
+          <TouchableOpacity
+            onPress={() => alert('ok')}
+            style={{width: '50%', height: '100%', justifyContent: 'center'}}>
             <Text style={[{fontSize: 14}, globalStyle.tc, globalStyle.cw]}>立即购买</Text>
           </TouchableOpacity>
         </View>
@@ -382,7 +434,7 @@ export class PriceMoal extends Component {
       return (
         <Modal
           transparent={true}
-          animationType={"slide"}
+          animationType={"fade"}
           style={styles.modal}>
           <View
             style={[styles.modalPressBox]}
@@ -398,7 +450,7 @@ export class PriceMoal extends Component {
               <ListView
                 style={[globalStyle.px1]}
                 dataSource={ this.state.dataSource }
-                renderRow={(n) => (<GoodsDetailMoalItem title={ n.title } description={n.description} />)}
+                renderRow={(n, i) => (<GoodsDetailMoalItem key={i} title={ n.title } description={n.description} />)}
           />
           <TouchableOpacity
             onPress={() => alert('shpping goods now !')}

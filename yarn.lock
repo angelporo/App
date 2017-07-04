@@ -3047,6 +3047,10 @@ react-native-navigation@^1.1.112:
   dependencies:
     lodash "4.x.x"
 
+react-native-swipe-list-view@^0.4.1:
+  version "0.4.1"
+  resolved "http://registry.npm.taobao.org/react-native-swipe-list-view/download/react-native-swipe-list-view-0.4.1.tgz#f4b0288e090fc86f743bc30b45df829de729bcd7"
+
 react-native-swiper@^1.5.4:
   version "1.5.4"
   resolved "http://registry.npm.taobao.org/react-native-swiper/download/react-native-swiper-1.5.4.tgz#a85535b5374ef8d605a7a720e447ac46816ac448"

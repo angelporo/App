@@ -34,8 +34,8 @@ export default class LoginView extends Component {
   }
   render () {
     return (
-        <Provider store={ store } >
-        <AppLogin navigator={this.props} />
+      <Provider store={ store } >
+        <AppLogin navigator={ this.props } />
       </Provider>
     );
   }

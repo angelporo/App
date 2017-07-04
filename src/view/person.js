@@ -34,7 +34,6 @@ export default class AppPerson extends Component {
     super(props);
   }
   render () {
-    console.log(store.getState());
     return (
       <Provider store={ store } >
         <App navigator={this.props} />

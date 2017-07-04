@@ -1,5 +1,5 @@
 /**
- * 首页
+ * 购物车页面
  * Param:  param
  * Return: {undefined}
  **/
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
-import Home from '../modules/Home';
+import ShoppingCarComponent from '../modules/ShoppingCar';
 
 function mapStateToProps (state) {
   return {
@@ -26,33 +26,25 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-let AppHome = connect(mapStateToProps, mapDispatchToProps)( Home );
+let AppShoppingCar = connect(mapStateToProps, mapDispatchToProps)( ShoppingCarComponent );
 
-export default class GoodsDetail extends Component {
+export default class ShoppingCar extends Component {
   static navigatorButtons = {
     rightButtons: [
       {
-        buttonColor: '#ccc'
-      },
-      {
-        icon: require('./img/scan.png') ,
-        id: 'scan',
-        buttonColor: styleConfig.$globalColorPro
-      }
-    ],
-    leftButtons: [
-      {
-        icon: require('./img/search.png') ,
-        id: 'search',
-        buttonColor: styleConfig.$globalColorPro
+        buttonColor: '#ccc',
+        buttonFontSize: 12,
+        buttonColor: 'styleConfig.$globalColorAssist',
+        id: 'edit',
+        title: '编辑'
       }
     ]
-  }
+  };
 
-static navigatorStyle = {
+  static navigatorStyle = {
     navBarRightButtonColor: '#ccc',
     navBarLeftButtonColor: '#ccc'
-};
+  }
 
   constructor(props){
     super(props);
@@ -60,7 +52,7 @@ static navigatorStyle = {
   render () {
     return (
       <Provider store={ store } >
-        <AppHome navigator={this.props} />
+        <AppShoppingCar navigator={this.props} />
       </Provider>
     )
   }

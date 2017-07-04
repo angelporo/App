@@ -5,17 +5,24 @@ import {
   ScrollView,
   StatusBar,
   TouchableOpacity,
-  RefreshControl
+  RefreshControl,
+  InteractionManager
 } from 'react-native';
 import React, { Component } from 'react';
-import styleConfig, { globalStyle } from '../config/config-styles';
+import styleConfig, { globalStyle, refreshColor } from '../config/config-styles';
 import { testData } from '../redux/initSate';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { TouchBar, ViewTouchTitleBar } from '../modules/TouchBar';
+import { TouchBar,
+         ViewTouchTitleBar
+       } from '../modules/TouchBar';
 import HomeSwiper, { HomeSwiperAdCenter } from '../modules/HomeSwiper';
-import {  HomeRowList, TitleScriptionBar, HomeRecommend } from '../modules/ListItem';
-import AddressPicker from '../modules/AddressPicker';
+import { fromJS } from 'immutable';
+import {  HomeRowList,
+          TitleScriptionBar,
+          HomeRecommend,
+          HomeRecommendGoods
+       } from '../modules/HomeListItem';
 
 const TouchIcon = (<Icon name="ios-book" size={ 22 } color={ styleConfig.$globalColorAssist} />);
 const HomeTitleTouchBar = (<ViewTouchTitleBar title="U兔购" onPressLeft={() => alert('ok')}  Right={ TouchIcon } />
@@ -29,16 +36,11 @@ export function ScanIcon ({ onPress }) {
 }
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.props.navigator.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-  }
-
   intoGoodsDetail (id) {
     this.props.navigator.navigator.push({
-      screen: 'example.goodsDetail', // unique ID registered with Navigation.registerScreen
-      title: '', // navigation bar title of the pushed screen (optional)
-      animated: true, // does the push have transition animation or does it happen immediately (optional)
+      screen: 'example.GoodsDetail',
+      title: '',
+      animated: true,
       passProps: {goodsId: id},
       animationType: 'slide-horizontal',
       backButtonTitle: '',
@@ -50,24 +52,41 @@ export default class Home extends Component {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'scan') {
         this.props.navigator.navigator.push({
-          screen: 'example.Person', // unique ID registered with Navigation.registerScreen
-          title: "个人中心", // navigation bar title of the pushed screen (optional)
+          screen: 'example.Person',
+          title: "",
+          passProps: {},
+          animated: true,
+          animationType: 'slide-horizontal',
+          backButtonTitle: '' ,
+          backButtonHidden: false,
+          navigatorStyle: {},
+          navigatorButtons: {}
+        });
+      }
+      if (event.id == 'search') {
+        this.props.navigator.navigator.push({
+          screen: 'example.Search', // unique ID registered with Navigation.registerScreen
+          title: "", // navigation bar title of the pushed screen (optional)
           passProps: {}, // Object that will be passed as props to the pushed screen (optional)
           animated: true, // does the push have transition animation or does it happen immediately (optional)
           animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the push have different transition animation (optional)
           backButtonTitle: '' , // override the back button title (optional)
           backButtonHidden: false, // hide the back button altogether (optional)
-          navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
-          navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
         });
-      }
-      if (event.id == 'add') {
-        alert('NavBar', 'Add button pressed');
       }
     }
   }
 
+  constructor(props) {
+    super(props);
+    this.props.navigator.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.state = {
+      recommendTitleImage : "https://m.360buyimg.com/mobilecms/jfs/t5953/56/1066729502/67974/966811b/592e82d5N5e1dc697.jpg!q70.jpg"
+    }
+  }
+
   render () {
+    console.log(this.props.hotGoods);
     return (
       <ScrollView
         contentContainerStyle={styles.homeView}
@@ -78,7 +97,7 @@ export default class Home extends Component {
                 tintColor="#ff0000"
                 title="下拉刷新"
                 titleColor={ styleConfig.$globalColorPro }
-                colors={['#ff0000', '#00ff00', '#0000ff']}
+                colors={ refreshColor }
                 progressBackgroundColor="#ffff00"
                 />
       }
@@ -89,18 +108,18 @@ export default class Home extends Component {
           />
         <View style={[globalStyle.html, globalStyle.gbdc]}>
           <View>
-            <HomeSwiper data={ testData } />
+            <HomeSwiper data={ this.props.topSwiper } />
           </View>
           {/* 第二层广告*/}
           <HomeRowList
-            titUri="https://m.360buyimg.com/mobilecms/jfs/t5953/56/1066729502/67974/966811b/592e82d5N5e1dc697.jpg!q70.jpg"
-            listData={ testData }
+            titUri= { this.state.recommendTitleImage }
+            listData={ this.props.luckRecommend }
             onPress={(id) => this.intoGoodsDetail.bind(this)(id)}
             />
           {/*推荐商品*/}
-          <HomeRecommend />
-          <HomeSwiperAdCenter data={ testData } />
-          <AddressPicker isShow={true} />
+            <HomeRecommend source={ this.props.recommend } />
+            <HomeSwiperAdCenter data={ this.props.centerAdData } />
+            <HomeRecommendGoods source={ this.props.hotGoods} />
         </View>
       </ScrollView>
     )

@@ -103,7 +103,7 @@ export class Loading extends Component{
       <View style={styles.hintBox}>
       <ActivityIndicator
         style={styles.centering}
-        size="small"
+        size="large"
         hidesWhenStopped={false}
         />
       </View>

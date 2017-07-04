@@ -54,6 +54,36 @@ export function ProColorMessageButton ({
   )
 }
 
+export class SearchKeyWordButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    }
+  }
+  render () {
+    let { keyWords, index } = this.props;
+    let buttonStyle = () => { if(index <= 2){ return styles.searchHintButtonHot}else{return styles.searchHintButtonDefaile} }
+    let textStyle = () => { if (index  <= 2 ) {
+      return { color : '#ff2764'}
+    }else{
+      return { color : styleConfig.$globalColorAssist}
+    }
+                         }
+    return(
+      <View style={{}}>
+      <TouchableOpacity
+        style={ [ buttonStyle(), globalStyle.fzd8] }
+        onPress={ () => alert('ok')}
+        >
+        <Text
+          style={ [textStyle() ,  globalStyle.fzd8, globalStyle.lh1] }
+          >{ keyWords.text }</Text>
+      </TouchableOpacity>
+      </View>
+    )
+  }
+}
 
 
 
@@ -70,7 +100,24 @@ const styles = EStyleSheet.create({
     paddingTop: '0.25rem',
     marginLeft: '0.3rem',
     marginTop: '0.3rem',
-
+  },
+  searchHintButtonHot: {
+    paddingTop: '0.4rem',
+    paddingBottom: '0.4rem',
+    paddingLeft: '0.4rem',
+    paddingRight: '0.4rem',
+    backgroundColor: '#f7eeef',
+    marginTop: '0.4rem',
+    marginRight: '1rem',
+  },
+  searchHintButtonDefaile: {
+    paddingTop: '0.4rem',
+    paddingBottom: '0.4rem',
+    paddingLeft: '0.5rem',
+    paddingRight: '0.5rem',
+    backgroundColor: '$globalBgc',
+    marginTop: '0.5rem',
+    marginRight: '0.5rem',
   },
   goodsHintPer: {
     textAlign: 'center',

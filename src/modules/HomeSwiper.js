@@ -29,11 +29,15 @@ export default class HomeSwiper extends Component {
         >
         { this.props.data.map((n, i) => {
           return(
-              <View key={i} style={styles.swiperItem}>
+            <View key={i} style={styles.swiperItem}>
               <View style={styles.imgBox}>
-              <Text style={styles.text}>{n.text}</Text>
+                <Image
+                  source={{uri: n.uri}}
+                  style={{width: '100%', height: '100%'}}
+                  resizeMode={Image.resizeMode.cover}
+                  />
               </View>
-              </View>
+            </View>
           );
         })
         }
@@ -99,8 +103,12 @@ export class HomeSwiperAdCenter extends Component {
         { this.props.data.map((n, i) => {
           return(
               <View key={i} style={styles.swiperItem}>
-              <View style={styles.imgBox}>
-              <Text style={styles.text}>{n.text}</Text>
+                <View style={styles.imgBox}>
+                  <Image
+                    resizeMode={Image.resizeMode.cover}
+                    style={{width: '100%', height: '100%'}}
+                    source={{uri: n.uri}}
+                    />
               </View>
               </View>
           )
@@ -157,12 +165,10 @@ let styles = EStyleSheet.create({
     borderStyle: 'solid'
   },
   imgBox: {
-    backgroundColor: '#ccc',
     height: '100%',
   },
   swiperItem: {
-    height: '100%',
-    backgroundColor: '#ccc',
+    height: '100%'
   },
   text: {
     color: '#000',

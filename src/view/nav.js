@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
-import Home from '../modules/Home';
+import OrderPage from '../modules/Order';
 
 function mapStateToProps (state) {
   return {
@@ -26,9 +26,9 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-let AppHome = connect(mapStateToProps, mapDispatchToProps)( Home );
+let AppNav = connect(mapStateToProps, mapDispatchToProps)( OrderPage );
 
-export default class GoodsDetail extends Component {
+export default class Nav extends Component {
   static navigatorButtons = {
     rightButtons: [
       {
@@ -49,10 +49,10 @@ export default class GoodsDetail extends Component {
     ]
   }
 
-static navigatorStyle = {
+  static navigatorStyle = {
     navBarRightButtonColor: '#ccc',
     navBarLeftButtonColor: '#ccc'
-};
+  };
 
   constructor(props){
     super(props);
@@ -60,7 +60,7 @@ static navigatorStyle = {
   render () {
     return (
       <Provider store={ store } >
-        <AppHome navigator={this.props} />
+        <AppNav navigator={this.props} />
       </Provider>
     )
   }

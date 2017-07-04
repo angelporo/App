@@ -7,6 +7,7 @@ import {
   View,
   Text,
   Switch,
+  Image, 
   TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
@@ -36,26 +37,26 @@ export default class CommendStar extends Component {
     for(let i = 0; i < maxStar; i++) {
       if (indexOf >= i+1) {
         Icons.push(
-            <View key={i} style={styles.starIcon}>
-          <Icon
-                   name="ios-star"
-                   style={styles.starIcon}
-                   size={ 20 }
-                   onPress={ () => this.changeStartValue(i + 1)}
-                   color={ styleConfig.$globalColorPro }
-            />
-        </View>);
+          <TouchableOpacity
+            onPress={ () => this.changeStartValue(i + 1)}
+            key={i} style={styles.starIcon}>
+            <Image
+              source={require('./img/star-o.png')}
+              style={styles.starImage}
+              resizeMode={Image.resizeMode.contain}
+              />
+          </TouchableOpacity>);
       }else {
         Icons.push(
-          <View style={styles.starIcon}>
-          <Icon
-                   name="ios-star-outline"
-                   style={styles.starIcon}
-                   size={ 20 }
-                   onPress={ () => this.changeStartValue(i + 1)}
-                   color={ styleConfig.$globalColorPro }
-            />
-        </View>);
+          <TouchableOpacity
+            onPress={ () => this.changeStartValue(i + 1)}
+            style={styles.starIcon}>
+            <Image
+              source={require('./img/star.png')}
+              style={styles.starImage}
+              resizeMode={Image.resizeMode.contain}
+              />
+          </TouchableOpacity>);
       }
     }
       return Icons;
@@ -102,6 +103,10 @@ let styles = EStyleSheet.create({
     justifyContent: 'flex-start',
   },
   starIcon: {
-    marginLeft: '0.6rem',
+    marginLeft: '0.8rem',
+  },
+  starImage: {
+    width: '1rem',
+    height: '1rem',
   }
 })
