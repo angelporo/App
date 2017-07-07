@@ -86,7 +86,6 @@ export default class Home extends Component {
   }
 
   render () {
-    console.log(this.props.hotGoods);
     return (
       <ScrollView
         contentContainerStyle={styles.homeView}

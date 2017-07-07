@@ -66,7 +66,7 @@ export default class PersonAssetComponent extends Component {
     let { style, hintTitle,  } = this.props;
     return (
       <View style={[ style ]}>
-        <TouchBar title={ hintTitle } IconChild={ OrderIcon } isTouch={false}/>
+        <TouchBar title={ hintTitle } IconChild={ OrderIcon } isTouch={false} />
           {/*横向列表*/}
           <FlatList
             horizontal={true}

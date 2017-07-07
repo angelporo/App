@@ -9,7 +9,7 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
-  StatusBar,
+  ListView,
   RefreshControl,
 } from 'react-native';
 import React, { Component } from 'react';
@@ -17,20 +17,124 @@ import styleConfig, { globalStyle } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TouchBar, ViewTouchTitleBar } from './TouchBar';
-import Alert from './Alert';
+import Alert from '../modules/Alert';
 import { Vadio } from './SwitchBar';
-import { SwiperShoppingCarGoodsItem, SwiperText } from './HomeListItem';
+import { SwiperShoppingCarItem } from './HomeListItem';
+import { shoppingCar } from '../redux/shoppingCarState';
 
 export default class ShoppCar extends Component {
-
-  _handleSettingIcon () {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAllChecked: false,
+      goodsSourceData: shoppingCar.toJS().myShoppingCars,
+      checkeds: [],
+      isFetch: false,
+      allPrice: 1232,
+      page: 1,
+      isShowAlert: false,
+      surrentIndex: null, // 用户操作的数据索引
+    };
   }
+
+  changelAllCheckBox () {
+    const newGoodsSourceData = this.state.goodsSourceData.map( (n, i) => {
+        n.isChecked = !this.state.isAllChecked
+        return n
+      } )
+    this.setState({
+      isAllChecked: !this.state.isAllChecked,
+      goodsSourceData: newGoodsSourceData,
+      checkeds: this.getCheckeds(newGoodsSourceData)
+    })
+  }
+
+  /**
+   * 获取选中的商品
+   * Param:  param
+   * Return: { Array }
+   **/
+  getCheckeds( SourceData ) {
+    return SourceData.filter( n => { return (n.isChecked == true) }) //获取全部选中商品
+  }
+
+  changeGoodsItemCheckbox(item, index) {
+    // 点击单个商品
+    let newGoodsSourceData = this.state.goodsSourceData.map( (n, i) => {
+        if (index == i) {
+          n.isChecked = !n.isChecked;
+        }
+        return n
+    }) // 选中或取消单个商品修改后的所有商品
+    const isAllChecked = () => this.state.goodsSourceData.every( n => { return n.isChecked == true}) // 是否全选状态
+    this.setState({
+      isAllChecked: isAllChecked(),
+      goodsSourceData: newGoodsSourceData,
+      checkeds: this.getCheckeds(newGoodsSourceData)
+    })
+    //使用全部选中的商品来拿服务器计算好的总数也可以又前端来计算.
+  }
+  deleteItemByArray(index, arr) {
+    const newArr = arr.slice(0, index).concat(arr.slice(index + 1, arr.length))
+    return newArr;
+  }
+
+  handleDeleteItem () {
+    // 删除单个商品
+    let newGoodsSourceData = this.deleteItemByArray(this.state.surrentIndex, this.state.goodsSourceData);
+    console.log(this.state.goodsSourceData);
+    this.setState({
+      isShowAlert: !this.state.isShowAlert,
+      goodsSourceData: newGoodsSourceData,
+      checkeds: this.getCheckeds(newGoodsSourceData)
+    });
+  }
+  handleCountAddButton (item, index) {
+    // 点击增加数量操作
+    const newGoodsSourceData = this.state.goodsSourceData.map((n, i) => {
+        if (index == i) {
+          n.buyNum = (parseInt(n.buyNum) + 1) + '';
+          n.isChecked = true;
+        }
+        return n
+    });
+    this.setState({
+      goodsSourceData: newGoodsSourceData,
+      checkeds:this.getCheckeds(newGoodsSourceData),
+    })
+    // 修改购买数量后请求后端改变应付金额
+  }
+
+  handleCountReducButton (item, index) {
+    // 点击减少数量操作
+    const newGoodsSourceData =this.state.goodsSourceData.map((n, i) => {
+        if (index == i) {
+          n.buyNum = (parseInt(n.buyNum) - 1) + '';
+          n.isChecked = true;
+        }
+        return n
+    });
+    this.setState({
+      goodsSourceData: newGoodsSourceData,
+      checkeds:this.getCheckeds(newGoodsSourceData),
+    })
+  }
+
   render () {
+    console.log('选中要结算的商品', this.state.checkeds);
     return (
-      <View style={{position: 'relative', height: '100%', backgroundColor: styleConfig.$globalBgc}}>
+      <View style={styles.shoppingCar}>
+        <Alert
+          isShow={ this.state.isShowAlert}
+          titleDescription="是否确定删除该商品"
+          Left={<Text style={{color: styleConfig.$globalColorPro}}>取消</Text>}
+          Right={<Text style={{}}>确定</Text>}
+          onPressLeft={ () => this.setState({isShowAlert: !this.state.isShowAlert})}
+          onPressRight={ this.handleDeleteItem.bind(this)}
+          />
         <ScrollView
           showsVerticalScrollIndicator={false}
-          style={{position: 'relative'}}
+          style={{position: 'relative',}}
           refreshControl={
               <RefreshControl
                   refreshing={false}
@@ -42,34 +146,56 @@ export default class ShoppCar extends Component {
                   progressBackgroundColor="#ffff00"
                   />
         }>
-        <SwiperShoppingCarGoodsItem />
+        {
+          this.state.goodsSourceData.map( (item, index) => {
+            return (<SwiperShoppingCarItem
+                        key={index}
+                        onPressAddCounter={() => this.handleCountAddButton.bind(this)(item, index)}
+                        onPressReduceCounter={() => this.handleCountReducButton.bind(this)(item, index)}
+                        changeCheckBox={() => this.changeGoodsItemCheckbox.bind(this)(item, index) }
+                        itemData={item}
+                    onPressDelete={ () => this.setState({ isShowAlert: !this.state.isShowAlert,
+                                                         surrentIndex: index
+                                                       })}
+                    />)
+          })
+        }
         </ScrollView>
         <View style={[styles.shoppingFooter ]}>
-          <ShoppingCarFooter />
+          <ShoppingCarFooter
+      onPressAllCheckbox={ () => this.changelAllCheckBox.bind(this)()}
+            isAllChecked={this.state.isAllChecked}
+            allPrice={ this.state.allPrice }
+            />
         </View>
      </View>
     )
   }
 }
 
-export  function ShoppingCarFooter () {
+export  function ShoppingCarFooter ({
+  isAllChecked,
+  allPrice,
+  onPressAllCheckbox
+}) {
   return (
     <View style={styles.footer}>
       <View style={ styles.footerBox}>
         <View style={styles.footer}>
-          <Vadio checked={ false } changeValue={() =>alert('ok')} />
+          <Vadio checked={ isAllChecked } changeValue={ onPressAllCheckbox } />
             <View style={[globalStyle.mld5]}>
               <Text style={[globalStyle.fzd8]}>全选</Text>
             </View>
         </View>
         <View>
           <View>
-            <Text style={[globalStyle.fzd8, globalStyle.tc]}>合计:<Text style={[globalStyle.cp]}>$0</Text></Text>
+            <Text style={[globalStyle.fzd8, globalStyle.tc]}>合计:<Text style={[globalStyle.cp]}>{`${allPrice}`}</Text></Text>
             <Text style={[globalStyle.fzd8, {marginTop: 5}]}>不含运费及优惠</Text>
           </View>
         </View>
       </View>
-      <TouchableOpacity style={styles.clearingButtonBox}>
+      <TouchableOpacity
+        style={styles.clearingButtonBox}>
         <Text style={[globalStyle.cw, styles.clearingButton]}>去接算</Text>
       </TouchableOpacity>
     </View>
@@ -104,7 +230,14 @@ let styles = EStyleSheet.create({
   },
   clearingButton: {
   },
+  shoppingCar: {
+    position: 'relative',
+    height: '100%',
+    backgroundColor: styleConfig.$globalBgc,
+    paddingBottom: '3rem',
+  },
   footer: {
+    height: '3rem',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row'

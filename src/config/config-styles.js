@@ -22,7 +22,9 @@ export default {
 
 export let globalStyle = EStyleSheet.create({
   html: {
-    position: 'relative'
+    position: 'relative',
+    backgroundColor: '$globalWhite',
+    paddingTop: 20,
   },
   tc: {
     textAlign: 'center'

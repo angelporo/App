@@ -61,7 +61,6 @@ export class Vadio extends Component{
     this.setState({
       checked: !this.state.checked
     })
-
     changeValue();
   }
   render () {
@@ -78,7 +77,7 @@ export class Vadio extends Component{
                         onPress={ () => this.onChangeValue.bind(this)() }
                         color={ styleConfig.$globalColorAssist }
                         />);
-    if (this.state.checked) {
+    if (this.props.checked) {
       return VadioEntry;
     }else {
       return VadioOutline;
@@ -96,19 +95,19 @@ export class SwitchVadio extends Component {
   onChangeValue () {
     let { changeValue } = this.props;
     let _this = this;
-    this.setState({
-      checked: !_this.state.checked
-    })
+    // this.setState({
+    //   checked: !_this.state.checked
+    // })
     changeValue();
   }
 
   render () {
-    let { text, onValueChange, style } = this.props;
+    let { text, onValueChange, style, checked } = this.props;
     return (
       <View style={[styles.swtichBar, style]}>
         <View >
           <Vadio
-            checked={this.state.checked}
+            checked={ checked }
             changeValue={ () => this.onChangeValue.bind(this)() }
             />
         </View>

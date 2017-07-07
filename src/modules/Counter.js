@@ -5,8 +5,8 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Button
 } from 'react-native';
+import PropTypes from 'prop-types';
 import styleConfig, { globalStyle } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -14,35 +14,36 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default class CounterBar extends Component {
   constructor(props){
     super(props);
-
-    this.state = {
-      num: props.num || "1",
-      maxGoods: props.stock || 999999
-    }
   }
-
+  static propTypes = {
+    num: PropTypes.number,// 购买数量
+    stock: PropTypes.number,  // 库充
+    onPressAdd: PropTypes.func,
+    onPressReduce: PropTypes.func
+  }
   handleReduce() {
-    if (this.state.num <= 1) {
+    let { num, onPressReduce } = this.props;
+    if (num <= 1) {
+      alert('最少只能买一个!')
       return;
     }
-    this.setState({
-      num: (parseInt(this.state.num) - 1) + ''
-    })
+    onPressReduce() //修改外部传进来的num状态
   }
 
   handleAdd () {
-    if (parseInt(this.state.num) > parseInt(this.props.stock)) {
+    let { num, stock, onPressAdd  } = this.props;
+    if (parseInt(num) >= parseInt(stock)) {
+      alert('没有库存了!');
       return;
     }
-    this.setState({
-      num: (parseInt(this.state.num) + 1) + ''
-    })
+    onPressAdd()
   }
 
   render () {
-    let num = parseInt(this.state.num)
-    let disbaleReduce = num <= 1 ? {color: styleConfig.$globalBorder} : {}
-    let disbaleAdd = parseInt(this.state.num) >= parseInt(this.props.stock) ? {color: styleConfig.$globalBorder} : {}
+    let { num, stock } = this.props;
+    let IntNum = parseInt(num)
+    let disbaleReduce = IntNum <= 1 ? {color: styleConfig.$globalBorder} : {}
+    let disbaleAdd = IntNum >= parseInt(stock) ? {color: styleConfig.$globalBorder} : {}
     return(
       <View style={styles.box}>
         <View style={styles.buttonLeft}>
@@ -55,7 +56,7 @@ export default class CounterBar extends Component {
          <View style={ styles.numInput }>
            <TextInput
              style={styles.input}
-             value={ this.state.num }
+             value={ num }
               />
           </View>
           <View style={styles.buttonRight}>

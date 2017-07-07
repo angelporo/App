@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Animated
 } from 'react-native';
+import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import styleConfig from '../config/config-styles';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -30,11 +31,9 @@ export default class Alert extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isShow : false,
       opacityAnimationValue: new Animated.Value(0),
       scaleAnimationValue: new Animated.Value(0)
     }
-
     this.handleCancel = this.handleCancel.bind(this);
     this.handleAgree = this.handleAgree.bind(this);
   }
@@ -51,9 +50,6 @@ export default class Alert extends Component {
     this.timer && clearTimeout(this.timer);
   }
   show() {
-    this.setState({
-      isShow: true
-    });
     Animated.parallel([
       Animated.timing(this.state.opacityAnimationValue, {
         toValue: 1,
@@ -69,7 +65,6 @@ export default class Alert extends Component {
 
   // 关闭弹出框
   _close() {
-    this.setState({isShow: false});
     this.state.opacityAnimationValue.setValue(0);
     this.state.scaleAnimationValue.setValue(0);
   }
@@ -94,13 +89,14 @@ export default class Alert extends Component {
 
   render () {
     const {
+      isShow,
       title,
       titleDescription,
       Right, // jsx 元素, 主要用来区分颜色
       Left, // jsx 元素, 主要用来区分颜色
     } = this.props
-
-   if (this.state.isShow) {
+    if (isShow) {
+    this.show()
      return (
        <Animated.View style={ [styles.alertBox, styles.flexCenter,  {opacity: this.state.opacityAnimationValue}]}>
          <Animated.View style={ [styles.container, { transform:[{ scale: this.state.scaleAnimationValue}] }]}>
@@ -128,6 +124,17 @@ export default class Alert extends Component {
    }
   }
 }
+
+Alert.propTypes = {
+  isShow: PropTypes.bool,
+  titleDescription: PropTypes.string,
+  title: PropTypes.string,
+  Right: PropTypes.node,
+  Left: PropTypes.node,
+  onPressRight: PropTypes.func,
+  onPressLeft: PropTypes.func
+}
+
 
 const styles = EStyleSheet.create({
   c: {
@@ -158,7 +165,7 @@ const styles = EStyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: '1.1rem',
-    lineHeight: '1.4rem', 
+    lineHeight: '1.4rem',
     color: '$globalColorPro',
   },
   buttomBox: {

@@ -261,7 +261,7 @@ export class SwiperShoppingCarItem extends Component {
     return (
       <View style={{marginTop: 5}}>
         <Swipeable
-          onRef={ref => this.swipeable = ref}
+          onRef={ ref => alert('ok')}
           rightButtons={[<RightButton onPress={this.deleteItem.bind(this)} />]}>
         <View style={styles.orderItem}>
           <View style={[globalStyle.px1, styles.goodsImageItemBox]}>

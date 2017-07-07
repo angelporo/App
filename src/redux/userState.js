@@ -1,4 +1,5 @@
 import { Map, fromJS, List, Seq } from 'immutable';
+import React, { Component } from 'react';
 
 export default fromJS({user:{
   userName: 'liyuan',

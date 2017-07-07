@@ -15,6 +15,7 @@ import AppSearch from './src/view/search'
 import { Navigation } from 'react-native-navigation';
 import Nav from './src/view/nav';
 import ShoppingCar from './src/view/shoppingCar';
+import AppUserInfo from './src/view/userInfo';
 // 初始化入口文件注入全局style对象;
 EStyleSheet.build( styleConfig );
 
@@ -31,16 +32,17 @@ function RegisterScreens() {
   Navigation.registerComponent('example.Search', () => AppSearch);
   Navigation.registerComponent('example.Nav', () => Nav);
   Navigation.registerComponent('example.ShoppingCar', () => ShoppingCar);
+  Navigation.registerComponent('example.AppUserInfo', () => AppUserInfo);
 }
 
 RegisterScreens(); // this is where you register all of your app's screens
 
 // Navigation.showModal({
-//   screen: "example.Person", // unique ID registered with Navigation.registerScreen
-//   passProps: {}, // simple serializable object that will pass as props to the modal (optional)
-//   navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-//   navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-//   animationType: 'slide-up' // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+//   screen: "example.Person",
+//   passProps: {},
+//   navigatorStyle: {},
+//   navigatorButtons: {},
+//   animationType: 'slide-up'
 // });
 
 

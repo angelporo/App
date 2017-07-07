@@ -24,6 +24,7 @@ export function TouchBar ({
   IconChild,
   title,
   style,
+  bold = true,
   onClick,
   RightChild = defaultTouchBarRightChild
 }) {
@@ -32,7 +33,7 @@ export function TouchBar ({
       <View style={ styles.icon} >
         { IconChild }
       </View>
-      <View style={ styles.title}>
+      <View style={ IconChild ? styles.title : styles.noIcontitle}>
         <Text style={styles.text}>
           {title}
         </Text>
@@ -58,12 +59,20 @@ export function TouchBar ({
       )
     }
   }
-
-  return (
-    <View style={styles.box}>
-      <IsTouchableBar ChiledElement={ ItemContent } />
-    </View>
-  )
+  if(bold) {
+    // 区分底部线条粗细
+    return (
+      <View style={styles.box}>
+        <IsTouchableBar ChiledElement={ ItemContent } />
+      </View>
+    )
+  }else {
+    return(
+      <View style={styles.lightBox}>
+        <IsTouchableBar ChiledElement={ ItemContent } />
+      </View>
+    )
+  }
 }
 
 export class ViewTouchTitleBar extends Component {
@@ -127,6 +136,16 @@ const styles = EStyleSheet.create({
     right: 0, top: 0,
     paddingRight: '$globalWhiteSpace',
   },
+  lightBox: {
+    paddingTop: '0.3rem',
+    paddingBottom: '0.3rem',
+    paddingRight: '1rem',
+    paddingLeft: '1rem',
+    backgroundColor: '$globalWhite',
+    borderBottomWidth: 1,
+    borderColor: '$globalBorder',
+    borderStyle: 'solid',
+  },
   box: {
     paddingTop: '0.3rem',
     paddingBottom: '0.3rem',
@@ -149,6 +168,11 @@ const styles = EStyleSheet.create({
     flex: 1,
     flexGrow: 1,
     paddingLeft: '0.5rem',
+    justifyContent: 'center',
+  },
+  noIcontitle: {
+    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
   },
   returnIcon: {

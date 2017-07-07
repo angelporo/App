@@ -3030,6 +3030,10 @@ react-devtools-core@^2.0.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-animatable@^1.2.2:
+  version "1.2.2"
+  resolved "http://registry.npm.taobao.org/react-native-animatable/download/react-native-animatable-1.2.2.tgz#a873550e6f7cb95f90baf46b9eb15b1ab56425cb"
+
 react-native-blur@^3.0.0:
   version "3.0.0"
   resolved "http://registry.npm.taobao.org/react-native-blur/download/react-native-blur-3.0.0.tgz#4dcf42ff119ac5d4db8f0a7d39298bf48d0cc7cb"
@@ -3047,9 +3051,9 @@ react-native-navigation@^1.1.112:
   dependencies:
     lodash "4.x.x"
 
-react-native-swipe-list-view@^0.4.1:
-  version "0.4.1"
-  resolved "http://registry.npm.taobao.org/react-native-swipe-list-view/download/react-native-swipe-list-view-0.4.1.tgz#f4b0288e090fc86f743bc30b45df829de729bcd7"
+react-native-swipeable@^0.4.0:
+  version "0.4.0"
+  resolved "http://registry.npm.taobao.org/react-native-swipeable/download/react-native-swipeable-0.4.0.tgz#10ca127af1d206e857eb94c6bc49207ee21fa3e7"
 
 react-native-swiper@^1.5.4:
   version "1.5.4"
