@@ -82,11 +82,10 @@ export default class ShoppCar extends Component {
   handleDeleteItem () {
     // 删除单个商品
     let newGoodsSourceData = this.deleteItemByArray(this.state.surrentIndex, this.state.goodsSourceData);
-    console.log(this.state.goodsSourceData);
     this.setState({
       isShowAlert: !this.state.isShowAlert,
       goodsSourceData: newGoodsSourceData,
-      checkeds: this.getCheckeds(newGoodsSourceData)
+      checkeds: this.getCheckeds(newGoodsSourceData),
     });
   }
   handleCountAddButton (item, index) {
@@ -122,6 +121,7 @@ export default class ShoppCar extends Component {
 
   render () {
     console.log('选中要结算的商品', this.state.checkeds);
+    console.log('商品总数', this.state.goodsSourceData.length);
     return (
       <View style={styles.shoppingCar}>
         <Alert

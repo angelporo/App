@@ -35,7 +35,7 @@ export default class GoodsDetail extends Component {
         buttonColor: '#ccc'
       },
       {
-        icon: require('./img/scan.png') ,
+        icon: require('./img/scan.png'),
         id: 'scan',
         buttonColor: styleConfig.$globalColorPro
       }

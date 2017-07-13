@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native';
 const {height, width} = Dimensions.get('window');
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const FontSize = width > 340 ? 16 : 14;
+const FontSize = width > 340 ? 18 : 16;
 
 const proColor = '#FF2763';
 const assistColor = '#4c4c4c';
@@ -11,7 +11,7 @@ export default {
   $height: height,
   $width: width,
   rem: FontSize,
-  $globalWhiteSpace: "1rem",
+  $globalWhiteSpace: "0.8rem",
   $globalColorPro: proColor,
   $globalColorAssist: "#4c4c4c",
   $globalWhite: '#ffffff',
@@ -24,7 +24,6 @@ export let globalStyle = EStyleSheet.create({
   html: {
     position: 'relative',
     backgroundColor: '$globalWhite',
-    paddingTop: 20,
   },
   tc: {
     textAlign: 'center'
@@ -136,6 +135,9 @@ export let globalStyle = EStyleSheet.create({
   },
   cca: {
     color: '$globalColorAssist'
+  },
+  mt2: {
+    marginTop: '2rem',
   },
   cp: {
     color: '$globalColorPro'

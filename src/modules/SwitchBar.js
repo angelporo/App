@@ -68,12 +68,14 @@ export class Vadio extends Component{
     let VadioEntry = (<Icon
                       name="ios-radio-button-on"
                       size={ 22 }
+                      style={styles.padding5}
                       onPress={ () => this.onChangeValue.bind(this)() }
                       color={ styleConfig.$globalColorPro }
                       />);
     let VadioOutline = (<Icon
                         name="ios-radio-button-off-outline"
                         size={ 22 }
+                        style={styles.padding5}
                         onPress={ () => this.onChangeValue.bind(this)() }
                         color={ styleConfig.$globalColorAssist }
                         />);
@@ -134,5 +136,8 @@ let styles = EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  },
+  padding5: {
+    padding: '0.5rem',
   }
 })

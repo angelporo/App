@@ -74,23 +74,27 @@ export function HomeRowList ({titUri, listData, onPress}){
   )
 }
 
-export function RecommendItem ({
-  uri, goodsTitle, key
-}) {
-  return (
-    <TouchableOpacity key={key}
-                      onPress={() => { alert('into goods detaile page');}}
-      style={[styles.RecommendList]}>
-      <Image
-        style={styles.recommendlistItemImg}
-        source={{uri: uri}}
-        resizeMode={Image.resizeMode.cover}
-        />
-      <View>
-        <Text style={styles.text}>{ goodsTitle }</Text>
-      </View>
-    </TouchableOpacity>
-  )
+export class RecommendItem extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render () {
+    const {uri, goodsTitle, key} = this.props;
+    return (
+      <TouchableOpacity key={key}
+                        onPress={() => { alert('into goods detaile page');}}
+        style={[styles.RecommendList]}>
+        <Image
+          style={styles.recommendlistItemImg}
+          source={{uri: uri}}
+          resizeMode={Image.resizeMode.cover}
+          />
+        <View>
+          <Text style={styles.text}>{ goodsTitle }</Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
 }
 
 RecommendItem.propTypes = {
@@ -107,7 +111,8 @@ export function TitleScriptionBar ({
   title,
   titleScription,
   rightButtonText,
-  data
+  data,
+  onPressMore
 }) {
   return (
     <View>
@@ -120,8 +125,8 @@ export function TitleScriptionBar ({
         </View>
         <TouchableOpacity
           style={[globalStyle.flexEnd]}
-          onPress={ () => alert('ok') }>
-          <Text style={[globalStyle.fzd8, globalStyle.cca]}>{ rightButtonText }</Text>
+          onPress={ onPressMore }>
+          <Text style={[globalStyle.fzd8, globalStyle.cca, globalStyle.pyd5]}>{ rightButtonText }</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -134,6 +139,7 @@ export class HomeRecommend extends Component{
   }
   render () {
     const source = this.props.source || [];
+    const { onPressMore } = this.props;
     if (source.length == 0) {
       return null;
     }else {
@@ -142,6 +148,7 @@ export class HomeRecommend extends Component{
           <TitleScriptionBar
             title={'推荐'}
             titleScription="Recommended"
+            onPressMore={ onPressMore }
             rightButtonText='查看更多'
             />
           <View style={[styles.recommendBox]}>
@@ -163,6 +170,7 @@ export class HomeRecommendGoods extends Component{
   }
   render () {
     const source = this.props.source || [];
+    const { onPressMore } = this.props;
     if (source.length == 0) {
       return null;
     }else {
@@ -171,6 +179,7 @@ export class HomeRecommendGoods extends Component{
           <TitleScriptionBar
             title={'热销'}
             titleScription="Hot sale"
+            onPressMore={ onPressMore }
             rightButtonText='查看更多'
             />
           <View style={[styles.hotSaleBox]}>
@@ -287,7 +296,7 @@ export class SwiperShoppingCarItem extends Component {
                   </View>
                   <View style={[styles.counterBox]}>
                     <Text style={[globalStyle.cp, globalStyle.fzd8]}>{`${itemData.price}`}</Text>
-                    <View style={[globalStyle.flexEnd]}>
+                    <View style={[globalStyle.flexEnd, styles.mtd2]}>
                       <CounterBar
                         onPressReduce={ onPressReduceCounter }
                         onPressAdd={ onPressAddCounter }
@@ -366,7 +375,7 @@ let styles = EStyleSheet.create({
   hotItemGoodsName: {
     lineHeight: '1rem',
     fontSize: '0.8rem',
-    height: '2rem',
+    height: '2.2rem',
     marginTop: '0.5rem',
     overflow: 'hidden',
     paddingLeft: '0.2rem',
@@ -464,4 +473,7 @@ let styles = EStyleSheet.create({
   },
   recommendLeft: {
   },
+  mtd2: {
+    marginTop: '0.2rem',
+  }
 })

@@ -139,10 +139,17 @@ export default class GoodsDetailComponent extends Component {
         </View>
         <View style={[styles.detailIcons, globalStyle.px1, globalStyle.flexbox]}>
           <TouchableOpacity onPress={() => this.handleReturnPageIcon.bind(this)() }>
-            <Icon style={[globalStyle.flexStart]}  name="ios-arrow-dropleft-circle" color="#ccc" size={24} />
+            <Icon style={[globalStyle.flexStart]}
+                  name="ios-arrow-dropleft-circle"
+                  style={[globalStyle.pyd5]}
+                  color="#ccc"
+                  size={26} />
           </TouchableOpacity>
           <TouchableOpacity style={[ globalStyle.flexEnd, {flex: 1}]}>
-            <Icon name="ios-cart-outline" color="#ccc" size={24} />
+            <Icon name="ios-cart-outline"
+                  color="#ccc"
+                  style={[globalStyle.pyd5]}
+                  size={24} />
           </TouchableOpacity>
         </View>
        </View>
@@ -225,9 +232,9 @@ function GoodsDetailTouchBar ({
     <View style={ styles } >
       <TouchableOpacity
         onPress={onPress}
-        style={globalStyle.flexStart}>
+        style={[globalStyle.flexStart, {paddingBottom: 4, paddingTop: 4}]}>
         <View style={{flex: 1}}>
-          <Text style={[{ color: '#282828', lineHeight: TouchBarHeight }, globalStyle.fzd8]}>{ title }</Text>
+          <Text style={[{ color: '#282828' }]}>{ title }</Text>
         </View>
         <View>
           <Icon style={[globalStyle.flexEnd]}  name="ios-arrow-forward" color="#ccc" size={20} />
@@ -393,12 +400,12 @@ export class GoodsFooter extends Component {
           <TouchableOpacity
             onPress={() => alert('ok')}
             style={{width: '50%', height: '100%', justifyContent: 'center'}}>
-            <Text style={[{fontSize: 14, }, globalStyle.tc, globalStyle.cw]}>加入购物车</Text>
+            <Text style={[styles.buyButton, globalStyle.tc, globalStyle.cw]}>加入购物车</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => alert('ok')}
             style={{width: '50%', height: '100%', justifyContent: 'center'}}>
-            <Text style={[{fontSize: 14}, globalStyle.tc, globalStyle.cw]}>立即购买</Text>
+            <Text style={[styles.buyButton, globalStyle.tc, globalStyle.cw]}>立即购买</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -494,6 +501,9 @@ let styles = EStyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     left: 0, top: 0, right: 0, bottom: 0,
   },
+  buyButton: {
+    fontSize: '0.8rem',
+  },
   roundButton: {
     width: '4rem',
     borderRadius: '1.5rem',
@@ -556,6 +566,6 @@ let styles = EStyleSheet.create({
     position: 'absolute',
     backgroundColor: 'transparent',
     left: 0,
-    top: 25,
+    top: 20,
   }
 })

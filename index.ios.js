@@ -16,6 +16,10 @@ import { Navigation } from 'react-native-navigation';
 import Nav from './src/view/nav';
 import ShoppingCar from './src/view/shoppingCar';
 import AppUserInfo from './src/view/userInfo';
+import ApprealName from './src/view/realName';
+import AppMyWallet from './src/view/myWallet';
+import AppRemainDetail from './src/view/remainDetail';
+import AppHotTab from './src/view/hotSell';
 // 初始化入口文件注入全局style对象;
 EStyleSheet.build( styleConfig );
 
@@ -33,6 +37,10 @@ function RegisterScreens() {
   Navigation.registerComponent('example.Nav', () => Nav);
   Navigation.registerComponent('example.ShoppingCar', () => ShoppingCar);
   Navigation.registerComponent('example.AppUserInfo', () => AppUserInfo);
+  Navigation.registerComponent('example.AppRealName', () => ApprealName);
+  Navigation.registerComponent('example.AppMyWallet', () => AppMyWallet);
+  Navigation.registerComponent('example.AppRemainDetail', () => AppRemainDetail);
+  Navigation.registerComponent('example.AppHotTab', () => AppHotTab);
 }
 
 RegisterScreens(); // this is where you register all of your app's screens

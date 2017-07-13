@@ -7,7 +7,7 @@ import {
   View,
   Text,
   Switch,
-  Image, 
+  Image,
   TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
@@ -15,8 +15,9 @@ import styleConfig, { globalStyle } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-let StarIcon = (<Icon name="md-star" style={{marginLeft: 10}} size={ 16 } color={ styleConfig.$globalColorPro } />);
-let STartOutLine = (<Icon name="ios-star-outline" size={ 16 } style={{marginLeft: 10}} color={ styleConfig.$globalColorPro } />);
+let StarIcon = (<Icon name="md-star" style={{marginLeft: 10}} size={ 30 } color={ styleConfig.$globalColorPro } />);
+
+let STartOutLine = (<Icon name="ios-star-outline" size={ 30 } style={{marginLeft: 10}} color={ styleConfig.$globalColorPro } />);
 
 export default class CommendStar extends Component {
   constructor (props) {
@@ -39,7 +40,8 @@ export default class CommendStar extends Component {
         Icons.push(
           <TouchableOpacity
             onPress={ () => this.changeStartValue(i + 1)}
-            key={i} style={styles.starIcon}>
+            key={i}
+            style={styles.starIcon}>
             <Image
               source={require('./img/star-o.png')}
               style={styles.starImage}
@@ -50,6 +52,7 @@ export default class CommendStar extends Component {
         Icons.push(
           <TouchableOpacity
             onPress={ () => this.changeStartValue(i + 1)}
+            key={i}
             style={styles.starIcon}>
             <Image
               source={require('./img/star.png')}
@@ -106,7 +109,7 @@ let styles = EStyleSheet.create({
     marginLeft: '0.8rem',
   },
   starImage: {
-    width: '1rem',
-    height: '1rem',
+    width: '1.2rem',
+    height: '1.2rem',
   }
 })

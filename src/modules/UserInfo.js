@@ -20,39 +20,39 @@ import { PersonHeader } from '../modules/personHead';
 import PersonOrder from '../modules/person-order';
 import PersonAssetComponent from '../modules/person-asset';
 import Alert from '../modules/Alert';
+import AddressPicker from './AddressPicker'
 import { SwitchBar,
          SwitchVadio
        } from '../modules/SwitchBar';
 import CommendStar from '../modules/CommendStar';
 import CounterBar from '../modules/Counter';
+import ExampleView from './test';
+import { TextReturnButton } from './util'
 
-
-
-const returnIcon = (<Icon name="ios-arrow-forward" color='#6b6b6b' size={22} />);
 const TouchIcon = (<Icon name="ios-book" size={ 22 } color="red" />);
-function RightText ({descriptionNode}) {
-  return (
-    <View style={styles.flexEnd}>
-      <View style={styles.rightBarScription}>
-        { descriptionNode }
-      </View>
-      <View>
-        { returnIcon }
-      </View>
-    </View>
-  )
-}
 
 export default class UserInfo extends Component {
-
   static navigatorStyle = {
     navBarHidden: true
   }
 
   returnButton () {
     this.props.navigator.navigator.pop({
-      animated: true, // does the pop have transition animation or does it happen immediately (optional)
-      animationType: 'slide', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+      animated: true,
+      animationType: 'slide',
+    });
+  }
+  handleRealName () {
+    this.props.navigator.navigator.push({
+      screen: 'example.AppRealName',
+      title: "实名认证",
+      passProps: {},
+      animated: true,
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false,
+      navigatorStyle: {},
+      navigatorButtons: {}
     });
   }
 
@@ -70,36 +70,38 @@ export default class UserInfo extends Component {
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={[globalStyle.html]}>
+        style={{backgroundColor: styleConfig.$globalBgc}}
+        >
         <View style={{backgroundColor: styleConfig.$globalBgc}}>
-          <ViewTouchTitleBar
-            onPressLeft={ this.returnButton.bind(this) }
-            title="用户信息" />
         </View>
         <TouchBar
           title="用户名"
           bold={false}
           onClick={() => alert('ok')}
-          RightChild={ <RightText descriptionNode={<Text style={[globalStyle.lh1]}>China Cannon</Text>} />}
+          RightChild={ <TextReturnButton descriptionNode={<Text style={[globalStyle.lh1, styles.scriptionText]}>China Cannon</Text>} />}
           />
-        <TouchBar
-          title="出生日期"
-          bold={false}
-          onClick={() => alert('ok')}
-          RightChild={ <RightText descriptionNode={<Text style={[globalStyle.lh1]}>2017/06/17</Text>} />}
-          />
-        <TouchBar
-          title="性别"
-          bold={false}
-          onClick={() => alert('ok')}
-          RightChild={ <RightText descriptionNode={<Text style={[globalStyle.lh1]}>保密</Text>} />}
-          />
-        <TouchBar
-          title="实名认证"
-          bold={false}
-          onClick={() => alert('ok')}
-          RightChild={ <RightText descriptionNode={<Text style={[globalStyle.lh1]}>立即认证</Text>} />}
-          />
+          <TouchBar
+            title="出生日期"
+            bold={false}
+            onClick={() => alert('ok')}
+            RightChild={ <TextReturnButton descriptionNode={<Text style={[globalStyle.lh1, styles.scriptionText]}>2017/06/17</Text>} />}
+            />
+            <TouchBar
+              title="性别"
+              bold={false}
+              onClick={() => alert('ok')}
+              RightChild={ <TextReturnButton descriptionNode={<Text style={[globalStyle.lh1, styles.scriptionText]}>保密</Text>} /> }
+              />
+              <TouchBar
+                title="实名认证"
+                bold={false}
+                onClick={ this.handleRealName.bind(this)}
+                RightChild={ <TextReturnButton descriptionNode={<Text style={[globalStyle.lh1, styles.scriptionText]}>立即认证</Text>} />}
+                />
+              <AddressPicker
+                isShow={false}
+                onPressConfrim={() => alert('选择日期')}
+                />
       </ScrollView>
     )
   }
@@ -115,12 +117,10 @@ function testComponent () {
       text="物流服务"
       style={styles.starBox}
       changeValue={ ( score ) => alert(score)}
-        />
-
+          />
 </View>
   )
 }
-
 
 let styles = EStyleSheet.create({
   touchbarView: {
@@ -137,5 +137,8 @@ let styles = EStyleSheet.create({
   },
   rightBarScription: {
     marginRight: '0.5rem',
+  },
+  scriptionText: {
+    color: '$globalColorAssist',
   }
 })

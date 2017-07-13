@@ -24,10 +24,10 @@ export default class CounterBar extends Component {
   handleReduce() {
     let { num, onPressReduce } = this.props;
     if (num <= 1) {
-      alert('最少只能买一个!')
+      alert('最少只能买一个!');
       return;
     }
-    onPressReduce() //修改外部传进来的num状态
+    onPressReduce(); //修改外部传进来的num状态
   }
 
   handleAdd () {
@@ -36,45 +36,42 @@ export default class CounterBar extends Component {
       alert('没有库存了!');
       return;
     }
-    onPressAdd()
+    onPressAdd();
   }
 
   render () {
     let { num, stock } = this.props;
-    let IntNum = parseInt(num)
-    let disbaleReduce = IntNum <= 1 ? {color: styleConfig.$globalBorder} : {}
-    let disbaleAdd = IntNum >= parseInt(stock) ? {color: styleConfig.$globalBorder} : {}
+    let IntNum = parseInt(num);
+    let disbaleReduce = IntNum <= 1 ? {color: styleConfig.$globalBorder} : {};
+    let disbaleAdd = IntNum >= parseInt(stock) ? {color: styleConfig.$globalBorder} : {};
     return(
       <View style={styles.box}>
-        <View style={styles.buttonLeft}>
           <TouchableOpacity
-            style={styles.button}
+            style={styles.buttonLeft}
             onPress={ () => this.handleReduce.bind(this)()}>
               <Text style={[styles.reduce, disbaleReduce]}>-</Text>
            </TouchableOpacity>
-         </View>
          <View style={ styles.numInput }>
            <TextInput
              style={styles.input}
              value={ num }
               />
           </View>
-          <View style={styles.buttonRight}>
             <TouchableOpacity
-              style={styles.button}
+              style={styles.buttonRight}
               onPress={ () => this.handleAdd.bind(this)()}>
               <Text style={[styles.add, disbaleAdd]}>+</Text>
             </TouchableOpacity>
-          </View>
         </View>
     )
   }
 }
 
 let styles = EStyleSheet.create({
+  $buttonWidth: 26,
   box: {
-    width: 60,
-    height: 20,
+    width: 80,
+    height: 22,
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '$globalBorder',
@@ -85,7 +82,8 @@ let styles = EStyleSheet.create({
     backgroundColor: '$globalWhite'
   },
   button: {
-    width: '100%',
+    // width: '$buttonWidth',
+    // height: '$buttonWidth',
   },
   buttonLeft: {
     flex: 1,

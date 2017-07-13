@@ -1,5 +1,5 @@
 /**
- * 实名认证页面
+ * 我的钱包页面
  * Param:  param
  * Return: {undefined}
  **/
@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
-import RealName from '../modules/RealName';
+import RemainDetail from '../modules/RemainDetail';
 
 function mapStateToProps (state) {
   return {
@@ -22,9 +22,9 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-let RealNamePage = connect()( RealName );
+let RemainDetailPage = connect()( RemainDetail );
 
-export default class AppUserInfo extends Component {
+export default class AppRemainDetail extends Component {
   static navigatorStyle = {
     tabBarHidden: true,
   };
@@ -43,7 +43,7 @@ export default class AppUserInfo extends Component {
   render () {
     return (
       <Provider store={ store } >
-        <RealNamePage navigator={this.props} />
+        <RemainDetailPage navigator={this.props} />
       </Provider>
     )
   }

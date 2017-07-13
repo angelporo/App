@@ -34,17 +34,27 @@ export default class Person extends Component {
   }
   handleIntoUserInfo() {
     this.props.navigator.navigator.push({
-      screen: 'example.AppUserInfo', // unique ID registered with Navigation.registerScreen
-      title: undefined, // navigation bar title of the pushed screen (optional)
-      passProps: {}, // Object that will be passed as props to the pushed screen (optional)
-      animated: true, // does the push have transition animation or does it happen immediately (optional)
-      animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the push have different transition animation (optional)
-      backButtonTitle: undefined, // override the back button title (optional)
-      backButtonHidden: false, // hide the back button altogether (optional)
-      navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
-      navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+      screen: 'example.AppUserInfo',
+      title: '用户信息',
+      animated: true,
+      passProps: {id: '1'},
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false,
     });
   }
+  handleIntoMyWallet () {
+    this.props.navigator.navigator.push({
+      screen: 'example.AppMyWallet',
+      title: '我的钱包',
+      passProps: {id: '2'},
+      animated: true,
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false,
+    });
+  }
+
   _handleSettingIcon () {
     alert('lcick setting icons');
   }
@@ -67,12 +77,12 @@ export default class Person extends Component {
                 progressBackgroundColor="#ffff00"
                 />
       }>
-        <PersonHeader source={ require('../modules/img/avatar@2x.png')} userName='angely.me' vipName="普通会员" clickSettingFn={ this._handleSettingIcon} />
-        { /* 全部订单*/}
-        <PersonOrder touchText="全部订单" text='代发货'/>
-        { /* 我的资产*/}
-        <PersonAssetComponent  hintTitle='全部资产' style={{marginTop: 10}} />
-        <View HintHeadCompnent={ ListHead }  style={styles.touchbarView}>
+      <PersonHeader source={ require('../modules/img/avatar@2x.png')} userName='angely.me' vipName="普通会员" clickSettingFn={ this._handleSettingIcon} />
+      { /* 全部订单*/}
+      <PersonOrder touchText="全部订单" text='代发货'/>
+      { /* 我的资产*/}
+      <PersonAssetComponent  hintTitle='全部资产' style={{marginTop: 10}} />
+      <View HintHeadCompnent={ ListHead }  style={styles.touchbarView}>
         <TouchBar
           title={'用户信息' }
           IconChild={ TouchIcon }
@@ -80,17 +90,19 @@ export default class Person extends Component {
           />
 
         <TouchBar
-      title={'账户安全' }
-      IconChild={ TouchIcon }
-      onClick={ () => { alert('订单') }} />
-        <TouchBar
-      title={'资金管理' }
-      IconChild={ TouchIcon }
-      onClick={ () => { alert('订单') }} />
-        </View>
-
-
-        {testComponent()}
+          title={'账户安全' }
+          IconChild={ TouchIcon }
+          onClick={ () => { alert('订单') }} />
+          <TouchBar
+            title={'资金管理' }
+            IconChild={ TouchIcon }
+            onClick={ () => { alert('订单') }} />
+            <TouchBar
+              title={'我的钱包' }
+              IconChild={ TouchIcon }
+              onClick={ this.handleIntoMyWallet.bind(this)} />
+      </View>
+      {testComponent()}
 </ScrollView>
     )
   }
@@ -99,16 +111,15 @@ export default class Person extends Component {
 function testComponent () {
   return (
     <View>
-        <SwitchBar text='设为默认' changeValue={ () => alert('change Value success')} />
+      <SwitchBar text='设为默认' changeValue={ () => alert('change Value success')} />
         <View style={{marginTop: 10}}>
         </View>
         <CommendStar
-      text="物流服务"
-      style={styles.starBox}
-      changeValue={ ( score ) => alert(score)}
-        />
-        <ViewTouchTitleBar style={{marginTop: 10, marginBottom: 10} } title="设置" Right={ <Text>haha</Text>} />
-</View>
+          text="物流服务"
+          style={styles.starBox}
+          changeValue={ ( score ) => alert(score)}
+          />
+    </View>
   )
 }
 

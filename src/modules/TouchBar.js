@@ -109,8 +109,8 @@ const styles = EStyleSheet.create({
     paddingTop: '0.3rem',
     backgroundColor: '$globalWhite',
     paddingBottom: '0.3rem',
-    paddingLeft: '1rem',
-    paddingRight: '1rem'
+    paddingLeft: '$globalWhiteSpace',
+    paddingRight: '$globalWhiteSpace'
   },
   titleLeft: {
     width: '3rem',
@@ -139,8 +139,8 @@ const styles = EStyleSheet.create({
   lightBox: {
     paddingTop: '0.3rem',
     paddingBottom: '0.3rem',
-    paddingRight: '1rem',
-    paddingLeft: '1rem',
+    paddingRight: '$globalWhiteSpace',
+    paddingLeft: '$globalWhiteSpace',
     backgroundColor: '$globalWhite',
     borderBottomWidth: 1,
     borderColor: '$globalBorder',
@@ -149,8 +149,8 @@ const styles = EStyleSheet.create({
   box: {
     paddingTop: '0.3rem',
     paddingBottom: '0.3rem',
-    paddingRight: '1rem',
-    paddingLeft: '1rem',
+    paddingRight: '$globalWhiteSpace',
+    paddingLeft: '$globalWhiteSpace',
     backgroundColor: '$globalWhite',
     borderBottomWidth: 2,
     borderColor: '$globalBorder',

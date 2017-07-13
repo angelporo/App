@@ -75,5 +75,15 @@ export default fromJS({
     goodsName: '伊卡尚 针织衫女2017 黑色 均码',
     price: '$165',
     sales: '50'
+  }, {
+    uri:'https://m.360buyimg.com/mobilecms/jfs/t6277/312/1683594815/21136/d7b9f19/59561746N72b1a732.jpg!q70.jpg',
+    goodsName: '伊卡尚 针织衫女2017 黑色 均码',
+    price: '$165',
+    sales: '50'
+  }, {
+    uri:'https://m.360buyimg.com/mobilecms/jfs/t6277/312/1683594815/21136/d7b9f19/59561746N72b1a732.jpg!q70.jpg',
+    goodsName: '伊卡尚 针织衫女2017 黑色 均码',
+    price: '$165',
+    sales: '50'
   }]
 })

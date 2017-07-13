@@ -65,13 +65,13 @@ export default class Home extends Component {
       }
       if (event.id == 'search') {
         this.props.navigator.navigator.push({
-          screen: 'example.Search', // unique ID registered with Navigation.registerScreen
-          title: "", // navigation bar title of the pushed screen (optional)
-          passProps: {}, // Object that will be passed as props to the pushed screen (optional)
-          animated: true, // does the push have transition animation or does it happen immediately (optional)
-          animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the push have different transition animation (optional)
-          backButtonTitle: '' , // override the back button title (optional)
-          backButtonHidden: false, // hide the back button altogether (optional)
+          screen: 'example.Search',
+          title: "",
+          passProps: {},
+          animated: true,
+          animationType: 'slide-horizontal',
+          backButtonTitle: '' ,
+          backButtonHidden: false,
         });
       }
     }
@@ -84,7 +84,21 @@ export default class Home extends Component {
       recommendTitleImage : "https://m.360buyimg.com/mobilecms/jfs/t5953/56/1066729502/67974/966811b/592e82d5N5e1dc697.jpg!q70.jpg"
     }
   }
-
+  handleHotSellMoreButton (type) {
+    // 点击热销更多button
+    this.props.navigator.navigator.push({
+      screen: 'example.AppHotTab',
+      title: '热销',
+      animated: true,
+      passProps: {goodsId: type},// 携带参数
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false,
+    });
+  }
+  shouldComponentUpdate (nextProps, nextState) {
+    return nextProps.id !== this.props.id;
+  };
   render () {
     return (
       <ScrollView
@@ -100,27 +114,31 @@ export default class Home extends Component {
                 progressBackgroundColor="#ffff00"
                 />
       }
-        >
-        <StatusBar
-          backgroundColor={styleConfig.$globalWhite}
-          barStyle="dark-content"
-          />
-        <View style={[globalStyle.html, globalStyle.gbdc]}>
-          <View>
-            <HomeSwiper data={ this.props.topSwiper } />
-          </View>
-          {/* 第二层广告*/}
-          <HomeRowList
-            titUri= { this.state.recommendTitleImage }
-            listData={ this.props.luckRecommend }
-            onPress={(id) => this.intoGoodsDetail.bind(this)(id)}
-            />
-          {/*推荐商品*/}
-            <HomeRecommend source={ this.props.recommend } />
-            <HomeSwiperAdCenter data={ this.props.centerAdData } />
-            <HomeRecommendGoods source={ this.props.hotGoods} />
+      >
+      <StatusBar
+        backgroundColor={styleConfig.$globalWhite}
+        barStyle="dark-content"
+        />
+      <View style={[globalStyle.html, globalStyle.gbdc]}>
+        <View>
+          <HomeSwiper data={ this.props.topSwiper } />
         </View>
-      </ScrollView>
+        {/* 第二层广告*/}
+        <HomeRowList
+          titUri= { this.state.recommendTitleImage }
+          listData={ this.props.luckRecommend }
+          onPress={(id) => this.intoGoodsDetail.bind(this)(id)}
+          />
+          {/*推荐商品*/}
+          <HomeRecommend
+            onPressMore={ () => this.handleHotSellMoreButton.bind(this)('')}
+            source={ this.props.recommend } />
+          <HomeSwiperAdCenter data={ this.props.centerAdData } />
+          <HomeRecommendGoods
+            onPressMore={ () => this.handleHotSellMoreButton.bind(this)('热销')}
+            source={ this.props.hotGoods} />
+      </View>
+</ScrollView>
     )
   }
 }

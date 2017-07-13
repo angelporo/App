@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
-import RealName from '../modules/RealName';
+import HotTabView from '../modules/HotSell';
 
 function mapStateToProps (state) {
   return {
@@ -22,9 +22,9 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-let RealNamePage = connect()( RealName );
+let AppHotTabView = connect()( HotTabView );
 
-export default class AppUserInfo extends Component {
+export default class AppHotTab extends Component {
   static navigatorStyle = {
     tabBarHidden: true,
   };
@@ -43,7 +43,7 @@ export default class AppUserInfo extends Component {
   render () {
     return (
       <Provider store={ store } >
-        <RealNamePage navigator={this.props} />
+        <AppHotTabView navigator={this.props} />
       </Provider>
     )
   }

@@ -3045,11 +3045,21 @@ react-native-extended-stylesheet@^0.5.0:
     css-mediaquery "^0.1.2"
     object-resolve-path "^1.1.0"
 
+react-native-image-picker@^0.26.3:
+  version "0.26.3"
+  resolved "http://registry.npm.taobao.org/react-native-image-picker/download/react-native-image-picker-0.26.3.tgz#0ad2eede49501a7046d8046a73813696539c3dcd"
+
 react-native-navigation@^1.1.112:
   version "1.1.112"
   resolved "http://registry.npm.taobao.org/react-native-navigation/download/react-native-navigation-1.1.112.tgz#32ef536f015c31e28e3d38a45d40dcb0ad31fd2a"
   dependencies:
     lodash "4.x.x"
+
+react-native-scrollable-tab-view@^0.6.7:
+  version "0.6.7"
+  resolved "http://registry.npm.taobao.org/react-native-scrollable-tab-view/download/react-native-scrollable-tab-view-0.6.7.tgz#3a5fe8a4bd5bc7eb023f306099323bbd9cc284a2"
+  dependencies:
+    react-timer-mixin "^0.13.3"
 
 react-native-swipeable@^0.4.0:
   version "0.4.0"
@@ -3179,7 +3189,7 @@ react-test-renderer@16.0.0-alpha.6:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
 
-react-timer-mixin@^0.13.2:
+react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.3"
   resolved "http://registry.npm.taobao.org/react-timer-mixin/download/react-timer-mixin-0.13.3.tgz#0da8b9f807ec07dc3e854d082c737c65605b3d22"
 

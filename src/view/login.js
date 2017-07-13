@@ -20,7 +20,7 @@ function mapDispatchToProps (dispatch) {
   };
 }
 
-let AppLogin = connect( mapStateToProps, mapDispatchToProps )(Login);
+let AppLogin = connect( mapStateToProps, mapDispatchToProps )( Login );
 
 export default class LoginView extends Component {
 

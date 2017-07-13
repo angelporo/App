@@ -54,23 +54,5 @@ export const shoppingCar = fromJS({
     attr:'颜色: 优雅红 重量: 12g',
     isChecked: false,
     goodsUri: 'https://m.360buyimg.com/n12/jfs/t3034/115/824321925/193914/39327879/57b46343N23b7df02.jpg!q70.jpg',
-  }, {
-    goodsName: '金龙鱼 食用油 花生浓香食用调和油5L',
-    price: '320',
-    stock: '100',  //库充,  每次修改数量后需要更新后端的数据
-    id: '112',
-    buyNum: '12',
-    attr:'颜色: 优雅红 重量: 12g',
-    isChecked: false,
-    goodsUri: "https://m.360buyimg.com/n1/jfs/t5275/215/967088973/27980/9d4d1959/59099770Nda33fb45.jpg!q70.jpg",
-  }, {
-    goodsName: '金龙鱼 食用油 花生浓香食用调和油5L',
-    id: '12',
-    price: '320',
-    stock: '100',  //库充,  每次修改数量后需要更新后端的数据
-    buyNum: '12',
-    attr:'颜色: 优雅红 重量: 12g',
-    isChecked: false,
-    goodsUri: "https://m.360buyimg.com/mobilecms/jfs/t5686/285/1744461819/6441/289a991d/59292b99N40772647.jpg!q70.jpg",
   }]
 });

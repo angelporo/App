@@ -26,13 +26,19 @@ let UserInfoPage = connect()( UserInfo );
 
 export default class AppUserInfo extends Component {
   static navigatorStyle = {
-    navBarRightButtonColor: '#ccc',
-    navBarLeftButtonColor: '#ccc',
-    navBarHidden: true,
+    tabBarHidden: false,
   };
 
   constructor(props){
     super(props);
+    this.props.navigator.setStyle({
+      navBarButtonFontSize: 16, // Change font size nav bar buttons (eg. the back button) (remembered across pushes)
+      navBarTextColor: styleConfig.$globalColorAssist,
+      navBarButtonFontWeight: '100', // Change font weight nav bar buttons (eg. the back button) (remembered across pushes)
+      navBarLeftButtonFontSize: 16, // Change font size of left nav bar button
+      navBarLeftButtonColor: '#ccc', // Change color of left nav bar button
+      navBarLeftButtonFontWeight: 100, // Change font weight of left nav bar button
+    });
   }
   render () {
     return (
