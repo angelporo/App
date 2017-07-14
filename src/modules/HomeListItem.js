@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   ListView,
+  FlatList,
   TouchableOpacity,
   SwipeableListView
 } from 'react-native';
@@ -121,7 +122,10 @@ export function TitleScriptionBar ({
           <Text>{ title }</Text>
         </View>
         <View style={[globalStyle.flexauto]}>
-          <Text style={[globalStyle.fzd8, globalStyle.mld5, globalStyle.cca]}>{ titleScription }</Text>
+          <Text style={[globalStyle.fzd8,
+                        globalStyle.mld5,
+                        globalStyle.cca
+                ]}>{ titleScription }</Text>
         </View>
         <TouchableOpacity
           style={[globalStyle.flexEnd]}
@@ -182,23 +186,34 @@ export class HomeRecommendGoods extends Component{
             onPressMore={ onPressMore }
             rightButtonText='查看更多'
             />
-          <View style={[styles.hotSaleBox]}>
-            {
-              source.map( (n, i) => {
-                return <HotSaleItem
-                           handleIntoGoodsDetail={ () => alert('n.price')}
-                           key={i}
-                           price={n.price}
-                           sale={n.sales}
-                           goodsName={n.goodsName}
-                           uri={n.uri} />
-              })
-            }
-          </View>
+            <GoodsRowItem source={source} />
         </View>
       );
     }
   }
+}
+
+export function GoodsRowItem ({source}) {
+  return (
+          <View style={[styles.hotSaleBox]}>
+    <FlatList
+      data={ source }
+      columnWrapperStyle={{justifyContent: 'space-between', flexDiraction: 'row'}}
+      numColumns={2}
+      renderItem={ ({item, index}) => {
+        return ( <HotSaleItem
+                     handleIntoGoodsDetail={ () => alert('12')}
+                     key={index}
+                     price={item.price}
+                     sale={item.sales}
+                     goodsName={item.goodsName}
+                     uri={item.uri}
+                     />
+               );
+      } }
+      />
+      </View>
+  )
 }
 
 
@@ -265,16 +280,17 @@ export class SwiperShoppingCarItem extends Component {
           itemData,
           onPressDelete,
           onPressAddCounter,
-          onPressReduceCounter
+          onPressReduceCounter,
+          onChange
         } = this.props;
     return (
       <View style={{marginTop: 5}}>
         <Swipeable
           onRef={ref => this.swipeable = ref}
           rightButtons={[<RightButton onPress={this.deleteItem.bind(this)} />]}>
-        <View style={styles.orderItem}>
-          <View style={[globalStyle.px1, styles.goodsImageItemBox]}>
-            <SwitchVadio style={[styles.swtichBar]} text="" checked={ itemData.isChecked } changeValue={ changeCheckBox } />
+          <View style={styles.orderItem}>
+            <View style={[globalStyle.px1, styles.goodsImageItemBox]}>
+              <SwitchVadio style={[styles.swtichBar]} text="" checked={ itemData.isChecked } changeValue={ changeCheckBox } />
               <View style={styles.goodsImageItem}>
                 <View style={[globalStyle.flexStart]}>
                   <Image
@@ -302,14 +318,15 @@ export class SwiperShoppingCarItem extends Component {
                         onPressAdd={ onPressAddCounter }
                         num={ itemData.buyNum }
                         stock={ itemData.stock }
+                        onChange={ (value) => onChange(value) }
                         />
                     </View>
                   </View>
                 </View>
               </View>
+            </View>
           </View>
-        </View>
-      </Swipeable>
+        </Swipeable>
       </View>
     )
   }

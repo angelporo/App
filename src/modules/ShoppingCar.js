@@ -10,6 +10,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ListView,
+  FlatList,
   RefreshControl,
 } from 'react-native';
 import React, { Component } from 'react';
@@ -90,35 +91,53 @@ export default class ShoppCar extends Component {
   }
   handleCountAddButton (item, index) {
     // 点击增加数量操作
+    const isAllChecked = () => this.state.goodsSourceData.every( n => { return n.isChecked == true}) // 是否全选状态
     const newGoodsSourceData = this.state.goodsSourceData.map((n, i) => {
         if (index == i) {
           n.buyNum = (parseInt(n.buyNum) + 1) + '';
           n.isChecked = true;
         }
-        return n
+      return n;
     });
     this.setState({
+      isAllChecked: isAllChecked(),
       goodsSourceData: newGoodsSourceData,
-      checkeds:this.getCheckeds(newGoodsSourceData),
-    })
+      checkeds:this.getCheckeds(newGoodsSourceData)
+    });
     // 修改购买数量后请求后端改变应付金额
   }
 
   handleCountReducButton (item, index) {
     // 点击减少数量操作
+    const isAllChecked = () => this.state.goodsSourceData.every( n => { return n.isChecked == true}); // 是否全选状态
     const newGoodsSourceData =this.state.goodsSourceData.map((n, i) => {
         if (index == i) {
           n.buyNum = (parseInt(n.buyNum) - 1) + '';
           n.isChecked = true;
         }
-        return n
+      return n;
     });
     this.setState({
+      isAllChecked: isAllChecked(),
       goodsSourceData: newGoodsSourceData,
-      checkeds:this.getCheckeds(newGoodsSourceData),
-    })
+      checkeds:this.getCheckeds(newGoodsSourceData)
+    });
   }
-
+  onChangeItemValue (value, index) {
+    const isAllChecked = () => this.state.goodsSourceData.every( n => { return n.isChecked == true}); // 是否全选状态
+    const newGoodsSourceData =this.state.goodsSourceData.map((n, i) => {
+      if (index == i) {
+        n.buyNum = value || '1';
+        n.isChecked = true;
+      }
+      return n;
+    });
+    this.setState({
+      isAllChecked: isAllChecked(),
+      goodsSourceData: newGoodsSourceData,
+      checkeds:this.getCheckeds(newGoodsSourceData)
+    });
+  }
   render () {
     console.log('选中要结算的商品', this.state.checkeds);
     console.log('商品总数', this.state.goodsSourceData.length);
@@ -132,35 +151,24 @@ export default class ShoppCar extends Component {
           onPressLeft={ () => this.setState({isShowAlert: !this.state.isShowAlert})}
           onPressRight={ this.handleDeleteItem.bind(this)}
           />
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{position: 'relative',}}
-          refreshControl={
-              <RefreshControl
-                  refreshing={false}
-                  onRefresh={ () => alert('下拉成功')}
-                  tintColor="#ff0000"
-                  title="下拉刷新"
-                  titleColor={ styleConfig.$globalColorPro }
-                  colors={['#ff0000', '#00ff00', '#0000ff']}
-                  progressBackgroundColor="#ffff00"
-                  />
-        }>
-        {
-          this.state.goodsSourceData.map( (item, index) => {
-            return (<SwiperShoppingCarItem
-                        key={index}
-                        onPressAddCounter={() => this.handleCountAddButton.bind(this)(item, index)}
-                        onPressReduceCounter={() => this.handleCountReducButton.bind(this)(item, index)}
-                        changeCheckBox={() => this.changeGoodsItemCheckbox.bind(this)(item, index) }
-                        itemData={item}
-                    onPressDelete={ () => this.setState({ isShowAlert: !this.state.isShowAlert,
-                                                         surrentIndex: index
-                                                       })}
-                    />)
-          })
-        }
-        </ScrollView>
+        <FlatList
+          data={this.state.goodsSourceData}
+          renderItem={ ({item, index}) => {
+            return (
+              <SwiperShoppingCarItem
+                key={index}
+                onChange={ (value) => this.onChangeItemValue.bind(this)(value, index)}
+                onPressAddCounter={() => this.handleCountAddButton.bind(this)(item, index)}
+                onPressReduceCounter={() => this.handleCountReducButton.bind(this)(item, index)}
+                changeCheckBox={() => this.changeGoodsItemCheckbox.bind(this)(item, index) }
+                itemData={item}
+                onPressDelete={ () => this.setState({ isShowAlert: !this.state.isShowAlert,
+                                                     surrentIndex: index
+                })}
+                />
+            );
+          }}
+          />
         <View style={[styles.shoppingFooter ]}>
           <ShoppingCarFooter
       onPressAllCheckbox={ () => this.changelAllCheckBox.bind(this)()}

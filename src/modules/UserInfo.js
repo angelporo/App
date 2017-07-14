@@ -10,6 +10,7 @@ import {
   Dimensions,
   StatusBar,
   RefreshControl,
+  DatePickerIOS
 } from 'react-native';
 import React, { Component } from 'react';
 import styleConfig, { globalStyle, refreshColor } from '../config/config-styles';
@@ -52,12 +53,15 @@ export default class UserInfo extends Component {
       backButtonTitle: '',
       backButtonHidden: false,
       navigatorStyle: {},
-      navigatorButtons: {}
+      navigatorButtons: {},
     });
   }
 
   _handleSettingIcon () {
     alert('lcick setting icons');
+  }
+  constructor(props) {
+    super(props);
   }
   render () {
     const ScrollHeight = styleConfig.$height - 48 + 20;
@@ -65,15 +69,21 @@ export default class UserInfo extends Component {
     const ListHead = (<TouchBar title="全部资产" IconChild={ OrderIcon } onClick={ () => { alert('全部资产') }}/>);
     const {
       userName,
-      userBirthDay,
+      userBirthDay
     } = this.props;
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{backgroundColor: styleConfig.$globalBgc}}
         >
-        <View style={{backgroundColor: styleConfig.$globalBgc}}>
-        </View>
+        {/*
+           <DatePickerIOS
+                       date={ this.state.date }
+                       mode="datetime"
+                       onDateChange={ (date) =>alert(date) }
+                       />
+               */
+          }
         <TouchBar
           title="用户名"
           bold={false}

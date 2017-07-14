@@ -19,7 +19,8 @@ export default class CounterBar extends Component {
     num: PropTypes.number,// 购买数量
     stock: PropTypes.number,  // 库充
     onPressAdd: PropTypes.func,
-    onPressReduce: PropTypes.func
+    onPressReduce: PropTypes.func,
+    onChange: PropTypes.func
   }
   handleReduce() {
     let { num, onPressReduce } = this.props;
@@ -38,9 +39,8 @@ export default class CounterBar extends Component {
     }
     onPressAdd();
   }
-
   render () {
-    let { num, stock } = this.props;
+    let { num, stock, onChange } = this.props;
     let IntNum = parseInt(num);
     let disbaleReduce = IntNum <= 1 ? {color: styleConfig.$globalBorder} : {};
     let disbaleAdd = IntNum >= parseInt(stock) ? {color: styleConfig.$globalBorder} : {};
@@ -54,6 +54,8 @@ export default class CounterBar extends Component {
          <View style={ styles.numInput }>
            <TextInput
              style={styles.input}
+             keyboardType="numeric"
+             onChangeText={ (value) => onChange(value)}
              value={ num }
               />
           </View>
@@ -63,14 +65,14 @@ export default class CounterBar extends Component {
               <Text style={[styles.add, disbaleAdd]}>+</Text>
             </TouchableOpacity>
         </View>
-    )
+    );
   }
 }
 
 let styles = EStyleSheet.create({
   $buttonWidth: 26,
   box: {
-    width: 80,
+    width: 90,
     height: 22,
     borderStyle: 'solid',
     borderWidth: 1,
@@ -86,7 +88,8 @@ let styles = EStyleSheet.create({
     // height: '$buttonWidth',
   },
   buttonLeft: {
-    flex: 1,
+    width: 23,
+    margin: 5,
     justifyContent: 'center',
     borderStyle: 'solid',
     borderRightColor: '$globalBorder',
@@ -94,27 +97,30 @@ let styles = EStyleSheet.create({
   },
   reduce: {
     alignItems: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+    width: '100%',
   },
   input: {
+    flex: 1,
     fontSize: '0.7rem',
-    textAlign: 'center',
-    zIndex: 100,
+    textAlign: 'center'
   },
   numInput: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   buttonRight: {
-    flex: 1,
+    width: 23,
+    margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
     borderStyle: 'solid',
     borderLeftColor: '$globalBorder',
-    borderLeftWidth: 1,
+    borderLeftWidth: 1
   },
   add: {
     textAlign: 'center',
+    width: '100%'
   }
 })

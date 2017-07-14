@@ -81,7 +81,7 @@ export default class Home extends Component {
     super(props);
     this.props.navigator.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.state = {
-      recommendTitleImage : "https://m.360buyimg.com/mobilecms/jfs/t5953/56/1066729502/67974/966811b/592e82d5N5e1dc697.jpg!q70.jpg"
+      recommendTitleImage : "https://m.360buyimg.com/mobilecms/jfs/t5953/56/1066729502/67974/966811b/592e82d5N5e1dc697.jpg!q70.jpg",
     }
   }
   handleHotSellMoreButton (type) {

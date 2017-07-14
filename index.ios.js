@@ -30,7 +30,6 @@ function RegisterScreens() {
   Navigation.registerComponent('example.Home', () => Home);
   Navigation.registerComponent('example.Login', () => LoginView);
   Navigation.registerComponent('example.Class', () => LoginView);
-  Navigation.registerComponent('example.Nav', () => Icon);
   Navigation.registerComponent('example.Person', () => AppPerson);
   Navigation.registerComponent('example.GoodsDetail', () => GoodsDetail);
   Navigation.registerComponent('example.Search', () => AppSearch);
@@ -95,7 +94,7 @@ Navigation.startTabBasedApp({
     tabBarSelectedButtonColor: styleConfig.$globalColorPro,
     tabBarLabelColor: styleConfig.$globalColorAssist, // iOS only. change the color of tab text
     tabBarSelectedLabelColor: styleConfig.$globalColorPro, // iOS only. change the color of the selected tab text
-    tabBarHideShadow: true // iOS only. Remove default tab bar top shadow (hairline)
+    tabBarHideShadow: true,  // iOS only. Remove default tab bar top shadow (hairline)
   },
   appStyle: {
     orientation: 'portrait' // Sets a specific orientation to the entire app. Default: 'auto'. Supported values: 'auto', 'landscape', 'portrait'

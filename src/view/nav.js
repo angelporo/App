@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
-import OrderPage from '../modules/Order';
+import NavPage from '../modules/NavPage';
 
 function mapStateToProps (state) {
   return {
@@ -26,7 +26,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-let AppNav = connect(mapStateToProps, mapDispatchToProps)( OrderPage );
+let AppNav = connect(mapStateToProps, mapDispatchToProps)( NavPage );
 
 export default class Nav extends Component {
   static navigatorButtons = {

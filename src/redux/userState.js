@@ -1,10 +1,10 @@
 import { Map, fromJS, List, Seq } from 'immutable';
 import React, { Component } from 'react';
-
 export default fromJS({user:{
   userName: 'liyuan',
   vipGrade: '普通会员',
   id: '24243',
+  birthday: 1500015750021,
   userCookie: '1234323432',
   avatar: "https://m.360buyimg.com/n12/jfs/t2158/10/2523294688/365362/c6ad6e25/570a6c49N8e2b6728.jpg!q70.jpg",
   asset: [{

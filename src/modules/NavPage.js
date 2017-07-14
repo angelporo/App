@@ -8,6 +8,7 @@ import {
   Text,
   StatusBar,
   ScrollView,
+  FlatList, 
   TouchableWithoutFeedback,
   TouchableOpacity,
   Image
@@ -94,9 +95,9 @@ export function ActiveNavShowContent ({
                                                    ]}>{ n.name }</Text>
                                     </TouchableOpacity>))
         }
-      </Vi<ew>
+      </View>
     </View>
-  )
+  );
 }
 
 export default class Class extends Component {
@@ -117,13 +118,13 @@ export default class Class extends Component {
       }
       if (event.id == 'search') {
         this.props.navigator.navigator.push({
-          screen: 'example.Search', // unique ID registered with Navigation.registerScreen
-          title: "", // navigation bar title of the pushed screen (optional)
-          passProps: {}, // Object that will be passed as props to the pushed screen (optional)
-          animated: true, // does the push have transition animation or does it happen immediately (optional)
-          animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the push have different transition animation (optional)
-          backButtonTitle: '' , // override the back button title (optional)
-          backButtonHidden: false, // hide the back button altogether (optional)
+          screen: 'example.Search',
+          title: "",
+          passProps: {},
+          animated: true,
+          animationType: 'slide-horizontal',
+          backButtonTitle: '' ,
+          backButtonHidden: false
         });
       }
     }
@@ -141,7 +142,9 @@ export default class Class extends Component {
   }
 
   handleChangeActiveItem (id) {
+    const newDataSource = Object.values(Object.assign({}, this.state.dataSource));
     this.setState({
+      dataSource: newDataSource,
       navActiveItem: id
     });
   }
@@ -149,21 +152,37 @@ export default class Class extends Component {
     return (
       <View style={styles.navBox}>
         <View style={styles.navBar}>
-          <ScrollView style={{height: '100%'}}>
-          {
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={ ({item, index}) =>
+                         (<NavItem
+                              key={index}
+                              isActive={this.state.navActiveItem == item.id}
+                              onPress={ () => this.handleChangeActiveItem.bind(this)(item.id)}
+                          text={ item.key }
+                          />
+                         )
+                       }
+        />
+        {
+          /*
+            <ScrollView style={{height: '100%'}}>
+            {
             this.state.dataSource.map( (item, i) => <NavItem
-                                                       key={i}
-                                                       isActive={this.state.navActiveItem == item.id}
-                                                       onPress={ () => this.handleChangeActiveItem.bind(this)(item.id)}
-                                       text={ item.key }
-                                       />)
-              }
-        </ScrollView>
-        </View>
-        <View style={[styles.navContant, globalStyle.px1]}>
-          <ActiveNavShowContent adUri={this.state.activeAdUri} sourceData={this.state.activeItemData} />
-        </View>
+            key={i}
+            isActive={this.state.navActiveItem == item.id}
+            onPress={ () => this.handleChangeActiveItem.bind(this)(item.id)}
+            text={ item.key }
+            />)
+            }
+            </ScrollView>
+          */
+        }
       </View>
+        <View style={[styles.navContant, globalStyle.px1]}>
+        <ActiveNavShowContent adUri={this.state.activeAdUri} sourceData={this.state.activeItemData} />
+        </View>
+        </View>
     )
   }
 }
@@ -177,19 +196,19 @@ let styles = EStyleSheet.create({
   navItemText: {
     lineHeight: '2.5rem',
     textAlign: 'center',
-    color: '$globalColorAssist', 
+    color: '$globalColorAssist'
   },
   navBar: {
-    width: '5rem',
+    width: '5rem'
   },
   navItem: {
     height: '2.5rem',
-    backgroundColor: '$globalWhite',
+    backgroundColor: '$globalWhite'
   },
   blw: {
     borderLeftWidth: 4,
     borderStyle: 'solid',
-    borderColor: '$globalWhite',
+    borderColor: '$globalWhite'
   },
   bl: {
     borderLeftWidth: 4,

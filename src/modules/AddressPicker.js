@@ -183,15 +183,18 @@ export default class AddressPicker extends Component {
 
         return <PickerIOS.Item key={i} label={key} value={key} />
     }
+
+  /**
+   * 点击确定按钮调用方法
+   * Param:  param
+   * Return: {undefined}
+   **/
   hanldeConfirm () {
     const { onPressConfrim } = this.props;
     onPressConfrim(this.state.selectedProvince, this.state.selectedCity, this.state.selectedArea);
-    // this.setState({
-    //   isShow: false
-    // })
   }
   render() {
-    const { isShow } = this.props
+    const { isShow } = this.props;
     return (
       <Modal
         animationType="slide"
@@ -203,6 +206,7 @@ export default class AddressPicker extends Component {
             <TouchableOpacity
               onPress={() => this.hanldeConfirm.bind(this)()}
               ><Text style={[globalStyle.cp, styles.plusText, globalStyle.pyd5]}>确定</Text></TouchableOpacity>
+
           </View>
           <View style={styles.flexbox}>
             <PickerIOS style={styles.addressitem}

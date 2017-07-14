@@ -94,7 +94,7 @@ export function ActiveNavShowContent ({
                                                    ]}>{ n.name }</Text>
                                     </TouchableOpacity>))
         }
-      </View>
+      </Vi<ew>
     </View>
   )
 }

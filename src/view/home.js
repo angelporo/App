@@ -9,7 +9,6 @@ import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
 import Home from '../modules/Home';
-
 function mapStateToProps (state) {
   return {
     topSwiper: state.home.topSwiper,
@@ -42,11 +41,11 @@ export default class GoodsDetail extends Component {
     ],
     leftButtons: [
       {
-        icon: require('./img/search.png') ,
+        icon: require('./img/search.png'),
         id: 'search',
         buttonColor: styleConfig.$globalColorPro
       }
-    ]
+    ],
   }
 
 static navigatorStyle = {
