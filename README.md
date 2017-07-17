@@ -2,6 +2,7 @@
 # jzcapp 练手项目
 
 ## 目录结构
+```
 ├── config  // 项目配置文件
 │   └── config-styles.js
 ├── modules     //项目组件文件夹
@@ -31,7 +32,7 @@
     │   └── search@3x.png
     ├── login.js
     └── userInfo.js
-
+```
 
 ## 功能介绍
 如果后期有时间， 配置文件内不需要添加配置内容
