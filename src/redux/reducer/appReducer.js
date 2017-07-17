@@ -1,11 +1,7 @@
-import initState from '../initSate';
-let appReducer = (state=initState, action ) => {
-  switch(action.type) {
-  case "INIT" :
-    return state.count + 1;
-  default:
-    return state;
-  }
-}
+import { combineReducers } from 'redux';
+import { fromJS } from 'immutable';
+import shoppingReducer from '../reducer/shoppingCar';
+import homeReducer from '../reducer/home';
+import user from '../reducer/user';
 
-export default appReducer;
+export default combineReducers({ shoppingReducer, homeReducer, user });

@@ -1,0 +1,4 @@
+import { combineReducers } from 'redux';
+import shoppingReducer from '../reducer/shoppingCar';
+
+export default combineReducers({ sho ppingReducer });

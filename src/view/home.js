@@ -9,14 +9,16 @@ import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
 import Home from '../modules/Home';
+
 function mapStateToProps (state) {
+  let stateJS = state.homeReducer.toJS();
   return {
-    topSwiper: state.home.topSwiper,
-    luckRecommend: state.home.luckRecommend,
-    recommend: state.home.recommendGoods,
-    brandRecommend: state.home.brandRecommend,
-    hotGoods: state.home.hotGoods,
-    centerAdData: state.home.centerAdData
+    topSwiper: stateJS.topSwiper,
+    luckRecommend: stateJS.luckRecommend,
+    recommend: stateJS.recommendGoods,
+    brandRecommend: stateJS.brandRecommend,
+    hotGoods: stateJS.hotGoods,
+    centerAdData: stateJS.centerAdData
   }
 }
 function mapDispatchToProps (dispatch) {
@@ -61,6 +63,6 @@ static navigatorStyle = {
       <Provider store={ store } >
         <AppHome navigator={this.props} />
       </Provider>
-    )
+    );
   }
 }

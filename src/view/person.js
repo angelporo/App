@@ -12,7 +12,8 @@ import Person from '../modules/Person';
 
 function mapStateToProps (state) {
   return {
-    name: 'liyuan'
+    userName: state.user.get('userName'),
+    userVipGrade: state.user.get('vipGrade'),
   }
 }
 function mapDispatchToProps (dispatch) {

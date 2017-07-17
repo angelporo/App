@@ -8,25 +8,24 @@ import PropTypes from 'prop-types';
 import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
+import { compose } from 'redux';
 import ShoppingCarComponent from '../modules/ShoppingCar';
+import { updateMyShoppingCarList } from '../redux/reducer/user';
 
 function mapStateToProps (state) {
   return {
-    topSwiper: state.home.topSwiper,
-    luckRecommend: state.home.luckRecommend,
-    recommend: state.home.recommendGoods,
-    brandRecommend: state.home.brandRecommend,
-    hotGoods: state.home.hotGoods,
-    centerAdData: state.home.centerAdData
-  }
-}
-function mapDispatchToProps (dispatch) {
-  return {
-    nameDispatch: function () {alert('ok')}
+    goodsSourceData: state.user.toJS().myShoppingCars
   }
 }
 
-let AppShoppingCar = connect(mapStateToProps, mapDispatchToProps)( ShoppingCarComponent );
+function mapDispatchToProps (dispatch) {
+  return {
+    updateMyShoppingCarList: compose( dispatch, updateMyShoppingCarList)
+  };
+}
+
+let AppShoppingCar = connect(mapStateToProps,
+                             mapDispatchToProps)( ShoppingCarComponent );
 
 export default class ShoppingCar extends Component {
   static navigatorButtons = {
@@ -54,6 +53,6 @@ export default class ShoppingCar extends Component {
       <Provider store={ store } >
         <AppShoppingCar navigator={this.props} />
       </Provider>
-    )
+    );
   }
 }

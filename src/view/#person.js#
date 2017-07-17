@@ -1,17 +1,20 @@
 /**
- * 商品详情
+ * 个人中心
  * Param:  param
  * Return: {undefined}
  **/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import store from '../redux/store/store';
+import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
-import GoodsDetailComponent from '../modules/GoodsDetail';
+import Person from '../modules/Person';
 
 function mapStateToProps (state) {
   return {
-    name: 'liyuan'
+    userName: state.user.get('userName'),
+    userVipGrade: state.user.get('vipGrade'),
+    userAvatar: state.user.get('avatar'), 
   }
 }
 function mapDispatchToProps (dispatch) {
@@ -20,13 +23,14 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-let App = connect(mapStateToProps, mapDispatchToProps )(GoodsDetailComponent);
+let App = connect()( Person );
 
-export default class GoodsDetail extends Component {
+export default class AppPerson extends Component {
   static navigatorStyle = {
+    navBarRightButtonColor: '#ccc',
+    navBarLeftButtonColor: '#ccc',
     navBarHidden: true,
-    tabBarHidden: true
-  }
+  };
 
   constructor(props){
     super(props);

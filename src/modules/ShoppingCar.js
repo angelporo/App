@@ -21,7 +21,7 @@ import { TouchBar, ViewTouchTitleBar } from './TouchBar';
 import Alert from '../modules/Alert';
 import { Vadio } from './SwitchBar';
 import { SwiperShoppingCarItem } from './HomeListItem';
-import { shoppingCar } from '../redux/shoppingCarState';
+import { shoppingCar } from '../redux/state/shoppingCarState';
 
 export default class ShoppCar extends Component {
   constructor(props) {
@@ -34,20 +34,22 @@ export default class ShoppCar extends Component {
       allPrice: 1232,
       page: 1,
       isShowAlert: false,
-      surrentIndex: null, // 用户操作的数据索引
+      surrentIndex: null // 用户操作的数据索引
     };
   }
 
   changelAllCheckBox () {
-    const newGoodsSourceData = this.state.goodsSourceData.map( (n, i) => {
-        n.isChecked = !this.state.isAllChecked
-        return n
-      } )
+    const goodsData = this.props.goodsSourceData;
+    const newGoodsSourceData = goodsData.map( (n, i) => {
+      n.isChecked = !this.state.isAllChecked;
+      return n;
+    } );
+    const { updateMyShoppingCarList } = this.props;
+    updateMyShoppingCarList( newGoodsSourceData);
     this.setState({
       isAllChecked: !this.state.isAllChecked,
-      goodsSourceData: newGoodsSourceData,
       checkeds: this.getCheckeds(newGoodsSourceData)
-    })
+    });
   }
 
   /**
@@ -56,52 +58,55 @@ export default class ShoppCar extends Component {
    * Return: { Array }
    **/
   getCheckeds( SourceData ) {
-    return SourceData.filter( n => { return (n.isChecked == true) }) //获取全部选中商品
+    return SourceData.filter( n => { return (n.isChecked == true) }); //获取全部选中商品
   }
 
   changeGoodsItemCheckbox(item, index) {
     // 点击单个商品
-    let newGoodsSourceData = this.state.goodsSourceData.map( (n, i) => {
+    let newGoodsSourceData = this.props.goodsSourceData.map( (n, i) => {
         if (index == i) {
           n.isChecked = !n.isChecked;
         }
-        return n
-    }) // 选中或取消单个商品修改后的所有商品
-    const isAllChecked = () => this.state.goodsSourceData.every( n => { return n.isChecked == true}) // 是否全选状态
+      return n;
+    }); // 选中或取消单个商品修改后的所有商品
+    const isAllChecked = () => this.props.goodsSourceData.every( n => { return n.isChecked == true}); // 是否全选状态
+    const { updateMyShoppingCarList } = this.props;
+        updateMyShoppingCarList( newGoodsSourceData);
     this.setState({
       isAllChecked: isAllChecked(),
-      goodsSourceData: newGoodsSourceData,
       checkeds: this.getCheckeds(newGoodsSourceData)
-    })
+    });
     //使用全部选中的商品来拿服务器计算好的总数也可以又前端来计算.
   }
   deleteItemByArray(index, arr) {
-    const newArr = arr.slice(0, index).concat(arr.slice(index + 1, arr.length))
+    const newArr = arr.slice(0, index).concat(arr.slice(index + 1, arr.length));
     return newArr;
   }
 
   handleDeleteItem () {
     // 删除单个商品
-    let newGoodsSourceData = this.deleteItemByArray(this.state.surrentIndex, this.state.goodsSourceData);
+    let newGoodsSourceData = this.deleteItemByArray(this.state.surrentIndex, this.props.goodsSourceData);
+    const { updateMyShoppingCarList } = this.props;
+    updateMyShoppingCarList( newGoodsSourceData);
     this.setState({
       isShowAlert: !this.state.isShowAlert,
-      goodsSourceData: newGoodsSourceData,
-      checkeds: this.getCheckeds(newGoodsSourceData),
+      checkeds: this.getCheckeds(newGoodsSourceData)
     });
   }
   handleCountAddButton (item, index) {
     // 点击增加数量操作
-    const isAllChecked = () => this.state.goodsSourceData.every( n => { return n.isChecked == true}) // 是否全选状态
-    const newGoodsSourceData = this.state.goodsSourceData.map((n, i) => {
+    const isAllChecked = () => this.props.goodsSourceData.every( n => { return n.isChecked == true}); // 是否全选状态
+    const newGoodsSourceData = this.props.goodsSourceData.map((n, i) => {
         if (index == i) {
           n.buyNum = (parseInt(n.buyNum) + 1) + '';
           n.isChecked = true;
         }
       return n;
     });
+    const { updateMyShoppingCarList } = this.props;
+    updateMyShoppingCarList( newGoodsSourceData);
     this.setState({
       isAllChecked: isAllChecked(),
-      goodsSourceData: newGoodsSourceData,
       checkeds:this.getCheckeds(newGoodsSourceData)
     });
     // 修改购买数量后请求后端改变应付金额
@@ -109,38 +114,40 @@ export default class ShoppCar extends Component {
 
   handleCountReducButton (item, index) {
     // 点击减少数量操作
-    const isAllChecked = () => this.state.goodsSourceData.every( n => { return n.isChecked == true}); // 是否全选状态
-    const newGoodsSourceData =this.state.goodsSourceData.map((n, i) => {
+    const isAllChecked = () => this.props.goodsSourceData.every( n => { return n.isChecked == true}); // 是否全选状态
+    const newGoodsSourceData =this.props.goodsSourceData.map((n, i) => {
         if (index == i) {
           n.buyNum = (parseInt(n.buyNum) - 1) + '';
           n.isChecked = true;
         }
       return n;
     });
+    const { updateMyShoppingCarList } = this.props;
+    updateMyShoppingCarList( newGoodsSourceData );
     this.setState({
       isAllChecked: isAllChecked(),
-      goodsSourceData: newGoodsSourceData,
       checkeds:this.getCheckeds(newGoodsSourceData)
     });
   }
   onChangeItemValue (value, index) {
-    const isAllChecked = () => this.state.goodsSourceData.every( n => { return n.isChecked == true}); // 是否全选状态
-    const newGoodsSourceData =this.state.goodsSourceData.map((n, i) => {
+    const isAllChecked = () => this.props.goodsSourceData.every( n => { return n.isChecked == true}); // 是否全选状态
+    const newGoodsSourceData =this.props.goodsSourceData.map((n, i) => {
       if (index == i) {
         n.buyNum = value || '1';
         n.isChecked = true;
       }
       return n;
     });
+    const { updateMyShoppingCarList } = this.props;
+    updateMyShoppingCarList( newGoodsSourceData );
     this.setState({
       isAllChecked: isAllChecked(),
-      goodsSourceData: newGoodsSourceData,
       checkeds:this.getCheckeds(newGoodsSourceData)
     });
   }
   render () {
     console.log('选中要结算的商品', this.state.checkeds);
-    console.log('商品总数', this.state.goodsSourceData.length);
+    console.log('商品总数', this.props.goodsSourceData.length);
     return (
       <View style={styles.shoppingCar}>
         <Alert
@@ -152,7 +159,7 @@ export default class ShoppCar extends Component {
           onPressRight={ this.handleDeleteItem.bind(this)}
           />
         <FlatList
-          data={this.state.goodsSourceData}
+          data={this.props.goodsSourceData}
           renderItem={ ({item, index}) => {
             return (
               <SwiperShoppingCarItem

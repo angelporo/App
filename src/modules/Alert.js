@@ -73,18 +73,18 @@ export default class Alert extends Component {
     // 点击取消按钮
     let { onPressLeft } = this.props;
     //调用取消执行函数
-    onPressLeft()
+    onPressLeft();
 
-    this._close()
+    this._close();
   }
 
   handleAgree () {
     // 点击确定按钮
     let { onPressRight } = this.props;
     //调用同意执行函数
-    onPressRight()
+    onPressRight();
 
-    this._close()
+    this._close();
   }
 
   render () {
@@ -93,10 +93,10 @@ export default class Alert extends Component {
       title,
       titleDescription,
       Right, // jsx 元素, 主要用来区分颜色
-      Left, // jsx 元素, 主要用来区分颜色
-    } = this.props
+      Left // jsx 元素, 主要用来区分颜色
+    } = this.props;
     if (isShow) {
-    this.show()
+      this.show();
      return (
        <Animated.View style={ [styles.alertBox, styles.flexCenter,  {opacity: this.state.opacityAnimationValue}]}>
          <Animated.View style={ [styles.container, { transform:[{ scale: this.state.scaleAnimationValue}] }]}>

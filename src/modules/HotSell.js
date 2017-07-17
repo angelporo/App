@@ -15,7 +15,7 @@ import styleConfig, { globalStyle, refreshColor } from '../config/config-styles'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import HotSall from '../redux/homeState';
+import HotSall from '../redux/state/homeState';
 import { HotSaleItem, GoodsRowItem } from './HomeListItem';
 
 const returnIcon = (<Icon name="ios-arrow-forward" color='#6b6b6b' size={22} />);
@@ -76,7 +76,7 @@ export class TabItemContent extends Component {
         >
       <GoodsRowItem source={ data }/>
       </ScrollView>
-    )
+    );
   }
 }
 
@@ -84,6 +84,7 @@ export class HotSellTabBar extends Component {
   constructor(props) {
     super(props);
   }
+
   handleTabBarItem(pageNumber) {
     const { goToPage } = this.props;
     goToPage(pageNumber);

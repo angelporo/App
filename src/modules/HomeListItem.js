@@ -16,7 +16,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageContain from '../modules/Image';
 import { TouchBar, ViewTouchTitleBar } from '../modules/TouchBar';
-import { testData } from '../redux/initSate';
 import { SwitchVadio } from '../modules/SwitchBar';
 import CounterBar from '../modules/Counter';
 import Swipeable from 'react-native-swipeable';
@@ -67,7 +66,8 @@ export function HomeRowList ({titUri, listData, onPress}){
                        uri={n.uri}
                        i= {i}
                        onPress={ () => onPress(n.id)}
-            text={n.description} />
+                       text={n.description}
+              />
             } )
           }
       </View>
