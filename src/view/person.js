@@ -14,6 +14,7 @@ function mapStateToProps (state) {
   return {
     userName: state.user.get('userName'),
     userVipGrade: state.user.get('vipGrade'),
+    userAvatar: state.user.get('avatar'),
   }
 }
 function mapDispatchToProps (dispatch) {

@@ -2,6 +2,7 @@
 # jzcapp 练手项目
 
 ## 目录结构
+
 ```
 ├── config  // 项目配置文件
 │   └── config-styles.js

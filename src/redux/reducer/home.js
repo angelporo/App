@@ -15,7 +15,7 @@ export function handleUpGradeHomeAllData (data) {
   return {
     type: UPGRADE_ALLDATA,
     data
-  }
+  };
 }
 
 /**
