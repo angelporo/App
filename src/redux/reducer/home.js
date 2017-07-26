@@ -1,10 +1,9 @@
-import {Map, fromJS} from 'immutable';
+import { Map, fromJS } from 'immutable';
 import home from '../state/homeState'; // 首页
 
 
 // type
 const UPGRADE_ALLDATA = 'UPGRADE_ALLDATA';
-
 
 /**
  * 更新页面所有数据

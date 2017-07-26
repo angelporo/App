@@ -29,11 +29,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Alert extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       opacityAnimationValue: new Animated.Value(0),
       scaleAnimationValue: new Animated.Value(0)
-    }
+    };
     this.handleCancel = this.handleCancel.bind(this);
     this.handleAgree = this.handleAgree.bind(this);
   }
@@ -43,7 +43,7 @@ export default class Alert extends Component {
     this.timer = setTimeout(
       () => { _this.show() },
       1000
-    )
+    );
   }
 
   componentWillUnmount () {
@@ -95,7 +95,7 @@ export default class Alert extends Component {
       Right, // jsx 元素, 主要用来区分颜色
       Left // jsx 元素, 主要用来区分颜色
     } = this.props;
-    if (isShow) {
+    if ( isShow ) {
       this.show();
      return (
        <Animated.View style={ [styles.alertBox, styles.flexCenter,  {opacity: this.state.opacityAnimationValue}]}>
@@ -106,7 +106,6 @@ export default class Alert extends Component {
                titleDescription  && (<Text style={styles.c} >{ titleDescription }</Text>)
              }
        </View>
-
          <View style={styles.buttomBox}>
          <TouchableOpacity onPress={ () => this.handleCancel() } style={styles.buttonItem}>
          { Left }
@@ -118,10 +117,10 @@ export default class Alert extends Component {
          </View>
          </Animated.View>
          </Animated.View>
-     )
-   }else {
-     return null
-   }
+     );
+    }else {
+      return null;
+    }
   }
 }
 

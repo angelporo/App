@@ -23,7 +23,7 @@ export default {
 export let globalStyle = EStyleSheet.create({
   html: {
     position: 'relative',
-    backgroundColor: '$globalWhite',
+    backgroundColor: '$globalWhite'
   },
   tc: {
     textAlign: 'center'
@@ -46,6 +46,9 @@ export let globalStyle = EStyleSheet.create({
   },
   mld5: {
     marginLeft: '0.5rem'
+  },
+  mrd5: {
+    marginRight: '0.5rem',
   },
   flexCenter: {
     flex: 0,

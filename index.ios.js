@@ -11,7 +11,7 @@ import Home from './src/view/home';
 import AppPerson from './src/view/person';
 import LoginView from './src/view/login';
 import GoodsDetail from './src/view/goodsDetail';
-import AppSearch from './src/view/search'
+import AppSearch from './src/view/search';
 import { Navigation } from 'react-native-navigation';
 import Nav from './src/view/nav';
 import ShoppingCar from './src/view/shoppingCar';
@@ -20,6 +20,12 @@ import ApprealName from './src/view/realName';
 import AppMyWallet from './src/view/myWallet';
 import AppRemainDetail from './src/view/remainDetail';
 import AppHotTab from './src/view/hotSell';
+import AppAddressManage from './src/view/address';
+import AppOrder from './src/view/order';
+import AppEditAddress from './src/view/editAddress';
+import AppOrderDetail from './src/view/orderDetail';
+import ConfirmOrder from './src/view/confirmOrder';
+
 // 初始化入口文件注入全局style对象;
 EStyleSheet.build( styleConfig );
 
@@ -40,6 +46,11 @@ function RegisterScreens() {
   Navigation.registerComponent('example.AppMyWallet', () => AppMyWallet);
   Navigation.registerComponent('example.AppRemainDetail', () => AppRemainDetail);
   Navigation.registerComponent('example.AppHotTab', () => AppHotTab);
+  Navigation.registerComponent('example.AppAddressManage', () => AppAddressManage);
+  Navigation.registerComponent('example.AppOrder', () => AppOrder);
+  Navigation.registerComponent('example.AppEditAddress', () => AppEditAddress);
+  Navigation.registerComponent('example.AppOrderDetail', () => AppOrderDetail);
+  Navigation.registerComponent('example.ConfirmOrder', () => ConfirmOrder);
 }
 
 RegisterScreens(); // this is where you register all of your app's screens

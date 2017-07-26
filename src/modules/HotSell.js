@@ -23,7 +23,7 @@ const ClassIcon = (<Icon name="ios-keypad" size={ 26 } color="red" />);
 
 export default class HotTabView extends Component {
   static navigatorStyle = {
-    navBarHidden: true,
+    navBarHidden: true
   }
 
   constructor (props) {

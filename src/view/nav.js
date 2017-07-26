@@ -11,7 +11,7 @@ import { Provider, connect } from 'react-redux';
 import NavPage from '../modules/NavPage';
 
 function mapStateToProps (state) {
-  let stateJS = state.homeReducer.toJS();
+  let stateJS = state.get('homeReducer').toJS();
   return {
     topSwiper: stateJS.topSwiper,
     luckRecommend: stateJS.luckRecommend,

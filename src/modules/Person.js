@@ -19,7 +19,6 @@ import { TouchBar, ViewTouchTitleBar } from '../modules/TouchBar';
 import { PersonHeader } from '../modules/personHead';
 import PersonOrder from '../modules/person-order';
 import PersonAssetComponent from '../modules/person-asset';
-import Alert from '../modules/Alert';
 import { SwitchBar,
          SwitchVadio
        } from '../modules/SwitchBar';
@@ -43,6 +42,28 @@ export default class Person extends Component {
       backButtonHidden: false,
     });
   }
+  handleIntoAddressPage () {
+    this.props.navigator.navigator.push({
+      screen: 'example.AppAddressManage',
+      title: '收货地址',
+      animated: true,
+      passProps: {id: '1'},
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false
+    });
+  }
+  handleIntoAppOrder () {
+    this.props.navigator.navigator.push({
+      screen: 'example.AppOrder',
+      title: '我的订单',
+      animated: true,
+      passProps: {id: '1'},
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false
+    });
+  }
   handleIntoMyWallet () {
     this.props.navigator.navigator.push({
       screen: 'example.AppMyWallet',
@@ -51,7 +72,7 @@ export default class Person extends Component {
       animated: true,
       animationType: 'slide-horizontal',
       backButtonTitle: '',
-      backButtonHidden: false,
+      backButtonHidden: false
     });
   }
 
@@ -88,11 +109,11 @@ export default class Person extends Component {
           IconChild={ TouchIcon }
           onClick={ this.handleIntoUserInfo.bind(this) }
           />
-
         <TouchBar
-          title={'账户安全' }
+          title={'账户安p全' }
           IconChild={ TouchIcon }
-          onClick={ () => { alert('订单') }} />
+          onClick={ () => { alert('订单') }}
+          />
           <TouchBar
             title={'资金管理' }
             IconChild={ TouchIcon }
@@ -101,6 +122,16 @@ export default class Person extends Component {
               title={'我的钱包' }
               IconChild={ TouchIcon }
               onClick={ this.handleIntoMyWallet.bind(this)} />
+            <TouchBar
+              title={'收货地址'}
+              IconChild={ TouchIcon }
+              onClick={ this.handleIntoAddressPage.bind(this) }
+              />
+            <TouchBar
+              title={'我的订单'}
+              IconChild={ TouchIcon }
+              onClick={ this.handleIntoAppOrder.bind(this) }
+              />
       </View>
       {testComponent()}
 </ScrollView>

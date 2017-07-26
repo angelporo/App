@@ -3,18 +3,31 @@ import user from '../state/userState'; // 首页
 
 
 // type
-const UPDATE_MYGOODS = "UPDATE_MYGOODS";
-const UPGRADE_PERSON = 'UPGRADE_PERSON';
+const UPDATE_MYGOODS = "UPDATE_MYGOODS"; // 更新用户购物车
+const UPGRADE_PERSON = 'UPGRADE_PERSON'; //更新用户个人中心页面整体数据
+const DELETE_ADDRESSITEM = 'DELETE_ADDRESSITEM'; //删除用户收货地址
 
 /**
  * 更新用户购物车
  * Param: { newMyGoods: Object }
  * Return: {undefined}
  **/
-export function updateMyShoppingCarList ( myGoods ) {
+export  let updateMyShoppingCarList = ( myGoods ) => {
   return {
     type: UPDATE_MYGOODS,
     newMyGoods: myGoods
+  };
+};
+
+/**
+ * 删除用户收货地址
+ * Param:  param
+ * Return: {undefined}
+ **/
+export let deleteUserAddressItem  = ({newAddressSourceData}) => {
+  return {
+    type: DELETE_ADDRESSITEM,
+    newAddressSourceData // 删除后的新用户收货地址
   };
 };
 
@@ -41,6 +54,8 @@ export default function (state = user, action) {
     return state.set('myShoppingCars', action.newMyGoods);
   case UPGRADE_PERSON:
     return state;
+  case DELETE_ADDRESSITEM:
+    return state.set('userAddress', action.newAddressSourceData);
   default:
     return state;
   }

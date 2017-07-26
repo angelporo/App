@@ -16,17 +16,20 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export class SwitchBar extends Component {
   constructor (props) {
     super(props);
+    const defaultValue = this.props.defaultValue ? true : false;
     this.state = {
-      value: false
-    }
+      value: defaultValue
+    };
   }
+
   onChangeValue () {
     let { changeValue } = this.props;
     let _this = this;
     this.setState({
       value: !_this.state.value
-    })
-    changeValue();
+    });
+    // 回调发送当前选中状态
+    changeValue(!this.state.value);
   }
 
   render () {
@@ -51,25 +54,25 @@ export class SwitchBar extends Component {
 
 export class Vadio extends Component{
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      checked: this.props.checked ? this.props.checked : false
-    }
+      checked: false
+    };
   }
   onChangeValue () {
     let { changeValue } = this.props;
     this.setState({
       checked: !this.state.checked
-    })
+    });
     changeValue();
   }
   render () {
-    let { changeValue } = this.props
+    let { changeValue } = this.props;
     let VadioEntry = (<Icon
                       name="ios-radio-button-on"
                       size={ 22 }
                       style={styles.padding5}
-                      onPress={ () => this.onChangeValue.bind(this)() }
+                      onPress={ this.onChangeValue.bind(this) }
                       color={ styleConfig.$globalColorPro }
                       />);
     let VadioOutline = (<Icon
@@ -88,11 +91,11 @@ export class Vadio extends Component{
 }
 
 export class SwitchVadio extends Component {
-  constructor (props) {
+  constructor ( props ) {
     super(props);
     this.state = {
       checked: props.checked || false
-    }
+    };
   }
   onChangeValue () {
     let { changeValue } = this.props;
@@ -106,7 +109,7 @@ export class SwitchVadio extends Component {
   render () {
     let { text, onValueChange, style, checked } = this.props;
     return (
-      <View style={[styles.swtichBar, style]}>
+      <View style={[styles.switchBox, style]}>
         <View >
           <Vadio
             checked={ checked }
@@ -121,16 +124,22 @@ export class SwitchVadio extends Component {
   }
 }
 
-let styles = EStyleSheet.create({
+const styles = EStyleSheet.create({
   swtichBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '$globalWhite',
-    // paddingLeft: '$globalWhiteSpace',
-    // paddingRight: '$globalWhiteSpace',
-    // paddingBottom: '0.2rem',
-    // paddingTop: '0.2rem'
+    paddingBottom: 5,
+    paddingTop: 5,
+    paddingLeft: '$globalWhiteSpace',
+    paddingRight: '$globalWhiteSpace',
+  },
+  switchBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '$globalWhite',
   },
   end: {
     flex: 1,
@@ -138,6 +147,6 @@ let styles = EStyleSheet.create({
     justifyContent: 'flex-end',
   },
   padding5: {
-    padding: '0.5rem',
+    padding: '0.4rem',
   }
 })

@@ -27,8 +27,9 @@ const DownTriangleIcon =  (<Icon name="triangle-down" size={ 16 } color={loginHi
 export class LoginInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { placeholder: '请输入手机号' ,
-                   value: ''
+    this.state = {
+      placeholder: '请输入手机号' ,
+      value: ''
                  };
   }
 
@@ -49,6 +50,7 @@ export class LoginInput extends Component {
             style={styles.loginInput}
             keyboardType="numeric"
             onChangeText={(text) => this.setState({text})}
+
             placeholder={this.state.placeholder}
             { ...this.props }
             />
@@ -141,12 +143,12 @@ export class VerifyCode extends Component {
             </Button>
         </View>
       </View>
-    )
+    );
   }
 }
 
 
-let styles = EStyleSheet.create({
+const styles = EStyleSheet.create({
   loginInput: {
     height: '2rem',
     fontSize: '0.8rem',

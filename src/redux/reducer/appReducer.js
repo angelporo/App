@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutablejs';
 import { fromJS } from 'immutable';
 import shoppingReducer from '../reducer/shoppingCar';
 import homeReducer from '../reducer/home';

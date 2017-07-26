@@ -83,7 +83,7 @@ export default class RealName extends Component {
   }
 
   render () {
-    const address = this.state.selectedArea !== '' ? `${this.state.selectedProvince} - ${this.state.selectedCity} - ${this.state.selectedArea}` : ''
+    const address = this.state.selectedArea !== '' ? `${this.state.selectedProvince} - ${this.state.selectedCity} - ${this.state.selectedArea}` : '';
     return (
       <ScrollView
         style={{backgroundColor: styleConfig.$globalBgc}}

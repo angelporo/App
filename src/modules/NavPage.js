@@ -21,7 +21,6 @@ import Alert from '../modules/Alert';
 const TouchIcon = (<Icon name="ios-book" size={ 22 } color="red" />);
 
 export class NavItem extends Component {
-
   constructor(props){
     super(props);
   }

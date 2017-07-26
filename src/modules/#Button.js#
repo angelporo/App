@@ -89,22 +89,23 @@ export function ElipseButton ({onPress,
                                text,
                                color,
                                textColor,
-                               data}) {
+                               type,
+                               id}) {
   return (
     <TouchableOpacity style={[styles.grayButton, {borderColor: color}]}
-                      onPress={ () => onPress( data ) }>
+                      onPress={ () => onPress(id, type) }>
       <Text style={[styles.grayButtonText, { color: textColor }]}>{ text }</Text>
     </TouchableOpacity>
   )
 }
 
-export function OrderButton ({color, onPress, text, item, type}) {
+export function OrderButton ({color, onPress, text, id, type}) {
   if(color === 'gray') {
     return (
       <ElipseButton
         onPress={ onPress }
         type={type}
-        data={ item }
+        id={ id }
         text={ text }
         color='#D0D0D0'
         textColor={styleConfig.$globalColorAssist}
@@ -114,7 +115,7 @@ export function OrderButton ({color, onPress, text, item, type}) {
     return (
       <ElipseButton
         onPress={ onPress }
-        data={ item }
+        id={ id }
         type={type}
         text={ text }
         color={styleConfig.$globalColorPro}
@@ -134,9 +135,11 @@ const styles = EStyleSheet.create({
     fontSize: '0.8rem'
   },
   grayButton: {
+    marginRight: '0.5rem',
     borderWidth: 1,
     borderStyle: 'solid',
-    width: '4rem',
+    width: '4re
+m',
     height: '1.8rem',
     overflow: 'hidden',
     borderRadius: '1.8rem',

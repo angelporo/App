@@ -48,7 +48,6 @@ export default class GoodsDetailComponent extends Component {
     let contentHeight = event.nativeEvent.contentSize.height;
     let scrollHeight = (currentHeight + height) - contentHeight
     if( scrollHeight >= 100){
-      console.log(scrollHeight);
       this.setState({
         goodsInfoImage: [{uri: "https://img30.360buyimg.com/popWaterMark/jfs/t4846/265/2008501908/300551/2c6370b3/58f6bf07N3eeed3a1.jpg"}, {uri: 'https://img30.360buyimg.com/popWaterMark/jfs/t3169/49/7575776379/73171/169e1430/58b7aac4Nd267b7ad.jpg'}],
         goodsInfoShow: true,
@@ -61,7 +60,6 @@ export default class GoodsDetailComponent extends Component {
   }
   constructor(props) {
     super(props);
-    console.log('component', this.props);
     this.state = {
       goodsName: '彪马PUMA男鞋跑步鞋2017春新款运',
       storeTag: ['赠送积分158', '积分商品', '商家包邮', '满198送'],

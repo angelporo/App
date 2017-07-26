@@ -11,7 +11,7 @@ import { Provider, connect } from 'react-redux';
 import Home from '../modules/Home';
 
 function mapStateToProps (state) {
-  let stateJS = state.homeReducer.toJS();
+  let stateJS = state.get('homeReducer').toJS();
   return {
     topSwiper: stateJS.topSwiper,
     luckRecommend: stateJS.luckRecommend,
@@ -19,12 +19,12 @@ function mapStateToProps (state) {
     brandRecommend: stateJS.brandRecommend,
     hotGoods: stateJS.hotGoods,
     centerAdData: stateJS.centerAdData
-  }
+  };
 }
 function mapDispatchToProps (dispatch) {
   return {
     nameDispatch: function () {alert('ok')}
-  }
+  };
 }
 
 let AppHome = connect(mapStateToProps, mapDispatchToProps)( Home );

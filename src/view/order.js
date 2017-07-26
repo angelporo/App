@@ -1,5 +1,5 @@
 /**
- * 实名认证页面
+ * 管理收货地址
  * Param:  param
  * Return: {undefined}
  **/
@@ -9,24 +9,25 @@ import PropTypes from 'prop-types';
 import store from '../redux/store/store';
 import styleConfig from '../config/config-styles';
 import { Provider, connect } from 'react-redux';
-import HotTabView from '../modules/HotSell';
+import UserOrder from '../modules/Order';
 
 function mapStateToProps (state) {
   return {
-    name: 'liyuan'
-  }
+    userOrders: state.getIn(['user', 'userOrder']).toJS()
+  };
 }
+
 function mapDispatchToProps (dispatch) {
   return {
     nameDispatch: function () {alert('ok')}
-  }
+  };
 }
 
-let AppHotTabView = connect()( HotTabView );
+let Order = connect(mapStateToProps, mapDispatchToProps )( UserOrder );
 
-export default class AppHotTab extends Component {
+export default class AppOrder extends Component {
   static navigatorStyle = {
-    tabBarHidden: true,
+    tabBarHidden: true
   };
 
   constructor(props){
@@ -37,13 +38,13 @@ export default class AppHotTab extends Component {
       navBarButtonFontWeight: '100', // Change font weight nav bar buttons (eg. the back button) (remembered across pushes)
       navBarLeftButtonFontSize: 16, // Change font size of left nav bar button
       navBarLeftButtonColor: '#ccc', // Change color of left nav bar button
-      navBarLeftButtonFontWeight: 100, // Change font weight of left nav bar button
+      navBarLeftButtonFontWeight: 100 // Change font weight of left nav bar button
     });
   }
   render () {
     return (
       <Provider store={ store } >
-        <AppHotTabView navigator={this.props} />
+        <Order navigator={this.props} />
       </Provider>
     );
   }

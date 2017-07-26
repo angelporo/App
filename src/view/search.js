@@ -55,7 +55,6 @@ export default class AppSearch extends Component {
     super(props);
   }
   render () {
-    console.log(this.props);
     return (
       <Provider store={ store } >
         <SearchView navigator={this.props} />

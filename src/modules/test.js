@@ -190,11 +190,11 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     backgroundColor: '#F5FCFF',
-    padding: 15,
+    padding: 15
   },
   sectionHeaderText: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 18
   },
 })
 
@@ -204,7 +204,7 @@ export default class ExampleView extends Component {
 
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
+      sectionHeaderHasChanged: (s1, s2) => s1 !== s2
     });
 
     this.state = {

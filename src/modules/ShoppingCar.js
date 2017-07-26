@@ -51,7 +51,6 @@ export default class ShoppCar extends Component {
       checkeds: this.getCheckeds(newGoodsSourceData)
     });
   }
-
   /**
    * 获取选中的商品
    * Param:  param

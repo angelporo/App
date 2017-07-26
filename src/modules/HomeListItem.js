@@ -33,10 +33,11 @@ export function HomeRowAdItem ({
       style={styles.rowAdItem}
       onPress={ () => onPress()}
       >
-      <View >
-        <ImageContain
-          style={styles.img}
-          uri={uri}
+      <View>
+        <Image
+          style={ styles.img }
+          resizeMode={Image.resizeMode.contain}
+          source={{uri: uri}}
           />
       </View>
       <View style={[styles.rowButton, globalStyle.flexCenter]}>
@@ -48,31 +49,36 @@ export function HomeRowAdItem ({
 
 export function HomeRowList ({titUri, listData, onPress}){
   return (
-    <View style={[globalStyle.bgdW, globalStyle.pyd5, globalStyle.mtd5]}>
+    <View style={[globalStyle.bgdW,
+                  globalStyle.pyd5,
+                  globalStyle.mtd5
+          ]}>
       <View >
         <Image
-          style={styles.titImg}
-          resizeMode={Image.resizeMode.cover}
+          style={ styles.titImg }
+          resizeMode={Image.resizeMode.contain}
           uri={titUri}
           source={{uri: titUri}}
           />
       </View>
-      <View style={[ globalStyle.px1, styles.flexRow]}>
+      <View style={[ globalStyle.px1,
+                     styles.flexRow
+            ]}>
         {
           listData.map( (n, i) => {
-            return <HomeRowAdItem
+            return (<HomeRowAdItem
                        id={n.id}
                        pric={n.text}
                        uri={n.uri}
                        i= {i}
                        onPress={ () => onPress(n.id)}
                        text={n.description}
-              />
+                    />);
             } )
           }
       </View>
     </View>
-  )
+  );
 }
 
 export class RecommendItem extends Component {
@@ -88,13 +94,13 @@ export class RecommendItem extends Component {
         <Image
           style={styles.recommendlistItemImg}
           source={{uri: uri}}
-          resizeMode={Image.resizeMode.cover}
+          resizeMode={Image.resizeMode.contain}
           />
         <View>
           <Text style={styles.text}>{ goodsTitle }</Text>
         </View>
       </TouchableOpacity>
-    )
+    );
   }
 }
 
@@ -332,7 +338,7 @@ export class SwiperShoppingCarItem extends Component {
   }
 }
 
-let styles = EStyleSheet.create({
+const styles = EStyleSheet.create({
   $orderImgItemSize: '5rem',
   rowFront: {
     marginTop: '0.5rem',
@@ -455,8 +461,8 @@ let styles = EStyleSheet.create({
     borderColor: 'transparent'
   },
   img: {
-    width: '8rem',
-    height: '4rem',
+    width: '4.2rem',
+    height: '4.2rem'
   },
   rowButton: {
     width:'100%',

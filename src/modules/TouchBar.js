@@ -42,7 +42,7 @@ export function TouchBar ({
         { RightChild }
       </View>
     </View>
-  )
+  );
 
   let IsTouchableBar = ({ ChiledElement}) => {
     if( isTouch ){
@@ -50,28 +50,28 @@ export function TouchBar ({
         <TouchableOpacity onPress={ onClick } style={[styles.container, style]}>
           <ChiledElement />
         </TouchableOpacity>
-      )
+      );
     }else {
       return (
         <View style={[styles.container, style]}>
           <ChiledElement />
         </View>
-      )
+      );
     }
-  }
+  };
   if(bold) {
     // 区分底部线条粗细
     return (
       <View style={styles.box}>
         <IsTouchableBar ChiledElement={ ItemContent } />
       </View>
-    )
+    );
   }else {
     return(
       <View style={styles.lightBox}>
         <IsTouchableBar ChiledElement={ ItemContent } />
       </View>
-    )
+    );
   }
 }
 

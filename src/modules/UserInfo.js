@@ -34,13 +34,14 @@ const TouchIcon = (<Icon name="ios-book" size={ 22 } color="red" />);
 
 export default class UserInfo extends Component {
   static navigatorStyle = {
-    navBarHidden: true
+    navBarRightButtonColor: '#ccc',
+    navBarLeftButtonColor: '#ccc'
   }
 
   returnButton () {
     this.props.navigator.navigator.pop({
       animated: true,
-      animationType: 'slide',
+      animationType: 'slide'
     });
   }
   handleRealName () {
