@@ -4,7 +4,7 @@
 ## 目前只支持`ios`
 系统目前只支持`mac`
 
-![目前项目工程进度]()
+![目前项目工程进度](https://github.com/angelporo/App/blob/dev/projectImage/appgif.gif)
 
 
 ```base
