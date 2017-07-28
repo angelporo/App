@@ -1,19 +1,20 @@
-
-# jzcapp 练手项目
+# `react-native` 练手项目
 
 ## 目前只支持`ios`
 系统目前只支持`mac`
 
 ![目前项目工程进度](https://github.com/angelporo/App/blob/dev/projectImage/appgif.gif)
+    请忽略项目中的low到爆的警告提示.
 
 
 ```base
-npm install
-npm start
+➜ git clone https://github.com/angelporo/App.git -b dev
+➜ cd App
+➜ npm install
+➜ npm start
 ```
 
 ## 目录结构
-
 ```
 ├── config  // 项目配置文件
 │   └── config-styles.js
@@ -49,12 +50,15 @@ npm start
 简单说下项目的技术栈,
 `react-native`,  `redux`, `immutable`, 还有一些第三方`react-native` 库
 
-说一下`state`中的设计,  没有吧所有的`state`放在全局的`store`内,  只是全局共有的`state`放到了`store`内页面中的状态还是在页面中修改,  而全局影响的state则放到了store中
+### 说一下`state`中的设计
+没有吧所有的`state`放在全局的`store`中,
+只是全局共有的`state`放到了`store`内, 页面中的状态还是在页面中修改.
+而全局影响的state则放到了store中
 
 这个设计也是想了很久. 希望大佬们交流
 
 第一次完完整整的写react-native项目. 原本想的这个项目要做一个电商类的完整项目,
-可以下单, 角色目前只打算写一个用户的角色, 没有很多, 小白一个, 希望大神给予`issues`
+可以下单, 角色目前只打算写一个用户的角色, 没有很多, 小白一个, 希望大神给予意见
 
 东西可真不是一个人写的... 累死宝宝了
 
