@@ -36,6 +36,6 @@ export const shoppingCar = fromJS({
         id: '234',
     attr:'颜色: 优雅红 重量: 12g',
     isChecked: false,
-    goodsUri: 'https://m.360buyimg.com/n12/jfs/t3034/115/824321925/193914/39327879/57b46343N23b7df02.jpg!q70.jpg',
-  }],
+    goodsUri: 'https://m.360buyimg.com/n12/jfs/t3034/115/824321925/193914/39327879/57b46343N23b7df02.jpg!q70.jpg'
+  }]
 });

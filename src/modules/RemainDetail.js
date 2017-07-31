@@ -16,28 +16,28 @@ import styleConfig, { globalStyle, refreshColor } from '../config/config-styles'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TouchBar, ViewTouchTitleBar } from '../modules/TouchBar';
-import { RemainDetailItem } from './util'
+import { RemainDetailItem } from './util';
 
 const IntrgralIcon = (<Icon name="ios-aperture" size={ 22 } color="red" />);
-const testData = [{title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}]
+const testData = [{title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}];
 
 
 export default class RemainDetail extends Component {
   static navigatorStyle = {
-    navBarHidden: true,
+    navBarHidden: true
   }
 
   constructor (props) {
     super(props);
     this.state = {
       detailData: testData
-    }
+    };
   }
   render () {
     return (
       <View style={{position: 'relative', height: '100%'}}>
         <ScrollView
-          style={{backgroundColor: styleConfig.$globalBgc,}}
+          style={{backgroundColor: styleConfig.$globalBgc}}
           showsVerticalScrollIndicator={false}>
           <View style={[globalStyle.mtd5, globalStyle.bgdW]}>
             <View style={styles.header}>

@@ -1,7 +1,7 @@
 /**
  * 用户确认订单页面组件
  * Param:  param
- * Return: {undefined}
+ * Return: { undefined }
  **/
 import {
   ScrollView,
@@ -33,6 +33,7 @@ const deleteIcon = (<Icon name="ios-trash-outline" size={ 22 } color={'#929292'}
 // 动画初始化
 const AnimatableListView = createAnimatableComponent(ScrollView);
 
+
 export default class ConfirmOrderComponent  extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +42,6 @@ export default class ConfirmOrderComponent  extends Component {
   }
 
   componentWillUnmount () {
-
   }
   componentDidMount () {
 

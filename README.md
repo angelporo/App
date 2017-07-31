@@ -6,7 +6,6 @@
 ![目前项目工程进度](https://github.com/angelporo/App/blob/dev/projectImage/appgif.gif)
     请忽略项目中的low到爆的警告提示.
 
-
 ```base
 ➜ git clone https://github.com/angelporo/App.git -b dev
 ➜ cd App
