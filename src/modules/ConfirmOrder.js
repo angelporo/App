@@ -28,6 +28,7 @@ import { createAnimatableComponent,
          Text
        } from 'react-native-animatable';
 import * as util from '../redux/utils/util';
+import { OrderInfoBox, OrderListItemRightComponent } from './OrderItem';
 
 const deleteIcon = (<Icon name="ios-trash-outline" size={ 22 } color={'#929292'} />);
 // 动画初始化
@@ -49,13 +50,15 @@ export default class ConfirmOrderComponent  extends Component {
   }
 
   render () {
+    const OrderRightText = OrderListItemRightComponent(this.props.item);
+    const OrderItemContent = OrderInfoBox( OrderRightText )({orderInfo: this.props.item});
     return (
       <AnimatableListView
         animation="bounceInUp"
         duration={ 1200 }
         delay={ 300 }
         >
-        <Text>确认订单页面组件, 订单id: {JSON.stringify(this.props.item)}</Text>
+        <OrderItemContent disableTouch />
       </AnimatableListView>
     );
   }

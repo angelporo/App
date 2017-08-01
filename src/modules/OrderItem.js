@@ -18,6 +18,93 @@ import styleConfig, { globalStyle, refreshColor } from '../config/config-styles'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { OrderButton } from '../modules/Button';
 
+/**
+ * 订单页面订单列表信息右边文字部分
+ * Param: param
+ * Return: {undefined}
+ **/
+export let OrderListItemRightComponent = orderInfo => {
+  return (
+    <View style={styles.orderItemTitleText}>
+      <View style={styles.orderItemTitleTextLeft}>
+        <View>
+          <Text style={[styles.goodsNameText,
+                        styles.lhd5,
+                        globalStyle.cca
+                ]}>{ orderInfo.goodsName }</Text>
+        </View>
+        <Text style={[globalStyle.fzd8,
+                      styles.lhd5,
+                      {color: '#A7A7A7'}
+              ]}>{ orderInfo.goodsArguments}</Text>
+      </View>
+      <View style={styles.orderItemTitleTextRight}>
+        <Text style={[globalStyle.fzd8,
+                      styles.lhd5,
+                      globalStyle.cca
+              ]}>{ orderInfo.price }</Text>
+        <Text style={[globalStyle.fzd8,
+                      styles.lhd5,
+                      globalStyle.cca
+              ]}>{ orderInfo.originalPrice }</Text>
+        <Text style={[globalStyle.fzd8, styles.lhd5]}>{ orderInfo.buyNum }</Text>
+      </View>
+    </View>
+  );
+}
+
+
+/**
+ * 订单页面订单详情部分抽象
+ * Param: ({orderInfo:Object, onPress: func })( element )
+ * Return: {undefined}
+ **/
+export let OrderInfoBox = (OrderRightWrapped) => ({ orderInfo, onPress }) => {
+  if(__DEV__){
+    if (!orderInfo.goodsLogo) {
+      throw new Error('请检查OrderInfoBox组件中goodsLogo属性, OrderItem.js');
+    }
+    if (!orderInfo.id) {
+      throw new Error('请检查OrderInfoBox组件中id属性, OrderItem.js');
+    }
+  }
+  return class OrderItemInfo extends Component {
+    constructor(props) {
+      super(props);
+    }
+    render () {
+      if (this.props.disableTouch || false) {
+        return (
+          <View style={[styles.orderItemGoodsBox,
+                    globalStyle.gbdc,
+                    globalStyle.px1
+            ]}>
+            <Image
+              style={ styles.orderItemGoodsImage }
+              resizeMode={ Image.resizeMode.contain }
+              source={{ uri: orderInfo.goodsLogo }}/>
+            { OrderRightWrapped }
+          </View>
+        );
+      }else {
+        return (
+                    <TouchableOpacity
+            onPress={ () => onPress(orderInfo) }
+            style={[styles.orderItemGoodsBox,
+                    globalStyle.gbdc,
+                    globalStyle.px1
+            ]}>
+            <Image
+              style={ styles.orderItemGoodsImage }
+              resizeMode={ Image.resizeMode.contain }
+              source={{ uri: orderInfo.goodsLogo }}/>
+            { OrderRightWrapped }
+          </TouchableOpacity>
+        );
+      }
+    }
+  }
+};
 
 export default class OrderItem extends Component{
   constructor(props){
@@ -29,7 +116,10 @@ export default class OrderItem extends Component{
             intoOrderDetail,
             onPressStoreName
           } = this.props;
-const RightArrowIcon = (<Icon name="ios-arrow-forward-outline" size={ 22 } color={styleConfig.$globalColorAssist} />);
+    const RightArrowIcon = (<Icon name="ios-arrow-forward-outline" size={ 22 } color={styleConfig.$globalColorAssist} />);
+    const rightText = OrderListItemRightComponent(item);
+    const OrderItemContent = OrderInfoBox( rightText )({onPress: intoOrderDetail,
+                                                        orderInfo: item});
     return(
       <View style={[globalStyle.mtd5]}>
         <View style={[styles.orderItemTitle,
@@ -44,9 +134,7 @@ const RightArrowIcon = (<Icon name="ios-arrow-forward-outline" size={ 22 } color
           </TouchableOpacity>
           <Text style={[globalStyle.cp, globalStyle.fzd8]}>{ item.state }</Text>
         </View>
-        <OrderInfoBox
-          onPress={ intoOrderDetail }
-          orderInfo={ item }/>
+        <OrderItemContent/>
         <View style={[styles.orderScription,
                       globalStyle.px1,
                       globalStyle.pyd5,
@@ -68,60 +156,6 @@ const RightArrowIcon = (<Icon name="ios-arrow-forward-outline" size={ 22 } color
       </View>
     );
   };
-}
-/**
- * 战术订单主要信息
- * Param:  { orderinfo: Object}
- * Return: {undefined}
- **/
-export function OrderInfoBox ({orderInfo, onPress})  {
-  if(__DEV__){
-    if (!orderInfo.goodsLogo) {
-      throw new Error('请检查OrderInfoBox组件中goodsLogo属性, OrderItem.js');
-    }
-    if (!orderInfo.id) {
-      throw new Error('请检查OrderInfoBox组件中id属性, OrderItem.js');
-
-    }
-  }
-  return (
-    <TouchableOpacity
-      onPress={ () => onPress(orderInfo) }
-      style={[styles.orderItemGoodsBox,
-              globalStyle.gbdc,
-              globalStyle.px1
-          ]}>
-      <Image
-        style={styles.orderItemGoodsImage}
-        resizeMode={Image.resizeMode.contain}
-        source={{ uri: orderInfo.goodsLogo}}/>
-      <View style={styles.orderItemTitleText}>
-        <View style={styles.orderItemTitleTextLeft}>
-          <View>
-            <Text style={[styles.goodsNameText,
-                          styles.lhd5,
-                          globalStyle.cca
-                  ]}>{ orderInfo.goodsName }</Text>
-          </View>
-          <Text style={[globalStyle.fzd8,
-                        styles.lhd5,
-                        {color: '#A7A7A7'}
-                ]}>{ orderInfo.goodsArguments}</Text>
-        </View>
-        <View style={styles.orderItemTitleTextRight}>
-          <Text style={[globalStyle.fzd8,
-                        styles.lhd5,
-                        globalStyle.cca
-                ]}>{ orderInfo.price }</Text>
-          <Text style={[globalStyle.fzd8,
-                        styles.lhd5,
-                        globalStyle.cca
-                ]}>{ orderInfo.originalPrice }</Text>
-          <Text style={[globalStyle.fzd8, styles.lhd5]}>{ orderInfo.buyNum }</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
 }
 
 
@@ -183,23 +217,23 @@ const styles = EStyleSheet.create({
   orderButtonItem: {
     width: '25%',
     alignItems: 'center',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   orderItemTitleText: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   orderItemTitleTextLeft: {
     width: '60%'
   },
   orderItemTitleTextRight: {
     width: '20%',
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   },
   lhd5: {
-    lineHeight: '1.2rem',
+    lineHeight: '1.2rem'
   },
   goodsNameText: {
     height: '2.4rem',

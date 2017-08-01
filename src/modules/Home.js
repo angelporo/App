@@ -43,7 +43,7 @@ export default class Home extends Component {
       passProps: {goodsId: id},
       animationType: 'slide-horizontal',
       backButtonTitle: '',
-      backButtonHidden: true,
+      backButtonHidden: true
     });
   }
 
@@ -70,7 +70,7 @@ export default class Home extends Component {
           animated: true,
           animationType: 'slide-horizontal',
           backButtonTitle: '' ,
-          backButtonHidden: false,
+          backButtonHidden: false
         });
       }
     }
@@ -81,7 +81,7 @@ export default class Home extends Component {
     this.props.navigator.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.state = {
       recommendTitleImage : "https://m.360buyimg.com/mobilecms/jfs/t5953/56/1066729502/67974/966811b/592e82d5N5e1dc697.jpg!q70.jpg"
-    }
+    };
   }
   handleHotSellMoreButton (type) {
     // 点击热销更多button
@@ -92,7 +92,7 @@ export default class Home extends Component {
       passProps: {goodsId: type},// 携带参数
       animationType: 'slide-horizontal',
       backButtonTitle: '',
-      backButtonHidden: false,
+      backButtonHidden: false
     });
   }
   shouldComponentUpdate (nextProps, nextState) {
@@ -130,7 +130,7 @@ export default class Home extends Component {
           />
           {/*推荐商品*/}
           <HomeRecommend
-            onPressMore={ () => this.handleHotSellMoreButton.bind(this)('')}
+            onPressMore={ () => this.handleHotSellMoreButton.bind(this)('') }
             source={ this.props.recommend } />
           <HomeSwiperAdCenter data={ this.props.centerAdData } />
           <HomeRecommendGoods
@@ -138,16 +138,16 @@ export default class Home extends Component {
             source={ this.props.hotGoods} />
       </View>
 </ScrollView>
-    )
+    );
   }
 }
 
 let styles = EStyleSheet.create({
   homeView: {
-    backgroundColor: '$globalWhite',
+    backgroundColor: '$globalWhite'
   },
   wrapper: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   activeDot: {
     backgroundColor: '$globalWhite',

@@ -27,7 +27,7 @@ export default class UserOrder extends Component{
   }
 
   intoConfirmOrderPage (item) {
-    this.props.navigator.navigator.push({
+    this.navigator.push({
       screen: 'example.ConfirmOrder',
       title: '确认订单',
       animated: true,
@@ -84,7 +84,8 @@ export default class UserOrder extends Component{
                  handle: () => alert('申请售后')},
                 {text: '付款',
                  buttonColor: 'red',
-                 handle: this.intoConfirmOrderPage.bind(this)}]
+                 handle: (item) => this.intoConfirmOrderPage(item)
+                }]
     }];
   }
 
@@ -115,6 +116,7 @@ export default class UserOrder extends Component{
       isShowAlert: false,
       alertTitle: ''
     };
+    this.navigator = this.props.navigator.navigator;
   }
 
   handleIntoStoreDefault (storeID)   {

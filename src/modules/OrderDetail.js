@@ -20,10 +20,11 @@ import { SwitchBar,
        } from '../modules/SwitchBar';
 import { createAnimatableComponent, View, Text } from 'react-native-animatable';
 import * as util from '../redux/utils/util';
-import { OrderInfoBox } from './OrderItem';
+import { OrderInfoBox, OrderListItemRightComponent } from './OrderItem';
 const AnimatableListView = createAnimatableComponent(ScrollView);
 const ContactIcon = (<Icon name="ios-chatbubbles-outline" size={ 22 } color={styleConfig.$globalColorPro} />);
 const CallIcon = (<Icon name="ios-call" size={ 22 } color={styleConfig.$globalColorPro} />);
+
 export default class OrderDetail extends Component {
   constructor(props) {
     super(props);
@@ -54,6 +55,9 @@ export default class OrderDetail extends Component {
   }
 
   render () {
+    const RightText = OrderListItemRightComponent(this.props.item);
+    const OrderItemContent = OrderInfoBox( RightText )({onPress: this.handleIntoGoodsDetaile.bind(this),
+                                                        orderInfo: this.props.item});
     return (
       <AnimatableListView
         animation="bounceInUp"
@@ -106,9 +110,9 @@ export default class OrderDetail extends Component {
             <Text>{ this.state.storeName }</Text>
           </TouchableOpacity>
         </View>
-        <OrderInfoBox
-          orderInfo={ this.props.item }
-          onPress={this.handleIntoGoodsDetaile.bind(this)}/>
+
+        <OrderItemContent disableTouch />
+
         <View style={[globalStyle.px1, globalStyle.bgdW]}>
           <View style={[globalStyle.bb, globalStyle.pyd5]}>
             <Text style={[globalStyle.tr, globalStyle.cca]}>{ this.state.payDetaile }</Text>
