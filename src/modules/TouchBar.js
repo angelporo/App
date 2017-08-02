@@ -98,7 +98,7 @@ export class ViewTouchTitleBar extends Component {
           { Right }
         </View>
       </View>
-    )
+    );
   }
 }
 

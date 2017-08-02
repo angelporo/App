@@ -18,6 +18,7 @@ import styleConfig, { globalStyle,
                     } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchBar,
          ViewTouchTitleBar
        } from '../modules/TouchBar';
@@ -36,7 +37,7 @@ const deleteIcon = (<Icon name="ios-trash-outline" size={ 22 } color={'#929292'}
 // 动画初始化
 const AnimatableListView = createAnimatableComponent(ScrollView);
 
-const AddressIcon = (<Icon name="ios-address" size={ 30 } color={'#929292'} />);
+const AddressIcon = (<MIcon name="map-marker" size={ 26 } color={'#929292'} />);
 const RightArrow = (<Icon name="ios-arrow-forward" size={ 22 } color={'#929292'} />);
 
 export default class ConfirmOrderComponent  extends Component {
@@ -45,7 +46,7 @@ export default class ConfirmOrderComponent  extends Component {
     this.state = {
       useGold: true,
       data: {
-        name: '李渊', mobile: '13191070518', address: '景阳街长治路口天骄科技园',
+        name: '李渊', mobile: '13191070518', address: '景阳街长治路口天骄科技园'
 
       }
     };
@@ -67,6 +68,7 @@ export default class ConfirmOrderComponent  extends Component {
   onChangeText(text) {
     // 改变input内数量
   }
+
   render () {
     const OrderRightText = OrderRightComponent(this.props.item);
     const OrderItemContent = OrderInfoBox( OrderRightText )({orderInfo: this.props.item});
@@ -190,7 +192,7 @@ export let OrderAddressSelectBox = ({addressInfo}) => {
       onPress={() => alert('change Address')}
       style={[globalStyle.flexBetween, globalStyle.px1]}>
       <Text>{ AddressIcon }</Text>
-      <View>
+      <View style={{flex: 1, marginLeft: 5}}>
         <View>
           <Text style={[globalStyle.fzd8, styles.addressName]}>收货人: { addressInfo.name }      电话: { addressInfo.mobile }</Text>
           <Text style={[ globalStyle.fzd8, styles.lhd5]}>收货地址: { addressInfo.address}</Text>
@@ -216,11 +218,10 @@ export let OrderRightComponent = orderInfo => {
   );
 }
 
-
 const styles = EStyleSheet.create({
   html: {
     position: 'relative',
-    height: '100%',
+    height: '100%'
   },
   goodsName: {
     width: '100%',
@@ -239,7 +240,7 @@ const styles = EStyleSheet.create({
     lineHeight: '1rem'
   },
   addressName: {
-    lineHeight: '2rem'
+    lineHeight: '2rem',
   },
   lhd5: {
     lineHeight: '1.5rem'
@@ -256,7 +257,7 @@ const styles = EStyleSheet.create({
     height: '2.5rem',
     width: '5rem',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   orderFooter: {
     width: '100%',

@@ -25,6 +25,7 @@ import AppOrder from './src/view/order';
 import AppEditAddress from './src/view/editAddress';
 import AppOrderDetail from './src/view/orderDetail';
 import ConfirmOrder from './src/view/confirmOrder';
+import UserSendCommentView from './src/view/sendComment';
 
 // 初始化入口文件注入全局style对象;
 EStyleSheet.build( styleConfig );
@@ -32,7 +33,7 @@ EStyleSheet.build( styleConfig );
 // AppRegistry.registerComponent('Jzcapp', () => App );
 
 // register all screens of the app (including internal ones)
-function RegisterScreens() {
+function RegisterScreens(store, Provider) {
   Navigation.registerComponent('example.Home', () => Home);
   Navigation.registerComponent('example.Login', () => LoginView);
   Navigation.registerComponent('example.Class', () => LoginView);
@@ -51,6 +52,8 @@ function RegisterScreens() {
   Navigation.registerComponent('example.AppEditAddress', () => AppEditAddress);
   Navigation.registerComponent('example.AppOrderDetail', () => AppOrderDetail);
   Navigation.registerComponent('example.ConfirmOrder', () => ConfirmOrder);
+  Navigation.registerComponent('example.UserSendCommentView', () => UserSendCommentView);
+
 }
 
 RegisterScreens(); // this is where you register all of your app's screens

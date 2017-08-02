@@ -14,7 +14,6 @@ import PropTypes from 'prop-types';
 import styleConfig, { globalStyle } from '../config/config-styles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ImageContain from '../modules/Image';
 import { TouchBar, ViewTouchTitleBar } from '../modules/TouchBar';
 import { SwitchVadio } from '../modules/SwitchBar';
 import CounterBar from '../modules/Counter';

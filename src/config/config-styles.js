@@ -48,7 +48,7 @@ export let globalStyle = EStyleSheet.create({
     marginLeft: '0.5rem'
   },
   mrd5: {
-    marginRight: '0.5rem',
+    marginRight: '0.5rem'
   },
   flexCenter: {
     flexDirection: 'row',
@@ -124,6 +124,9 @@ export let globalStyle = EStyleSheet.create({
   },
   lh1: {
     lineHeight: '1rem'
+  },
+  lhd5: {
+    lineHeight: '1.5rem'
   },
   bb: {
     borderBottomColor: '$globalBorder',

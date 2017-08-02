@@ -135,7 +135,7 @@ export default class Person extends Component {
       </View>
       {testComponent()}
 </ScrollView>
-    )
+    );
   }
 }
 

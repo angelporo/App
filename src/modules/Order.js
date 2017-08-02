@@ -68,9 +68,9 @@ export default class UserOrder extends Component{
                 {text: '售后',
                  buttonColor: 'gray',
                  handle: () => alert('申请售后')},
-                {text: '确认收获',
+                {text: '评价',
                  buttonColor: 'red',
-                 handle: () => alert('确认收获')}]
+                 handle: this.intoCommentView.bind(this)}]
     }, {
       type: 4, //退货/换货
       buttons: [{text: '延长发货',
@@ -84,9 +84,20 @@ export default class UserOrder extends Component{
                  handle: () => alert('申请售后')},
                 {text: '付款',
                  buttonColor: 'red',
-                 handle: (item) => this.intoConfirmOrderPage(item)
+                 handle: this.intoConfirmOrderPage.bind(this)
                 }]
     }];
+  }
+  intoCommentView (item) {
+    this.navigator.push({
+      screen: 'example.UserSendCommentView',
+      title: '发表评价',
+      animated: true,
+      passProps: {item: item},
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false
+    });
   }
 
   componentWillMount() {

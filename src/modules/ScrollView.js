@@ -15,7 +15,12 @@ import styleConfig, { globalStyle, refreshColor } from '../config/config-styles'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export const HOCRefetch = ( WrappedCompnoent ) => ({url, data, sources}) => class HOC extends Component {
+export const HOCRefetch = WrappedCompnoent =>
+  ({url,
+    data,
+    sources,
+    isRefetch=true
+   }) => class HOC extends Component {
   constructor (props) {
     super(props);
   }
@@ -27,6 +32,7 @@ export const HOCRefetch = ( WrappedCompnoent ) => ({url, data, sources}) => clas
       <ScrollView
         contentContainerStyle={styles.homeView}
         refreshControl={
+          isRefetch ?
             <RefreshControl
                 refreshing={false}
                 onRefresh={ () => alert('下拉成功')}
@@ -35,7 +41,8 @@ export const HOCRefetch = ( WrappedCompnoent ) => ({url, data, sources}) => clas
                 titleColor={ styleConfig.$globalColorPro }
                 colors={ refreshColor }
                 progressBackgroundColor="#ffff00"
-                />
+            /> :
+          null
       }
       >
       { WrappedCompnoent }

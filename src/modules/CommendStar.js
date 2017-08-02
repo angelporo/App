@@ -24,7 +24,7 @@ export default class CommendStar extends Component {
     super(props);
     this.state = {
       macStar: this.props.maxStar ? this.props.maxStar : 5 ,
-      surrentNum: 4
+      surrentNum: this.props.defaultValue || 1
     };
   }
 
