@@ -88,7 +88,7 @@ export default class CommendStar extends Component {
   }
 }
 
-let styles = EStyleSheet.create({
+const styles = EStyleSheet.create({
   starBox: {
     backgroundColor: '$globalWhite',
     paddingTop: '0.4rem',

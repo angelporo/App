@@ -178,7 +178,6 @@ export let VideoDescriptionComponent = wrappedComponent => ({name, description})
   );
 }
 
-
 /**
  * 添加图片按钮
  * Param: param

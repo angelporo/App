@@ -42,7 +42,6 @@ export default class  UserSendCommentView extends Component {
   constructor(props){
     super(props);
   }
-
   render () {
     return (
       <Provider store={ store } >
