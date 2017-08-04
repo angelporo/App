@@ -3,15 +3,7 @@
 ## 目前只支持`ios`
 系统目前只支持`mac`
 
-![目前项目工程进度](https://github.com/angelporo/App/blob/dev/projectImage/appgif.gif)
-    请忽略项目中的low到爆的警告提示.
-
-```base
-➜ git clone https://github.com/angelporo/App.git -b dev
-➜ cd App
-➜ npm install
-➜ npm start
-```
+`dev branch`为最新代码
 
 ## 目录结构
 ```

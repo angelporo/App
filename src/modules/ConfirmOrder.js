@@ -185,7 +185,6 @@ export let OrderItemStartBar = wrappedRightComponent => title => {
   );
 }
 
-
 export let OrderAddressSelectBox = ({addressInfo}) => {
   return (
     <TouchableOpacity

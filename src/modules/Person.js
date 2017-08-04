@@ -39,7 +39,7 @@ export default class Person extends Component {
       passProps: {id: '1'},
       animationType: 'slide-horizontal',
       backButtonTitle: '',
-      backButtonHidden: false,
+      backButtonHidden: false
     });
   }
   handleIntoAddressPage () {
@@ -79,6 +79,7 @@ export default class Person extends Component {
   _handleSettingIcon () {
     alert('lcick setting icons');
   }
+
   render () {
     const ScrollHeight = styleConfig.$height - 48 + 20;
     const OrderIcon = (<Icon name="ios-book" size={ 22 } color="red" />);

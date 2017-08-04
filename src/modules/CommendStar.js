@@ -24,7 +24,7 @@ export default class CommendStar extends Component {
     super(props);
     this.state = {
       macStar: this.props.maxStar ? this.props.maxStar : 5 ,
-      surrentNum: this.props.defaultValue || 1
+      currentNum: this.props.defaultValue || 1
     };
   }
 
@@ -67,13 +67,13 @@ export default class CommendStar extends Component {
 
   changeStartValue (indexOf) {
     let { changeValue } = this.props;
-    this.setState({ surrentNum: indexOf });
+    this.setState({ currentNum: indexOf });
 
     changeValue(indexOf);
 
   }
   render () {
-    let IconsArray = this.starIcon( this.state.surrentNum, this.state.macStar);
+    let IconsArray = this.starIcon( this.state.currentNum, this.state.macStar);
     let { text, style } = this.props;
     return (
       <View style={ [ styles.starBox, style]}>
