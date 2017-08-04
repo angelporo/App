@@ -1,293 +1,88 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  ListView,
-  Platform,
-  Slider,
-  StyleSheet,
-  TouchableWithoutFeedback,
+    StyleSheet,
+    View,
+    FlatList,
+    Text,
+    Button,
 } from 'react-native';
 
-import { createAnimatableComponent, View, Text } from 'react-native-animatable';
+var ITEM_HEIGHT = 100;
 
-export class AnimationCell extends Component {
-  ref = null;
-  handleRef = (ref) => {
-    this.ref = ref;
-  }
+export default class FlatListDemo extends Component {
 
-  handlePress = () => {
-    if (this.ref && this.props.onPress) {
-      this.props.onPress(this.ref, this.props.animationType);
+    _flatList;
+
+    _renderItem = (item) => {
+        var txt = '第' + item.index + '个' + ' title=' + item.item.title;
+        var bgColor = item.index % 2 == 0 ? 'red' : 'blue';
+        return <Text style={[{flex:1,height:ITEM_HEIGHT,backgroundColor:bgColor},styles.txt]}>{txt}</Text>
     }
-  };
 
-  render() {
-    return (
-      <TouchableWithoutFeedback onPress={this.handlePress}>
-        <View
-          ref={this.handleRef}
-          style={[{ backgroundColor: this.props.color }, styles.cell]}
-          useNativeDriver={this.props.useNativeDriver}
-          >
-          <Text style={styles.name}>{this.props.animationType}</Text>
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  }
+    _header = () => {
+        return <Text style={[styles.txt,{backgroundColor:'black'}]}>这是头部</Text>;
+    }
+
+    _footer = () => {
+        return <Text style={[styles.txt,{backgroundColor:'black'}]}>这是尾部</Text>;
+    }
+
+    _separator = () => {
+        return <View style={{height:2,backgroundColor:'yellow'}}/>;
+    }
+
+    render() {
+        var data = [];
+        for (var i = 0; i < 100; i++) {
+            data.push({key: i, title: i + ''});
+        }
+
+        return (
+            <View style={{flex:1}}>
+                <Button title='滚动到指定位置' onPress={()=>{
+                    //this._flatList.scrollToEnd();
+                    //this._flatList.scrollToIndex({viewPosition:0,index:8});
+                    this._flatList.scrollToOffset({animated: true, offset: 2000});
+                }}/>
+                <View style={{flex:1}}>
+                    <FlatList
+                        ref={(flatList)=>this._flatList = flatList}
+                        ListHeaderComponent={this._header}
+                        ListFooterComponent={this._footer}
+                        ItemSeparatorComponent={this._separator}
+                        renderItem={this._renderItem}
+
+                        //numColumns ={3}
+                        //columnWrapperStyle={{borderWidth:2,borderColor:'black',paddingLeft:20}}
+
+                        //horizontal={true}
+
+                        //getItemLayout={(data,index)=>(
+                        //{length: ITEM_HEIGHT, offset: (ITEM_HEIGHT+2) * index, index}
+                        //)}
+
+                        //onEndReachedThreshold={5}
+                        //onEndReached={(info)=>{
+                        //console.warn(info.distanceFromEnd);
+                        //}}
+
+                        //onViewableItemsChanged={(info)=>{
+                        //console.warn(info);
+                        //}}
+                        data={data}>
+                    </FlatList>
+                </View>
+
+            </View>
+        );
+    }
 }
-
-const AnimatableListView = createAnimatableComponent(ListView);
-
-const COLORS = [
-  '#65b237', // green
-  '#346ca5', // blue
-  '#a0a0a0', // light grey
-  '#ffc508', // yellow
-  '#217983', // cobolt
-  '#435056', // grey
-  '#b23751', // red
-  '#333333', // dark
-  '#ff6821', // orange
-  '#e3a09e', // pink
-  '#1abc9c', // turquoise
-  '#302614', // brown
-];
-
-const ANIMATION_TYPES = {
-  'Attention Seekers': [
-    'bounce',
-    'flash',
-    'jello',
-    'pulse',
-    'rotate',
-    'rubberBand',
-    'shake',
-    'swing',
-    'tada',
-    'wobble',
-  ],
-  'Bouncing Entrances': [
-    'bounceIn',
-    'bounceInDown',
-    'bounceInUp',
-    'bounceInLeft',
-    'bounceInRight',
-  ],
-  'Bouncing Exits': [
-    'bounceOut',
-    'bounceOutDown',
-    'bounceOutUp',
-    'bounceOutLeft',
-    'bounceOutRight',
-  ],
-  'Fading Entrances': [
-    'fadeIn',
-    'fadeInDown',
-    'fadeInDownBig',
-    'fadeInUp',
-    'fadeInUpBig',
-    'fadeInLeft',
-    'fadeInLeftBig',
-    'fadeInRight',
-    'fadeInRightBig',
-  ],
-  'Fading Exits': [
-    'fadeOut',
-    'fadeOutDown',
-    'fadeOutDownBig',
-    'fadeOutUp',
-    'fadeOutUpBig',
-    'fadeOutLeft',
-    'fadeOutLeftBig',
-    'fadeOutRight',
-    'fadeOutRightBig',
-  ],
-  Flippers: [
-    'flipInX',
-    'flipInY',
-    'flipOutX',
-    'flipOutY',
-  ],
-  Lightspeed: [
-    'lightSpeedIn',
-    'lightSpeedOut',
-  ],
-  'Sliding Entrances': [
-    'slideInDown',
-    'slideInUp',
-    'slideInLeft',
-    'slideInRight',
-  ],
-  'Sliding Exits': [
-    'slideOutDown',
-    'slideOutUp',
-    'slideOutLeft',
-    'slideOutRight',
-  ],
-  'Zooming Entrances': [
-    'zoomIn',
-    'zoomInDown',
-    'zoomInUp',
-    'zoomInLeft',
-    'zoomInRight',
-  ],
-  'Zooming Exits': [
-    'zoomOut',
-    'zoomOutDown',
-    'zoomOutUp',
-    'zoomOutLeft',
-    'zoomOutRight',
-  ],
-};
-
-const NATIVE_INCOMPATIBLE_ANIMATIONS = [
-  'jello',
-  'lightSpeedIn',
-  'lightSpeedOut',
-];
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: '300',
-    textAlign: 'center',
-    margin: 20,
-    marginTop: (Platform.OS === 'ios' ? 40 : 20),
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 20,
-    backgroundColor: 'transparent',
-  },
-  slider: {
-    height: 30,
-    margin: 10,
-  },
-  toggle: {
-    width: 120,
-    backgroundColor: '#333',
-    borderRadius: 3,
-    padding: 5,
-    fontSize: 14,
-    alignSelf: 'center',
-    textAlign: 'center',
-    margin: 10,
-    color: 'rgba(255, 255, 255, 1)',
-  },
-  toggledOn: {
-    color: 'rgba(255, 33, 33, 1)',
-    fontSize: 16,
-    transform: [{
-      rotate: '8deg',
-    }, {
-      translateY: -20,
-    }],
-  },
-  sectionHeader: {
-    backgroundColor: '#F5FCFF',
-    padding: 15
-  },
-  sectionHeaderText: {
-    textAlign: 'center',
-    fontSize: 18
-  },
-})
-
-export default class ExampleView extends Component {
-  constructor(props) {
-    super(props);
-
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (s1, s2) => s1 !== s2
-    });
-
-    this.state = {
-      dataSource: dataSource.cloneWithRowsAndSections(ANIMATION_TYPES),
-      duration: 1000,
-      toggledOn: false,
-    };
-  }
-
-  textRef = null;
-  handleTextRef = (ref) => {
-    this.textRef = ref;
-  };
-
-  handleDurationChange = (duration) => {
-    this.setState({ duration: Math.round(duration) });
-  };
-
-  handleRowPressed = ( componentRef , animationType ) => {
-    componentRef.setNativeProps({
-      style: {
-        zIndex: 1,
-      },
-    });
-    componentRef.animate(animationType, this.state.duration).then(() => {
-      componentRef.setNativeProps({
-        style: {
-          zIndex: 0,
-        },
-      });
-    });
-    if (this.textRef) {
-      this.textRef[animationType](this.state.duration);
+    txt: {
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        color: 'white',
+        fontSize: 30,
     }
-  };
-
-  render() {
-    const { dataSource, duration, toggledOn } = this.state;
-    return (
-      <View animation="fadeIn" style={styles.container} useNativeDriver>
-        <Text ref={this.handleTextRef} style={styles.title}>Animatable Explorer</Text>
-
-        <View animation="tada" delay={3000}>
-          <Slider
-            style={styles.slider}
-            value={1000}
-            onValueChange={this.handleDurationChange}
-            maximumValue={2000}
-          />
-        </View>
-        <TouchableWithoutFeedback onPress={() => this.setState({ toggledOn: !toggledOn })}>
-          <Text
-            style={[styles.toggle, toggledOn && styles.toggledOn]}
-            transition={['color', 'rotate', 'fontSize']}
-          >
-            Toggle me!
-          </Text>
-        </TouchableWithoutFeedback>
-        <Text animation="zoomInDown" delay={700} style={styles.instructions}>
-          Tap one of the following to animate for {duration} ms
-        </Text>
-        <AnimatableListView
-          animation="bounceInUp"
-          duration={1100}
-          delay={1400}
-          style={styles.listView}
-          dataSource={dataSource}
-          removeClippedSubviews={false}
-          renderSectionHeader={(rows, section) => (
-            <View style={styles.sectionHeader}>
-              <Text style={styles.sectionHeaderText}>{section}</Text>
-            </View>
-          )}
-          renderRow={(animationType, section, i) => (
-            <AnimationCell
-              animationType={animationType}
-              color={COLORS[i % COLORS.length]}
-              onPress={this.handleRowPressed}
-              useNativeDriver={NATIVE_INCOMPATIBLE_ANIMATIONS.indexOf(animationType) === -1}
-            />
-          )}
-        />
-      </View>
-    );
-  }
-}
+});

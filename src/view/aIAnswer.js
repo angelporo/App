@@ -12,6 +12,7 @@ import  AIComponent from '../modules/AIAnswer';
 
 function mapStateToProps (state) {
   return {
+    userAvatar: state.get('user').toJS().avatar
   };
 }
 
