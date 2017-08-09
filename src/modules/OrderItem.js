@@ -53,7 +53,6 @@ export let OrderListItemRightComponent = orderInfo => {
   );
 }
 
-
 /**
  * 订单页面订单详情部分抽象
  * Param: ({orderInfo:Object, onPress: func })( element )
@@ -103,13 +102,14 @@ export let OrderInfoBox = (OrderRightWrapped) => ({ orderInfo, onPress }) => {
         );
       }
     }
-  }
+  };
 };
 
 export default class OrderItem extends Component{
   constructor(props){
     super(props);
   }
+
   render () {
     const { item,
             orderSystem,

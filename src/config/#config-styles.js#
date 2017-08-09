@@ -147,7 +147,7 @@ export let globalStyle = EStyleSheet.create({
     color: '$globalColorAssist'
   },
   mt2: {
-    marginTop: '2rem',
+    marginTop: '2rem'
   },
   cp: {
     color: '$globalColorPro'

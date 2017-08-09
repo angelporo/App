@@ -64,7 +64,7 @@ export default class UserOrder extends Component{
                  handle: () => alert('延长')},
                 {text: '查看物流',
                  buttonColor: 'gray',
-                 handle: () => alert('查看物流')},
+                 handle: this.intoLookLogiticsView.bind(this)},
                 {text: '售后',
                  buttonColor: 'gray',
                  handle: () => alert('申请售后')},
@@ -92,6 +92,18 @@ export default class UserOrder extends Component{
     this.navigator.push({
       screen: 'example.UserSendCommentView',
       title: '发表评价',
+      animated: true,
+      passProps: {item: item},
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false
+    });
+  }
+
+  intoLookLogiticsView (item) {
+    this.navigator.push({
+      screen: 'example.UserLookLogitics',
+      title: '查看物流',
       animated: true,
       passProps: {item: item},
       animationType: 'slide-horizontal',

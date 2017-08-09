@@ -27,7 +27,7 @@ import AppOrderDetail from './src/view/orderDetail';
 import ConfirmOrder from './src/view/confirmOrder';
 import UserSendCommentView from './src/view/sendComment';
 import AIAnswer from './src/view/aIAnswer';
-
+import UserLookLogitics from './src/view/lookLogistics';
 // 初始化入口文件注入全局style对象;
 EStyleSheet.build( styleConfig );
 
@@ -55,6 +55,7 @@ function RegisterScreens(store, Provider) {
   Navigation.registerComponent('example.ConfirmOrder', () => ConfirmOrder);
   Navigation.registerComponent('example.UserSendCommentView', () => UserSendCommentView);
   Navigation.registerComponent('example.AI', () => AIAnswer);
+  Navigation.registerComponent( 'example.UserLookLogitics', () => UserLookLogitics );
 }
 
 RegisterScreens(); // this is where you register all of your app's screens

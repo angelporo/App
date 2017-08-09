@@ -10,7 +10,8 @@ import {
   FloatList,
   TextInput,
   Image,
-  Animated
+  Animated,
+  PixelRatio
 } from 'react-native';
 import React, { Component } from 'react';
 import styleConfig, { globalStyle, refreshColor } from '../config/config-styles';import EStyleSheet from 'react-native-extended-stylesheet';
@@ -26,12 +27,8 @@ const MicIcon = (<Icon name="ios-mic" size={ 22 } color={styleConfig.$globalColo
 const SmileIcon = (<SIcon name="emotsmile" size={ 18 } color={styleConfig.$globalColorPro} />);
 // 动画初始化
 const AnimatableListView = createAnimatableComponent(ScrollView);
+const TextInputBarHeight = 40;
 
-const VIEWABILITY_CONFIG = {
-  minimumViewTime: 3000,
-  viewAreaCoveragePercentThreshold: 100,
-  waitForInteraction: true
-};
 
 export default class AI extends Component {
   AiDataSource=[{
@@ -45,18 +42,12 @@ export default class AI extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sourceData: [{
-        infoHead: {type: 0}, // 这里的type为0是AI答复, type为1是用户答复
-        infoContent:'亲爱的会员, 很高兴为您服务, 请问有什么可以帮到您的?'
-      }, {
-        infoHead : {type: 1},
-        infoContent : '卧槽! 我没有什么问的!'
-      }],
+      sourceData: [],
       userText: '',
       isScroll: false,
-      scrollHeight: '', // listView在屏幕中的高度
-      scrollCourrentHeight: '', // listview当前实际高度
-
+      scrollHeight: null, // listView在屏幕中的高度
+      scrollCourrentHeight: 40, // listview当前实际高度
+      lang: 40,
     };
   }
 
@@ -69,34 +60,52 @@ export default class AI extends Component {
   }
   handleSendIssue () {
     // 点击发送按钮发送消息
+    if (this.state.userText == '') return;
     const sendData = [{
-        infoHead : { type: 0 },
-        infoContent : '这里是自定义的死数据, 别看了, 你还没有写完!'
+      infoHead : { type: 0 },
+      infoContent : '这里是自定义的死数据, 别看了, 你还没有写完!',
+      // TODO: 每一项数据中需要用消息的id来做key值,  不然会性能很慢
     }, {
-        infoHead : { type: 1 },
-        infoContent : this.state.userText
+      infoHead : { type: 1 },
+      infoContent : this.state.userText,
+      // TODO: 每一项数据中需要用消息的id来做key值,  不然会性能很慢
     }];
     const newSourceData = Array.from(this.state.sourceData.concat(sendData));
+    // console.log(this._flatList);
     this.setState({
       userText: '',
       sourceData: Array.from(newSourceData)
     }, () => {
-      if(this.state.isScroll){
+      if( this.state.scrollHeight && this.state.scrollHeight < this.state.scrollCourrentHeight ){
         this._flatList.scrollToEnd();
       }
     });
   }
 
-  getListViewHeightByItemListHeight (x, y, width, height) {
+  getCurrentListViewHeightByItemListHeight (x, y, width, height) {
     // 通过美衣先高度来获取list总的高度
-    console.log(x, y, width, height);
     // TODO: 通过itemlist的高度, 判断内容总高度是否大于scrollView的高度, 如果大于则scrollToEnd
+    this.setState({
+      scrollCourrentHeight: parseInt(this.state.scrollCourrentHeight) + parseInt(height) + 16,
+      lang: height + 16
+    });
+    console.log( this.state.scrollCourrentHeight, this.state.scrollHeight );
+  }
+
+  getListViewHeightByItemListHeight (x, y, width, height) {
+    // NOTE: 获取listView总高度
+    this.setState({
+      scrollHeight: (height - TextInputBarHeight)/PixelRatio.get()
+    });
   }
 
   renderRow ({item, index}) {
+    if ( this._flatListBox && !this.state.scrollHeight ) {
+      this._flatListBox.ref._component.measure( this.getListViewHeightByItemListHeight.bind(this) );
+    }
     if (this._itemList) {
       // 获取itemlist高度
-      this._itemList.ref._component.measure(this.getListViewHeightByItemListHeight.bind(this));
+      this._itemList.ref._component.measure(this.getCurrentListViewHeightByItemListHeight.bind(this));
     }
     if( item.infoHead.type == 0 ){
       // AI回复
@@ -135,7 +144,9 @@ export default class AI extends Component {
   render () {
     return (
       <View style={styles.html}>
-        <View style={styles.chatBoxView}>
+        <View
+          ref={(flatlsit) => this._flatListBox = flatlsit}
+          style={styles.chatBoxView}>
           <FlatList
             style={styles.chatBox}
             data={ this.state.sourceData }
@@ -180,23 +191,25 @@ const styles = EStyleSheet.create({
   },
   chatBoxView: {
     height: '100%',
-    paddingBottom: '2.5rem',
+    paddingBottom: TextInputBarHeight,
     backgroundColor: '$globalBgc'
   },
   chatItemLeft: {
-    marginTop: '1rem',
+    marginTop: 10,
+    marginBottom: 6,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
   chatItemRight: {
-    marginTop: '1rem',
+    marginTop: 10,
+    marginBottom: 6,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
   chatBar: {
-    height: '2.5rem',
+    height: 40,
     backgroundColor: '$globalWhite',
     paddingTop: '0.3rem',
     paddingBottom: '0.3rem',
@@ -216,15 +229,13 @@ const styles = EStyleSheet.create({
     height: '2.5rem'
   },
   infoContent: {
-    flexGrow: 0,
     flexShrink: 1,
-    padding: '0.4rem',
     borderRadius: '0.5rem'
   },
   infoText: {
-    lineHeight: '1rem',
     color: '$globalColorAssist',
-    fontSize:'0.8rem'
+    fontSize:'0.8rem',
+    padding: '0.4rem'
   },
   textInput: {
     flexGrow: 1,
@@ -246,3 +257,20 @@ const styles = EStyleSheet.create({
     paddingRight: '0.3rem'
   }
 });
+
+
+const Serializable = Sup => class extends Sup {
+  constructor(...args) {
+    super(...args);
+    if (typeof this.construct.stringify !== 'function') {
+      throw new ReferenceError('please define stringify method to the class');
+    }
+    if (typeof this.construct.parse !== 'function') {
+      throw new ReferenceError('please define parse method to the class');
+    }
+  }
+
+  toString() {
+    return this.constructor.stringify(this);
+  }
+}
