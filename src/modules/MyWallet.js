@@ -15,13 +15,13 @@ import styleConfig, { globalStyle, refreshColor } from '../config/config-styles'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TouchBar, ViewTouchTitleBar } from '../modules/TouchBar';
-import { TextReturnButton } from './util'
+import { TextReturnButton } from '../modules/UserItem';
 
 const IntrgralIcon = (<Icon name="ios-aperture" size={ 22 } color="red" />);
 
 export default class MyWallet extends Component {
   static navigatorStyle = {
-    navBarHidden: true,
+    navBarHidden: true
   }
 
   constructor (props) {
@@ -34,10 +34,12 @@ export default class MyWallet extends Component {
       selectedCity: '',
       selectedProvince: '',
       selectedArea: ''
-    }
+    };
   }
   RightReturnText(text) {
-    return <TextReturnButton descriptionNode={<Text style={[globalStyle.lh1, styles.scriptionText]}>{text}</Text>} />
+    return (
+      <TextReturnButton descriptionNode={<Text style={[globalStyle.lh1, styles.scriptionText]}>{text}</Text>} />
+    );
   }
   handleIntoRemain () {
     // 进入账户余额详情页面
@@ -63,7 +65,7 @@ export default class MyWallet extends Component {
             title={ <Text>账户余额<Text style={{color: '#FD9F01', fontSize: 12}}>$66.44</Text></Text> }
             IconChild={ <Icon name="ios-aperture" size={ 40 } color="#FD9F01" /> }
             bold={false}
-            onClick={ this.handleIntoRemain.bind(this) }
+            onClick={ this.handleIntoRemain.bind( this ) }
             />
         </View>
         <View style={[globalStyle.mtd5]}>

@@ -16,7 +16,7 @@ import styleConfig, { globalStyle, refreshColor } from '../config/config-styles'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TouchBar, ViewTouchTitleBar } from '../modules/TouchBar';
-import { RemainDetailItem } from './util';
+import { RemainDetailItem } from '../modules/UserItem';
 
 const IntrgralIcon = (<Icon name="ios-aperture" size={ 22 } color="red" />);
 const testData = [{title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}, {title: '转给朋友', time: '2018-06-12', num: '-33', result: '成功'}];

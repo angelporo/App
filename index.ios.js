@@ -1,4 +1,6 @@
 'use strict';
+import userState from './src/redux/state/userState';
+import Storage from './src/modules/util';
 import React, { Component } from 'react';
 import store from './src/redux/store/store';
 import { Provider } from 'react-redux';
@@ -28,6 +30,11 @@ import ConfirmOrder from './src/view/confirmOrder';
 import UserSendCommentView from './src/view/sendComment';
 import AIAnswer from './src/view/aIAnswer';
 import UserLookLogitics from './src/view/lookLogistics';
+
+// 获取用户登录状态
+let loginState = userState.get('userCookie');
+
+
 // 初始化入口文件注入全局style对象;
 EStyleSheet.build( styleConfig );
 
@@ -68,7 +75,6 @@ RegisterScreens(); // this is where you register all of your app's screens
 //   animationType: 'slide-up'
 // });
 
-
 // start the app
 Navigation.startTabBasedApp({
   tabs: [
@@ -95,7 +101,7 @@ Navigation.startTabBasedApp({
     },
     {
       label: '我的',
-      screen: 'example.Person',
+      screen: loginState ? 'example.Person' : 'example.Login',
       icon: require('./src/view/img/home.png'),
       selectedIcon: require('./src/view/img/home.png'), // iOS only
       title: undefined,

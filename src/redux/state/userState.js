@@ -1,7 +1,7 @@
 import { Map, fromJS, List, Seq } from 'immutable';
 import shoppingCar from './shoppingCarState';
 export default fromJS({
-  userCookie: '1234323432',
+  userCookie: null,
   userName: 'liyuan',
   vipGrade: '普通会员',
   id: '24243',
