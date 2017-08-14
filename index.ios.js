@@ -83,7 +83,7 @@ Navigation.startTabBasedApp({
       title: 'U兔购',
       screen: 'example.Home', // this is a registered name for a screen
       icon: require('./src/view/img/home.png'),
-      selectedIcon: require('./src/view/img/home.png'), // iOS only
+      selectedIcon: require('./src/view/img/home.png') // iOS only
     },
     {
       label: '分类',
@@ -106,7 +106,7 @@ Navigation.startTabBasedApp({
       selectedIcon: require('./src/view/img/home.png'), // iOS only
       title: undefined,
       tabsStyle: {
-        navBarHidden: true,
+        navBarHidden: true
       }
     }
   ],

@@ -1,9 +1,8 @@
 # `react-native` 练手项目
 
-## 目前只支持`ios`
 系统目前只支持`mac`
 
-`dev branch`为最新代码
+`dev branch` 为最新代码
 
 ## 目录结构
 ```

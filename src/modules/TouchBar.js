@@ -17,7 +17,7 @@ TouchBar.PropTypes = {
   title: PropTypes.string,
   onClick: PropTypes.func,
   RightChild: PropTypes.node
-}
+};
 
 export function TouchBar ({
   isTouch=true,
@@ -159,7 +159,7 @@ const styles = EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   icon: {
     justifyContent: 'center'
@@ -168,12 +168,12 @@ const styles = EStyleSheet.create({
     flex: 1,
     flexGrow: 1,
     paddingLeft: '0.5rem',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   noIcontitle: {
     flex: 1,
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   returnIcon: {
     paddingLeft: '$globalWhiteSpace'
@@ -183,4 +183,4 @@ const styles = EStyleSheet.create({
     color: '$globalColorAssist',
     width: '100%'
   }
-})
+});
