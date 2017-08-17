@@ -266,15 +266,3 @@ export default fromJS({
     type: 0
   }]
 })
-
-function decorateLight(target, key, descriptor) {
-  const method = descriptor.value;
-  let moreAtk = 50;
-  let ret;
-  descriptor.value = (...args) => {
-    args[1] += moreAtk;
-    ret = method.apply(target, args);
-    return ret;
-  }
-  return descriptor;
-}

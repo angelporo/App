@@ -51,8 +51,19 @@ export const HOCRefetch = WrappedCompnoent =>
   }
 };
 
-const styles = EStyleSheet.create({
+let styles = EStyleSheet.create({
   homeView: {
     backgroundColor: '$globalWhite'
   }
 });
+
+
+// TODO: 求正整数的几次幂;
+let getArrayByString = str => {
+  let res = [];
+  for(let i = 0; i < str.length; i++) {
+    res.push(str[i]);
+  }
+  return res;
+}
+
