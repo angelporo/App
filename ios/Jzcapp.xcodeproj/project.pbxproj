@@ -14,6 +14,7 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* JzcappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* JzcappTests.m */; };
 		0A83BC51C61844F998D3A4AE /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BBEAE8A964471E87C1718E /* MaterialIcons.ttf */; };
+		0B2931651FA182D80079A868 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0B2931461FA182D80079A868 /* bundle */; };
 		0B4D595A1EF3E2ED00253CD1 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D59501EF3E2ED00253CD1 /* Entypo.ttf */; };
 		0B4D595B1EF3E2ED00253CD1 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D59511EF3E2ED00253CD1 /* EvilIcons.ttf */; };
 		0B4D595C1EF3E2ED00253CD1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D59521EF3E2ED00253CD1 /* FontAwesome.ttf */; };
@@ -300,6 +301,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* JzcappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JzcappTests.m; sourceTree = "<group>"; };
 		04919DA0809949A79E44B44E /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		0B2931461FA182D80079A868 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		0B4D59501EF3E2ED00253CD1 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		0B4D59511EF3E2ED00253CD1 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		0B4D59521EF3E2ED00253CD1 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -467,6 +469,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0B2931031FA17F6D0079A868 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				7A39941470D4414F85AC19A4 /* libRNVectorIcons.a */,
+				E828332F3AFB453DA2C801F8 /* libRNBlur.a */,
+				BB14536D1D07426FA0122442 /* libRNImagePicker.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		0B4D594F1EF3E2ED00253CD1 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,12 +620,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				0B2931461FA182D80079A868 /* bundle */,
 				0B4D594F1EF3E2ED00253CD1 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* Jzcapp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* JzcappTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				8DC56C4C5E0547BCB2D6F6EA /* Resources */,
+				0B2931031FA17F6D0079A868 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1067,6 +1081,7 @@
 				0B4D595E1EF3E2ED00253CD1 /* Ionicons.ttf in Resources */,
 				0B4D595D1EF3E2ED00253CD1 /* Foundation.ttf in Resources */,
 				0B4D59601EF3E2ED00253CD1 /* MaterialIcons.ttf in Resources */,
+				0B2931651FA182D80079A868 /* bundle in Resources */,
 				0B4D595A1EF3E2ED00253CD1 /* Entypo.ttf in Resources */,
 				0B4D595F1EF3E2ED00253CD1 /* MaterialCommunityIcons.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
@@ -1271,7 +1286,7 @@
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/react-native-navigation/ios";
 				INFOPLIST_FILE = Jzcapp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				NEW_SETTING = "";
 				OTHER_LDFLAGS = (
@@ -1301,7 +1316,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 				);
 				INFOPLIST_FILE = Jzcapp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				NEW_SETTING = "";
 				OTHER_LDFLAGS = (

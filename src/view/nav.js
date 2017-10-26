@@ -19,12 +19,12 @@ function mapStateToProps (state) {
     brandRecommend: stateJS.brandRecommend,
     hotGoods: stateJS.hotGoods,
     centerAdData: stateJS.centerAdData
-  }
+  };
 }
 function mapDispatchToProps (dispatch) {
   return {
     nameDispatch: function () {alert('ok')}
-  }
+  };
 }
 
 let AppNav = connect(mapStateToProps, mapDispatchToProps)( NavPage );

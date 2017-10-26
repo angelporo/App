@@ -6,7 +6,9 @@ const FontSize = width > 340 ? 18 : 16;
 
 const proColor = '#FF2763';
 const assistColor = '#4c4c4c';
+
 export const refreshColor = ['#ff0000', '#00ff00', '#0000ff'];
+
 export default {
   $height: height,
   $width: width,
