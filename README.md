@@ -4,7 +4,7 @@
 
 `dev branch` 为最新代码
 
-[演示图片, 仅供参考](https://github.com/angelporo/App/blob/dev/demoGif/demoGif.gif)
+![演示图片, 仅供参考](https://github.com/angelporo/App/blob/dev/demoGif/demoGif.gif)
 
 ## 目录结构
 ```
