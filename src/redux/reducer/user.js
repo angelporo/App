@@ -60,3 +60,40 @@ export default function (state = user, action) {
     return state;
   }
 }
+
+
+
+let shakerSort = array => {
+  let swap = (array, i, j) => {
+    let temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  };
+  let length = array.length,
+      left = 0,
+      right = length - 1,
+      lastSeappedLeft = left,
+      lastSwappedRight = right,
+      i,
+      j;
+
+  while(left < right) {
+    // 从左到右
+    lastSwappedRight = 0;
+    for( i = left; i < right; i++) {
+      if(array[i] > array[i + 1]) {
+        swap(array, i, i+1);
+        lastSwappedRight = i;
+      }
+    }
+    right = lastSwappedRight;
+    lastSeappedLeft = length -1;
+    for(j = right; left < j; j--) {
+      if(array[j - 1] > array[j]) {
+        swap(array, j - 1, j);
+        lastSeappedLeft = j;
+      }
+    }
+    left = lastSeappedLeft;
+  }
+}

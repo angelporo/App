@@ -39,7 +39,7 @@ export default class Person extends Component {
       passProps: {id: '1'},
       animationType: 'slide-horizontal',
       backButtonTitle: '',
-      backButtonHidden: false,
+      backButtonHidden: false
     });
   }
   handleIntoAddressPage () {
@@ -79,10 +79,11 @@ export default class Person extends Component {
   _handleSettingIcon () {
     alert('lcick setting icons');
   }
+
   render () {
     const ScrollHeight = styleConfig.$height - 48 + 20;
     const OrderIcon = (<Icon name="ios-book" size={ 22 } color="red" />);
-    const ListHead = (<TouchBar title="全部资产" IconChild={ OrderIcon } onClick={ () => { alert('全部资产') }}/>);
+    const ListHead = (<TouchBar title="全部资产" IconChild={ OrderIcon } onClick={ () => { alert('全部资产'); }}/>);
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -101,7 +102,7 @@ export default class Person extends Component {
       <PersonHeader source={ require('../modules/img/avatar@2x.png')} userName='angely.me' vipName="普通会员" clickSettingFn={ this._handleSettingIcon} />
       { /* 全部订单*/}
       <PersonOrder touchText="全部订单" text='代发货'/>
-      { /* 我的资产*/}
+      { /* 我的资产*/ }
       <PersonAssetComponent  hintTitle='全部资产' style={{marginTop: 10}} />
       <View HintHeadCompnent={ ListHead }  style={styles.touchbarView}>
         <TouchBar
@@ -133,27 +134,10 @@ export default class Person extends Component {
               onClick={ this.handleIntoAppOrder.bind(this) }
               />
       </View>
-      {testComponent()}
 </ScrollView>
-    )
+    );
   }
 }
-
-function testComponent () {
-  return (
-    <View>
-      <SwitchBar text='设为默认' changeValue={ () => alert('change Value success')} />
-        <View style={{marginTop: 10}}>
-        </View>
-        <CommendStar
-          text="物流服务"
-          style={styles.starBox}
-          changeValue={ ( score ) => alert(score)}
-          />
-    </View>
-  )
-}
-
 
 let styles = EStyleSheet.create({
   touchbarView: {

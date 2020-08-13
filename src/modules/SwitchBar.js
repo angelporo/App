@@ -36,7 +36,7 @@ export class SwitchBar extends Component {
     let { text, onValueChange, style } = this.props;
     return (
       <View style={[styles.swtichBar, style]}>
-        <View >
+        <View>
           <Text>{ text }</Text>
         </View>
         <View style={ styles.end }>
@@ -48,7 +48,7 @@ export class SwitchBar extends Component {
             />
         </View>
       </View>
-    )
+    );
   }
 }
 

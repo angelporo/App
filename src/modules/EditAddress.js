@@ -18,7 +18,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { LoginInput, PassWordInput, VerifyCode } from '../modules/input';
 import { HintMsg, Loading } from '../modules/hint';
 import { TouchBar } from '../modules/TouchBar';
-import { TextReturnButton } from './util';
+import { TextReturnButton } from '../modules/UserItem';
 import { SwitchBar } from '../modules/SwitchBar';
 import AddressPicker from './AddressPicker';
 

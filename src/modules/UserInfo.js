@@ -21,14 +21,14 @@ import { PersonHeader } from '../modules/personHead';
 import PersonOrder from '../modules/person-order';
 import PersonAssetComponent from '../modules/person-asset';
 import Alert from '../modules/Alert';
-import AddressPicker from './AddressPicker'
+import AddressPicker from './AddressPicker';
 import { SwitchBar,
          SwitchVadio
        } from '../modules/SwitchBar';
 import CommendStar from '../modules/CommendStar';
 import CounterBar from '../modules/Counter';
 import ExampleView from './test';
-import { TextReturnButton } from './util'
+import { TextReturnButton } from './UserItem';
 
 const TouchIcon = (<Icon name="ios-book" size={ 22 } color="red" />);
 
@@ -54,7 +54,7 @@ export default class UserInfo extends Component {
       backButtonTitle: '',
       backButtonHidden: false,
       navigatorStyle: {},
-      navigatorButtons: {},
+      navigatorButtons: {}
     });
   }
 
@@ -114,7 +114,7 @@ export default class UserInfo extends Component {
                 onPressConfrim={() => alert('选择日期')}
                 />
       </ScrollView>
-    )
+    );
   }
 }
 

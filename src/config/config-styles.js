@@ -1,12 +1,14 @@
 import { Dimensions } from 'react-native';
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const FontSize = width > 340 ? 18 : 16;
 
 const proColor = '#FF2763';
 const assistColor = '#4c4c4c';
+
 export const refreshColor = ['#ff0000', '#00ff00', '#0000ff'];
+
 export default {
   $height: height,
   $width: width,
@@ -48,10 +50,9 @@ export let globalStyle = EStyleSheet.create({
     marginLeft: '0.5rem'
   },
   mrd5: {
-    marginRight: '0.5rem',
+    marginRight: '0.5rem'
   },
   flexCenter: {
-    flex: 0,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
@@ -79,9 +80,14 @@ export let globalStyle = EStyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
+  flexBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
   flexbox: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   center: {
     flexDirection: 'row',
@@ -121,6 +127,9 @@ export let globalStyle = EStyleSheet.create({
   lh1: {
     lineHeight: '1rem'
   },
+  lhd5: {
+    lineHeight: '1.5rem'
+  },
   bb: {
     borderBottomColor: '$globalBorder',
     borderStyle: 'solid',
@@ -140,7 +149,7 @@ export let globalStyle = EStyleSheet.create({
     color: '$globalColorAssist'
   },
   mt2: {
-    marginTop: '2rem',
+    marginTop: '2rem'
   },
   cp: {
     color: '$globalColorPro'
@@ -152,4 +161,7 @@ export let globalStyle = EStyleSheet.create({
     paddingLeft: '0.8rem',
     paddingRight: '0.8rem'
   },
+  pld5: {
+    paddingLeft: '0.5rem'
+  }
 });

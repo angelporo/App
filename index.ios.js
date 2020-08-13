@@ -1,8 +1,9 @@
 'use strict';
+import userState from './src/redux/state/userState';
+import Storage from './src/modules/util';
 import React, { Component } from 'react';
 import store from './src/redux/store/store';
 import { Provider } from 'react-redux';
-import { AppRegistry } from 'react-native';
 import ModulesView from './src/view/modulesView';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import styleConfig from './src/config/config-styles';
@@ -25,14 +26,19 @@ import AppOrder from './src/view/order';
 import AppEditAddress from './src/view/editAddress';
 import AppOrderDetail from './src/view/orderDetail';
 import ConfirmOrder from './src/view/confirmOrder';
+import UserSendCommentView from './src/view/sendComment';
+import AIAnswer from './src/view/aIAnswer';
+import UserLookLogitics from './src/view/lookLogistics';
+
+// 获取用户登录状态
+let loginState = userState.get('userCookie');
+
 
 // 初始化入口文件注入全局style对象;
 EStyleSheet.build( styleConfig );
 
-// AppRegistry.registerComponent('Jzcapp', () => App );
-
 // register all screens of the app (including internal ones)
-function RegisterScreens() {
+function RegisterScreens(store, Provider) {
   Navigation.registerComponent('example.Home', () => Home);
   Navigation.registerComponent('example.Login', () => LoginView);
   Navigation.registerComponent('example.Class', () => LoginView);
@@ -51,6 +57,9 @@ function RegisterScreens() {
   Navigation.registerComponent('example.AppEditAddress', () => AppEditAddress);
   Navigation.registerComponent('example.AppOrderDetail', () => AppOrderDetail);
   Navigation.registerComponent('example.ConfirmOrder', () => ConfirmOrder);
+  Navigation.registerComponent('example.UserSendCommentView', () => UserSendCommentView);
+  Navigation.registerComponent('example.AI', () => AIAnswer);
+  Navigation.registerComponent( 'example.UserLookLogitics', () => UserLookLogitics );
 }
 
 RegisterScreens(); // this is where you register all of your app's screens
@@ -63,7 +72,6 @@ RegisterScreens(); // this is where you register all of your app's screens
 //   animationType: 'slide-up'
 // });
 
-
 // start the app
 Navigation.startTabBasedApp({
   tabs: [
@@ -72,7 +80,7 @@ Navigation.startTabBasedApp({
       title: 'U兔购',
       screen: 'example.Home', // this is a registered name for a screen
       icon: require('./src/view/img/home.png'),
-      selectedIcon: require('./src/view/img/home.png'), // iOS only
+      selectedIcon: require('./src/view/img/home.png') // iOS only
     },
     {
       label: '分类',
@@ -90,12 +98,12 @@ Navigation.startTabBasedApp({
     },
     {
       label: '我的',
-      screen: 'example.Person',
+      screen: loginState ? 'example.Person' : 'example.Login',
       icon: require('./src/view/img/home.png'),
       selectedIcon: require('./src/view/img/home.png'), // iOS only
       title: undefined,
       tabsStyle: {
-        navBarHidden: true,
+        navBarHidden: true
       }
     }
   ],

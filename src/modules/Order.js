@@ -27,7 +27,7 @@ export default class UserOrder extends Component{
   }
 
   intoConfirmOrderPage (item) {
-    this.props.navigator.navigator.push({
+    this.navigator.push({
       screen: 'example.ConfirmOrder',
       title: '确认订单',
       animated: true,
@@ -64,13 +64,13 @@ export default class UserOrder extends Component{
                  handle: () => alert('延长')},
                 {text: '查看物流',
                  buttonColor: 'gray',
-                 handle: () => alert('查看物流')},
+                 handle: this.intoLookLogiticsView.bind(this)},
                 {text: '售后',
                  buttonColor: 'gray',
                  handle: () => alert('申请售后')},
-                {text: '确认收获',
+                {text: '评价',
                  buttonColor: 'red',
-                 handle: () => alert('确认收获')}]
+                 handle: this.intoCommentView.bind(this)}]
     }, {
       type: 4, //退货/换货
       buttons: [{text: '延长发货',
@@ -84,8 +84,32 @@ export default class UserOrder extends Component{
                  handle: () => alert('申请售后')},
                 {text: '付款',
                  buttonColor: 'red',
-                 handle: this.intoConfirmOrderPage.bind(this)}]
+                 handle: this.intoConfirmOrderPage.bind(this)
+                }]
     }];
+  }
+  intoCommentView (item) {
+    this.navigator.push({
+      screen: 'example.UserSendCommentView',
+      title: '发表评价',
+      animated: true,
+      passProps: {item: item},
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false
+    });
+  }
+
+  intoLookLogiticsView (item) {
+    this.navigator.push({
+      screen: 'example.UserLookLogitics',
+      title: '查看物流',
+      animated: true,
+      passProps: {item: item},
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false
+    });
   }
 
   componentWillMount() {
@@ -115,6 +139,7 @@ export default class UserOrder extends Component{
       isShowAlert: false,
       alertTitle: ''
     };
+    this.navigator = this.props.navigator.navigator;
   }
 
   handleIntoStoreDefault (storeID)   {

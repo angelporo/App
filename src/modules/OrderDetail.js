@@ -20,10 +20,11 @@ import { SwitchBar,
        } from '../modules/SwitchBar';
 import { createAnimatableComponent, View, Text } from 'react-native-animatable';
 import * as util from '../redux/utils/util';
-import { OrderInfoBox } from './OrderItem';
+import { OrderInfoBox, OrderListItemRightComponent } from './OrderItem';
 const AnimatableListView = createAnimatableComponent(ScrollView);
 const ContactIcon = (<Icon name="ios-chatbubbles-outline" size={ 22 } color={styleConfig.$globalColorPro} />);
 const CallIcon = (<Icon name="ios-call" size={ 22 } color={styleConfig.$globalColorPro} />);
+
 export default class OrderDetail extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +41,7 @@ export default class OrderDetail extends Component {
       orderType: data.typeStatus,   // 订单状态
       payDetaile: `共一件商品 实付款: 999(含运费)` //付款详情
     };
+    this.navigator = this.props.navigator.navigator;
   }
 
   componentWillUnmount() {
@@ -52,8 +54,21 @@ export default class OrderDetail extends Component {
     const id = this.props.item.id;
     alert(id);
   }
-
+  intoAIpage () {
+    this.navigator.push({
+      screen: 'example.AI',
+      title: '你的小兔',
+      animated: true,
+      passProps: {},
+      animationType: 'slide-horizontal',
+      backButtonTitle: '',
+      backButtonHidden: false
+    });
+  }
   render () {
+    const RightText = OrderListItemRightComponent(this.props.item);
+    const OrderItemContent = OrderInfoBox( RightText )({onPress: this.handleIntoGoodsDetaile.bind(this),
+                                                        orderInfo: this.props.item});
     return (
       <AnimatableListView
         animation="bounceInUp"
@@ -106,15 +121,17 @@ export default class OrderDetail extends Component {
             <Text>{ this.state.storeName }</Text>
           </TouchableOpacity>
         </View>
-        <OrderInfoBox
-          orderInfo={ this.props.item }
-          onPress={this.handleIntoGoodsDetaile.bind(this)}/>
+
+        <OrderItemContent disableTouch />
+
         <View style={[globalStyle.px1, globalStyle.bgdW]}>
           <View style={[globalStyle.bb, globalStyle.pyd5]}>
             <Text style={[globalStyle.tr, globalStyle.cca]}>{ this.state.payDetaile }</Text>
           </View>
           <View style={ styles.orderBottomButton }>
-            <TouchableOpacity style={[globalStyle.flexCenter, styles.orderButton]}>
+            <TouchableOpacity
+              onPress={this.intoAIpage.bind(this)}
+              style={[globalStyle.flexCenter, styles.orderButton]}>
               { ContactIcon }
               <Text style={[globalStyle.cca, globalStyle.mld5]}>联系小兔</Text>
             </TouchableOpacity>
