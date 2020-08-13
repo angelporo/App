@@ -2,9 +2,17 @@
 
 系统目前只支持`mac`
 
+
 `dev branch` 为最新代码
 
 ![演示图片, 仅供参考](https://github.com/angelporo/App/blob/dev/demoGif/demoGif.gif)
+
+```base
+➜ git clone https://github.com/angelporo/App.git -b dev
+➜ cd App
+➜ npm install
+➜ npm start
+```
 
 ## 目录结构
 ```
